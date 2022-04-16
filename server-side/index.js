@@ -13,21 +13,24 @@ let corsOptions = {
     optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 }
 
-
-
-
 // Controllers
-const patient = require('./controllers/PatientController')
+const patientController = require('./controllers/PatientController')
+const doctorController = require('./controllers/DoctorController')
+const treatmentController = require('./controllers/TreatmentController')
+const testController = require('./controllers/TestController')
+const laboratoryController = require('./controllers/LaboratoryController')
 app.use(bodyParser.urlencoded({ extended: false }))
 // app.use(bodyParser.json())
 app.use(cors(corsOptions))
-app.use(patient)
 
-app.post("/", (req, res) => {
-    res.send(req.body)
-})
-
+app.use(patientController)
+app.use(doctorController)
+app.use(treatmentController)
+app.use(testController)
+app.use(laboratoryController)
 
 server.listen(5000,() => {
     console.log("SERVER RUNNING");
 });
+
+//export default server

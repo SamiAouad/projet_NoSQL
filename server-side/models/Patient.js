@@ -1,6 +1,8 @@
 const mongoose = require("mongoose")
 
+
 const patientSchema = new mongoose.Schema({
+    cni: String,
     firstName: String,
     lastName : String,
     email: String,
@@ -16,7 +18,15 @@ const patientSchema = new mongoose.Schema({
     photo: {
         data: Buffer,
         contentType: String
-    }
+    },
+    dossierMedical: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Treatment"
+    }],
+    rdv: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Rdv"
+    }]
 })
 
 module.exports = mongoose.model("Patient", patientSchema);
