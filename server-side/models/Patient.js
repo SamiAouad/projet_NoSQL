@@ -2,11 +2,32 @@ const mongoose = require("mongoose")
 
 
 const patientSchema = new mongoose.Schema({
-    cni: String,
-    firstName: String,
-    lastName : String,
-    email: String,
-    passwordHash: String,
+    cni: {
+        type: String,
+        required: true
+    },
+    firstName: {
+        type: String,
+        required: true
+    },
+    lastName : {
+        type: String,
+        required: true
+    },
+    phone: {
+        type: String
+    },
+    email: {
+        type: String,
+        required: true
+    },
+    passwordHash: {
+        type: String,
+        required: true
+    },
+    gender: {
+        type: String
+    },
     createdAt: {
         type: Date,
         default: () => Date.now()

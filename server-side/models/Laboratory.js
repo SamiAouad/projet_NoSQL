@@ -30,4 +30,4 @@ const laboratorySchema = new mongoose.Schema({
     }],
 })
 
-module.exports = mongoose.model("Patient", laboratorySchema);
+module.exports = mongoose.model("Laboratory", laboratorySchema);

@@ -5,12 +5,19 @@ const cors = require('cors')
 const server = http.createServer(app);
 const bodyParser = require("body-parser")
 const mongoose = require('mongoose')
+const morgan = require('morgan')
+const config = require('config')
 
 mongoose.connect('mongodb://localhost:27017/test')
 
 let corsOptions = {
     origin: '*',
     optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+}
+
+if(config.util.getEnv('NODE_ENV') !== 'test') {
+    //use morgan to log at command line
+    app.use(morgan('combined')); //'combined' outputs the Apache style LOGs
 }
 
 // Controllers
@@ -33,4 +40,4 @@ server.listen(5000,() => {
     console.log("SERVER RUNNING");
 });
 
-//export default server
+module.exports = server

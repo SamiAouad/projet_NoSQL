@@ -2,9 +2,10 @@ const bcrypt = require('bcrypt')
 const Doctor = require('../models/Doctor')
 let fs = require('fs');
 let path = require('path');
+const {Doc} = require("mocha/lib/reporters");
 
 
-const createDoctor = (req, res) => {
+const create = (req, res) => {
     const salt = bcrypt.genSaltSync(10);
     const passwordHash = bcrypt.hashSync(req.body.password, salt);
     let doctor = new Doctor({
@@ -37,6 +38,22 @@ const createDoctor = (req, res) => {
     fs.unlinkSync(path.resolve(__dirname, '../uploads/' + req.file.filename))
 }
 
+const login = async (req, res) => {
+    let doctor = null
+    if (req.body == null)
+        return res.status(500).send(false);
+    try{
+        doctor = await Doctor.findOne({email: req.body.email})
+        if (bcrypt.compareSync(req.body.password, doctor.passwordHash))
+            return res.status(200).send(true)
+        return res.status(500).send(false)
+    }catch(ex){
+        return res.status(500).send(false)
+    }
+
+}
+
 module.exports = {
-    createDoctor
+    create,
+    login
 };
