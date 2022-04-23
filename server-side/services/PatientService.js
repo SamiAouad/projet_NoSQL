@@ -34,6 +34,8 @@ const createPatient = (req, res) => {
         fs.unlinkSync(path.resolve(__dirname, '../uploads/' + req.file.filename))
 }
 
+
+
 module.exports = {
     createPatient
 };

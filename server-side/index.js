@@ -26,7 +26,10 @@ const doctorController = require('./controllers/DoctorController')
 const treatmentController = require('./controllers/TreatmentController')
 const testController = require('./controllers/TestController')
 const laboratoryController = require('./controllers/LaboratoryController')
+const rdvController = require('./controllers/RdvController')
+const userController = require('./controllers/UserController')
 app.use(bodyParser.urlencoded({ extended: false }))
+
 // app.use(bodyParser.json())
 app.use(cors(corsOptions))
 
@@ -35,6 +38,8 @@ app.use(doctorController)
 app.use(treatmentController)
 app.use(testController)
 app.use(laboratoryController)
+app.use(rdvController)
+app.use(userController)
 
 server.listen(5000,() => {
     console.log("SERVER RUNNING");

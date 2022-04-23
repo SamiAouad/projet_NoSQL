@@ -15,8 +15,12 @@ let storage = multer.diskStorage({
 
 let upload = multer({ storage: storage });
 
-router.post('/doctor', upload.single("photo"), DoctorService.create)
+router.post('/doctor/create', upload.single("photo"), DoctorService.create)
     .post('/doctor/login', DoctorService.login)
+    .get("/doctor/find", DoctorService.find)
+    .get('/doctor/findByCity', DoctorService.findByCity)
+    .get('/doctor/findBySpecialty', DoctorService.findBySpecialty)
+    .get('/doctor/all', DoctorService.all)
 
 
 module.exports = router

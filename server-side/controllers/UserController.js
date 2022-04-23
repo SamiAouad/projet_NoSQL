@@ -1,5 +1,5 @@
 const express = require('express')
-const RdvService = require('../services/RdvService')
+const userService = require('../services/UserService')
 
 const router = express.Router()
 let multer = require('multer')
@@ -15,7 +15,7 @@ let storage = multer.diskStorage({
 
 let upload = multer({ storage: storage });
 
-router.post('/rdv/create', RdvService.createRdv)
+router.post('/login' , userService.login)
 
 
 module.exports = router

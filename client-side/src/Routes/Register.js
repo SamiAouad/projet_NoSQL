@@ -1,4 +1,4 @@
-import '../css/Register.css'
+import style from '../css/Register.module.css'
 import * as yup from 'yup'
 import {useState} from "react";
 import {useNavigate} from "react-router";
@@ -13,22 +13,9 @@ const api = axios.create({
 const Register = () => {
     const navigate = useNavigate();
     const [file, setFile] = useState()
-    // const [image, setImage] = useState()
     const [error, setError] = useState('')
 
     const validationSchema = yup.object({
-        /*code: '',
-        firstName: '',
-        lastName: '',
-        phone: '',
-        university: '',
-        promotion: '',
-        email: '',
-        specialty: '',
-        city: '',
-        address: '',
-        password: '',
-        passwordConf: ''*/
         code: yup.string('valeur invalid').required('ce champs est obligatoire'),
         firstName: yup.string('valeur invalid').required('ce champs est obligatoire'),
         lastName: yup.string('valeur invalid').required('ce champs est obligatoire'),
@@ -58,16 +45,19 @@ const Register = () => {
         item.append('street', formik.values.street)
         item.append('password', formik.values.password)
         item.append('photo', file)
+        try{
+            await api.post('/doctor/create', item).then(res => {
+                if (res.status === 500){
+                    navigate('/error/500')
+                }
 
-        api.post('/doctor', item).then(res => {
-            if (res.status === 500){
-                console.log('an error has occurred')
-            }
+                else
+                    console.log('looking good')
+            })
+        }catch(message){
+            navigate('/error/500')
+        }
 
-            else
-
-                console.log('looking good')
-        })
     }
     const formik = useFormik({
         initialValues: {
@@ -95,7 +85,7 @@ const Register = () => {
                 <header>Registration</header>
                 <form onSubmit={formik.handleSubmit}>
                     <div className='form first'>
-                        <div className='details personal'>
+                        <div className={`${style.details}`}>
                             <span className='title'>Information personnel</span>
 
                             <div className='fields'>
