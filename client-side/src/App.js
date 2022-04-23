@@ -3,6 +3,7 @@ import SignIn from "./Routes/SignIn";
 import Register from "./Routes/Register";
 import ErrorPage from "./Routes/ErrorPage";
 import PatientHomePage from "./Routes/PatientHomePage";
+import RDV from "./Routes/RDV";
 
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
             <Route path={'/error/:code'} element={<ErrorPage/>} exact/>
             <Route path={'/signIn'} element={<SignIn/>} exact/>
             <Route path={'/home'} element={<PatientHomePage/>} exact/>
+            <Route path={'/doctor/home'} element={<RDV/>} exact/>
         </Routes>
       </BrowserRouter>
   );
