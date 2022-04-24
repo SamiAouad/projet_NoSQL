@@ -16,7 +16,7 @@ describe('create rdv', () => {
                     patientCni: 'BB180559',
                     doctorCode: '12345678',
                     description: 'this is a description',
-                    urgent: false,
+                    urgent: 3,
                     date: new Date(2022, 4, 25)
                 })
                 .end( (err, res) => {

@@ -1,9 +1,27 @@
 import { Row, Table} from "react-bootstrap";
 import NavbarDoctor from "./NavbarDoctor";
-
 import image from '../images/signIn/PatientPatient.png'
 import style from '../css/RDV.module.css'
+import {useNavigate} from "react-router";
+import {useEffect} from "react";
+import axios from "axios";
+
 const RDV = () => {
+    const navigate = useNavigate()
+    const user = JSON.parse(localStorage.getItem('user'))
+    const api = axios.create({
+        baseURL: 'http://localhost:5000'
+    })
+
+    useEffect(() => {
+        if (!user)
+            navigate('/SignIn')
+        else
+        if (user.cni)
+            navigate('/doctor/register')
+    }, [])
+
+
 
 const PatientData = [
     { id  :"1" , picture : "image" , NumPatient : "P1110" , NumDossier : " D1110" , Traitement : "Curatif" , Date : "12/09/2021" , Horaire : "08:00" , Situation :"Urgence sans risque" } , 

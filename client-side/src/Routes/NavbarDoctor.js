@@ -21,7 +21,7 @@ const NavbarDoctor = () => {
           <NavDropdown.Item href="#action/3.4">Dossier Patient </NavDropdown.Item>
         </NavDropdown>
         <NavDropdown  className="navlink text-white " title="Gestion des Consultations " id="basic-nav-dropdown">
-          <NavDropdown.Item   href="#action/3.1">Acceptation Patient</NavDropdown.Item>
+          <NavDropdown.Item   href="/doctor/rdv">Acceptation Patient</NavDropdown.Item>
           <NavDropdown.Item href="#action/3.2">Constitution du dossier patient</NavDropdown.Item>
         
           <NavDropdown.Divider />

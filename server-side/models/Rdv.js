@@ -18,10 +18,11 @@ const RdvSchema = new mongoose.Schema({
         default: () => Date.now()
     },
     urgent: {
-        type: Boolean,
+        type: Number,
         default: () => false
     },
-    date: Date
+    date: Date,
+    description: String
 })
 
 

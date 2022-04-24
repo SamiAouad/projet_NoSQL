@@ -15,7 +15,8 @@ let storage = multer.diskStorage({
 
 let upload = multer({ storage: storage });
 
-router.post('/treatment', upload.single("photo"), TreatmentService.createTreatment)
+router.post('/treatment/create', TreatmentService.createTreatment)
+    .post('/treatment/symptom', TreatmentService.addSymptom)
 
 
 module.exports = router

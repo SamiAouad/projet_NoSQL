@@ -10,7 +10,7 @@ const api = axios.create({
     baseURL: `http://localhost:5000/`
 })
 
-const Register = () => {
+const DoctorRegister = () => {
     const navigate = useNavigate();
     const [file, setFile] = useState()
     const [error, setError] = useState('')
@@ -209,4 +209,4 @@ const Register = () => {
     );
 }
 
-export default Register;
+export default DoctorRegister;

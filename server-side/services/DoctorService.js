@@ -2,8 +2,7 @@ const bcrypt = require('bcrypt')
 const Doctor = require('../models/Doctor')
 let fs = require('fs');
 let path = require('path');
-const {Doc} = require("mocha/lib/reporters");
-
+const rdvRepository = require('../repository/RdvRepository')
 
 const create = (req, res) => {
     const salt = bcrypt.genSaltSync(10);
@@ -95,6 +94,7 @@ const all = async (req, res) => {
             const image = doctors[i].photo.data.toString('base64')
             result.push({
                 _id: doctors[i]._id,
+                code: doctors[i].code,
                 firstName: doctors[i].firstName,
                 lastName: doctors[i].lastName,
                 email: doctors[i].email,
@@ -109,11 +109,22 @@ const all = async (req, res) => {
     }
 }
 
+const getRdv = async (req, res) => {
+    try{
+        const rdv = await rdvRepository.getByDoctorId(req.body.doctorId)
+        res.send(rdv)
+    }catch(ex){
+        console.log(ex)
+        res.status(500).send(null)
+    }
+}
+
 module.exports = {
     create,
     login,
     findByCity,
     findBySpecialty,
     find,
-    all
+    all,
+    getRdv
 };

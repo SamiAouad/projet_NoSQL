@@ -21,6 +21,7 @@ router.post('/doctor/create', upload.single("photo"), DoctorService.create)
     .get('/doctor/findByCity', DoctorService.findByCity)
     .get('/doctor/findBySpecialty', DoctorService.findBySpecialty)
     .get('/doctor/all', DoctorService.all)
+    .post('/doctor/rdv', DoctorService.getRdv)
 
 
 module.exports = router
