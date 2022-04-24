@@ -1,0 +1,135 @@
+body {
+    width: 100%;
+    height: 100vh;
+    margin: -1px;
+    background: url("../images/doctorhome/Background.jpg") center / cover no-repeat;
+  }
+  
+  #SectionOneId {
+    width: 100%;
+    height: 100vh;
+    font-family: Montserrat, sans-serif;
+    color: #0b2545;
+  }
+  
+  #title {
+    font-size: 32px;
+    margin-top: 29px;
+  }
+  
+  #Thead {
+    background: linear-gradient(90deg, #66ddc9 0%, #0b2545 100%), #ffffff;
+    color: #ffffff;
+    font-weight: bold;
+    font-family: Montserrat, sans-serif;
+  }
+  
+  #mycolumn {
+    width: 463px;
+  }
+  
+  #mypara {
+  }
+  
+  #Tbody {
+    background: #0b2545;
+    color: rgb(255,255,255);
+  }
+  
+  #SectionTwoId {
+  }
+  
+  #mybtn {
+  }
+  
+  .mybtn {
+    background: #0b2545;
+  }
+  
+  .btn-reserve {
+    background: #0b2545;
+  }
+  
+  .btn-reserve {
+  }
+  
+  .reserveBtn {
+    background: rgba(5,90,218,0);
+    width: 100%;
+    border-radius: 25px;
+    margin-top: 33px;
+  }
+
+  .contactclean {
+    background: #f1f7fc;
+    padding: 80px 0;
+  }
+  
+  @media (max-width:767px) {
+    .contactclean {
+      padding: 20px 0;
+    }
+  }
+  
+  .contactclean form {
+    max-width: 480px;
+    width: 90%;
+    margin: 0 auto;
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 4px;
+    color: #505e6c;
+    box-shadow: 1px 1px 5px rgba(0,0,0,0.1);
+  }
+  
+  @media (max-width:767px) {
+    .contactclean form {
+      padding: 30px;
+    }
+  }
+  
+  .contactclean h2 {
+    margin-top: 5px;
+    font-weight: bold;
+    font-size: 28px;
+    margin-bottom: 36px;
+    color: inherit;
+  }
+  
+  .contactclean form .formcontrol {
+    background: #fff;
+    border-radius: 2px;
+    box-shadow: 1px 1px 1px rgba(0,0,0,0.05);
+    outline: none;
+    color: inherit;
+    padding-left: 12px;
+    height: 42px;
+  }
+  
+  .contactclean form .formcontrol:focus {
+    border: 1px solid #b2b2b2;
+  }
+  
+  .contactclean form textarea.formcontrol {
+    min-height: 100px;
+    max-height: 260px;
+    padding-top: 10px;
+    resize: vertical;
+  }
+  
+  .contactclean form .btnprimary:hover {
+    opacity: 1;
+    background: #66ddc9;
+  }
+  
+  .contactclean form .btn:active {
+    transform: translateY(1px);
+  }
+  
+  .contactclean form .btnprimary {
+    background-color: rgb(11,37,69) !important;
+    margin-top: 30px;
+    color: #fff;
+  }
+  
+  

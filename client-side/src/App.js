@@ -8,6 +8,7 @@ import PatientRegister from "./Routes/PatientRegister";
 import TakeRdv from "./Routes/TakeRdv";
 import RdvDemands from "./Routes/RdvDemands";
 import HomePage from "./Routes/HomePage";
+import DoctorHome from './Routes/DoctorHome';
 
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
             <Route path={'/rdv'} element={<TakeRdv/>} exact/>
             <Route path={'/doctor/rdv'} element={<RdvDemands/>} exact/>
             <Route path='/patient/rdv' element={<TakeRdv/>} exact/>
+            <Route path={'doctor/home'} element={<DoctorHome/>} exact/>
         </Routes>
       </BrowserRouter>
   );
