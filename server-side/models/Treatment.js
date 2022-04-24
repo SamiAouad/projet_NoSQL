@@ -29,7 +29,13 @@ const TreatmentSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "Test"
     },
-    description: String,
+    appointment: {
+        date: Date,
+        description: {
+            type: String,
+            default: ""
+        }
+    }, // notes about the progress of the treatment
     symptoms: [{
         description: String,
         severity: Number

@@ -89,7 +89,7 @@ function TakeRdv() {
                                     <legend className="col-form-label " id={style.myradio}>Urgence</legend>
                                     <div className="col-sm-10">
                                         <div className="form-check">
-                                            <input className="form-check-input" type="radio" name="gridRadios" 
+                                            <input className="form-check-input" type="radio" name="gridRadios"
                                                    id={style.gridRadios1} value="1" checked />
                                             <label className="form-check-label">
                                                 Urgence sans risque
