@@ -8,7 +8,7 @@ const mongoose = require('mongoose')
 const morgan = require('morgan')
 const config = require('config')
 
-mongoose.connect('mongodb://localhost:27017/test')
+mongoose.connect('mongodb://localhost:27017/ProjetNosql')
 
 let corsOptions = {
     origin: '*',

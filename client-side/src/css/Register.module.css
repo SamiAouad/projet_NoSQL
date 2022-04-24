@@ -1,9 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
 
 *{
-    margin : 0 ;
-    padding : 0 ;
-    box-sizing : border-box ;
+    margin : 0 ; 
+    padding : 0 ; 
+    box-sizing : border-box ; 
     font-family: 'Quicksand' , 'sans-serif';
 }
 .register{
@@ -13,17 +13,17 @@
     justify-content: center;
     background-image: url(../images/register/Background.jpg);
     background-size: cover;
-
+    
 }
 .container{
-    position: relative;
-    max-width: 900px;
-    width: 100%;
-    border-radius: 6px;
-    padding: 30px;
-    margin: 0 15px;
-    background-color: #b3cfd09c ;
-    box-shadow: 0 5px 10px #eef4ed ;
+   position: relative; 
+   max-width: 900px;
+   width: 100%;
+   border-radius: 6px;
+   padding: 30px;
+   margin: 0 15px;
+   background-color: #b3cfd09c ;
+   box-shadow: 0 5px 10px #eef4ed ;
 }
 .container header {
     position: relative;
@@ -52,7 +52,7 @@
 }
 
 .container form .details {
-    margin-top: 30px ;
+     margin-top: 30px ;
 }
 .container form .details.Id {
     margin-top: 10px ;
@@ -68,13 +68,13 @@
 }
 
 .container form .fields{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   flex-wrap: wrap;
 }
 
-form .fields .input-field{
+form .fields .inputField{
     display: flex;
     flex-direction: column;
     margin: 4px 0 ;
@@ -98,7 +98,7 @@ form .fields .input-field{
 }
 
 .input-field input:is(:focus , :valid){
-    box-shadow: 0 3px 6px  rgba(0, 0, 0, 0.13);
+   box-shadow: 0 3px 6px  rgba(0, 0, 0, 0.13); 
 }
 
 .input-field input[type="date"] :valid{
