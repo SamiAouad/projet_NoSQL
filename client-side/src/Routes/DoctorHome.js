@@ -147,7 +147,7 @@ const DoctorHome = () => {
                       <option value={14}>08:00-14:00</option>
                       <option value>09:00-15:00</option>
                     </select>
-                    <div className="mb-3"><button className={`btn ${style.btnprimary} ${style.reservebtn}`  }  type="button">Enregistrez</button></div>
+                    <div className="mb-3"><button className={` btn ${style.btnprimary} ${style.reservebtn}`  }  type="button">Enregistrez</button></div>
                   </form>
                 </section>
               </div>
