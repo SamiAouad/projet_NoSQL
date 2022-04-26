@@ -1,37 +1,22 @@
-import { Nav , Navbar,NavDropdown , Container} from "react-bootstrap";
-import '../css/NavbarPatient.module.css'
+import '../css/DoctorHome.module.css'
 
 const NavbarDoctor = () => {
-    return ( 
-        <div>
-<Navbar className="navbg" expand="lg">
-  <Container className="container-fluid ">
-
-    <Navbar.Brand href="#">Healtho</Navbar.Brand>
-    <Navbar.Toggle aria-controls="basic-navbar-nav" />
-    <Navbar.Collapse className="justify-content-center"id="basic-navbar-nav">
-      <Nav className="nav   ">
-        <Nav.Link className="navlink text-white " href="#home">Acceuil</Nav.Link>
-        <Nav.Link className="navlink text-white" href="#RDV">RDV</Nav.Link>
-        <NavDropdown  className="navlink text-white " title="Gestion Patients" id="basic-nav-dropdown">
-          <NavDropdown.Item   href="#action/3.1">Mes Patients</NavDropdown.Item>
-          <NavDropdown.Item href="#action/3.2">Bilan</NavDropdown.Item>
-          <NavDropdown.Item href="#action/3.3">résultats d’analyses </NavDropdown.Item>
-          <NavDropdown.Divider />
-          <NavDropdown.Item href="#action/3.4">Dossier Patient </NavDropdown.Item>
-        </NavDropdown>
-        <NavDropdown  className="navlink text-white " title="Gestion des Consultations " id="basic-nav-dropdown">
-          <NavDropdown.Item   href="/doctor/rdv">Acceptation Patient</NavDropdown.Item>
-          <NavDropdown.Item href="#action/3.2">Constitution du dossier patient</NavDropdown.Item>
-        
-          <NavDropdown.Divider />
-          <NavDropdown.Item href="#action/3.4">Traitement</NavDropdown.Item>
-        </NavDropdown>
-      </Nav>
-    </Navbar.Collapse>
-  </Container>
-</Navbar>
-        </div>
+    return (
+        <nav className="navbar navbar-light navbar-expand-md">
+          <div className="container-fluid"><a className="navbar-brand" href="#" style={{fontWeight: 'bold'}}>Healtho</a><button data-bs-toggle="collapse" className="navbar-toggler" data-bs-target="#navcol-1"><span className="visually-hidden">Toggle navigation</span><span className="navbar-toggler-icon" /></button>
+            <div className="collapse navbar-collapse" id="navcol-1">
+              <ul className="navbar-nav mx-auto">
+                <li className="nav-item"><a className="nav-link active" href="#" style={{fontWeight: 'bold', color: 'rgb(255,255,255)'}}>Rendez-Vous</a></li>
+                <li className="nav-item"><a className="nav-link" href="#" style={{color: 'rgb(11,37,69)', fontWeight: 'bold'}}>Gestion Patient</a></li>
+                <li className="nav-item"><a className="nav-link" href="#" style={{color: 'rgb(11,37,69)', fontWeight: 'bold'}}>Gestion Consultation</a></li>
+              </ul>
+              <ul className="navbar-nav">
+                <li className="nav-item"><a className="nav-link active" href="#" style={{fontWeight: 'bold', color: 'rgb(255,255,255)'}}>Acceuil</a></li>
+                <li className="nav-item"><a className="nav-link" href="#" style={{color: 'rgb(11,37,69)', fontWeight: 'bold'}}>Deconnexion</a></li>
+              </ul>
+            </div>
+          </div>
+        </nav>
         
      );
 }

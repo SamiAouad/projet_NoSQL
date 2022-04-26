@@ -22,6 +22,7 @@ router.post('/doctor/create', upload.single("photo"), DoctorService.create)
     .get('/doctor/findBySpecialty', DoctorService.findBySpecialty)
     .get('/doctor/all', DoctorService.all)
     .post('/doctor/rdv', DoctorService.getRdv)
+    .post('/doctor/consultation/', DoctorService.getTreatments)
 
 
 module.exports = router

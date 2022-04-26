@@ -1,14 +1,14 @@
 const mongoose = require("mongoose")
 
 const PrescriptionSchema = new mongoose.Schema({
-    meds: {
+    meds: [{
         name: String,
         dose: Number,
         unit: String,
         when: String,
         duration: Number,
         description: String
-    },
+    }],
     photo: {
         data: Buffer,
         contentType: String
@@ -29,18 +29,22 @@ const TreatmentSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "Test"
     },
-    appointment: {
+    appointments: [{
         date: Date,
         description: {
             type: String,
             default: ""
         }
-    }, // notes about the progress of the treatment
+    }], // notes about the progress of the treatment
     symptoms: [{
         description: String,
         severity: Number
-    }]
+    }],
+    rdv: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Rdv"
+    }
 })
 
 
-module.exports = mongoose.model("Treatment", TreatmentSchema);
+module.exports = mongoose.model("treatments", TreatmentSchema);

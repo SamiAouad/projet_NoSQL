@@ -26,9 +26,13 @@ const mongoose = require("mongoose");
     });
 }*/
 const createTreatment = async (req, res) => {
+    console.log(req.body)
     let treatment = new Treatment({
         patientId: req.body.patientId,
         doctorId: req.body.doctorId,
+        appointments: req.body.appointments,
+        symptoms: req.body.symptoms,
+        rdv: req.body.rdv
     })
     try{
         await treatment.save()
@@ -56,7 +60,25 @@ const addSymptom = async (req, res) => {
     }
 }
 
+const addAppointment = async (req, res) => {
+    let appointment = {
+        date: req.body.date,
+        description: req.body.description
+    }
+    try{
+        await Treatment.findOneAndUpdate(
+            { _id: new mongoose.mongo.ObjectId(req.body.treatmentId) },
+            { $push: { appointments: appointment } },
+        );
+        res.status(200).send(true)
+    }catch(message){
+        console.log(message)
+        res.status(500).send(false)
+    }
+}
+
 module.exports = {
     createTreatment,
-    addSymptom
+    addSymptom,
+    addAppointment
 };

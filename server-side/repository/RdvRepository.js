@@ -1,13 +1,24 @@
 const Rdv = require('../models/Rdv')
+const mongoose = require("mongoose");
 
-const getByDoctorId = async (doctorId) =>{
+const getByDoctorCode = async (doctorCode) =>{
     try{
-        return await Rdv.find({doctorId: doctorId})
+        return await Rdv.find({doctorCode: doctorCode})
     }catch(ex){
         return null
     }
 }
 
+const getById = async (id) =>{
+    try{
+        return await Rdv.findOne({_id: id})
+    }catch(ex){
+        return null
+    }
+}
+
+
 module.exports = {
-    getByDoctorId
+    getByDoctorCode,
+    getById
 }

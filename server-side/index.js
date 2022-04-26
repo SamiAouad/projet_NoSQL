@@ -8,7 +8,8 @@ const mongoose = require('mongoose')
 const morgan = require('morgan')
 const config = require('config')
 
-mongoose.connect('mongodb://localhost:27017/ProjetNosql')
+mongoose.connect('mongodb://localhost:27017/test')
+
 
 let corsOptions = {
     origin: '*',
@@ -21,6 +22,8 @@ if(config.util.getEnv('NODE_ENV') !== 'test') {
 }
 
 // Controllers
+app.use(bodyParser.urlencoded({ extended: false }))
+
 const patientController = require('./controllers/PatientController')
 const doctorController = require('./controllers/DoctorController')
 const treatmentController = require('./controllers/TreatmentController')
@@ -28,9 +31,9 @@ const testController = require('./controllers/TestController')
 const laboratoryController = require('./controllers/LaboratoryController')
 const rdvController = require('./controllers/RdvController')
 const userController = require('./controllers/UserController')
-app.use(bodyParser.urlencoded({ extended: false }))
+const calendarController = require("./controllers/CalendarController")
 
-// app.use(bodyParser.json())
+app.use(bodyParser.json())
 app.use(cors(corsOptions))
 
 app.use(patientController)
@@ -40,6 +43,7 @@ app.use(testController)
 app.use(laboratoryController)
 app.use(rdvController)
 app.use(userController)
+app.use(calendarController)
 
 server.listen(5000,() => {
     console.log("SERVER RUNNING");

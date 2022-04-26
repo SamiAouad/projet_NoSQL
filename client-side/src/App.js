@@ -21,11 +21,10 @@ function App() {
             <Route path={'/error/:code'} element={<ErrorPage/>} exact/>
             <Route path={'/signIn'} element={<SignIn/>} exact/>
             <Route path={'/home'} element={<PatientHomePage/>} exact/>
-            <Route path={'/doctor/home'} element={<RDV/>} exact/>
             <Route path={'/rdv'} element={<TakeRdv/>} exact/>
             <Route path={'/doctor/rdv'} element={<RdvDemands/>} exact/>
             <Route path='/patient/rdv' element={<TakeRdv/>} exact/>
-            <Route path={'doctor/home'} element={<DoctorHome/>} exact/>
+            <Route path={'/doctor/home'} element={<DoctorHome/>} exact/>
         </Routes>
       </BrowserRouter>
   );

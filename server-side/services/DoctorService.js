@@ -3,6 +3,8 @@ const Doctor = require('../models/Doctor')
 let fs = require('fs');
 let path = require('path');
 const rdvRepository = require('../repository/RdvRepository')
+const treatmentRepository = require('../repository/TreatmentRepository')
+const mongoose = require("mongoose");
 
 const create = (req, res) => {
     const salt = bcrypt.genSaltSync(10);
@@ -111,11 +113,28 @@ const all = async (req, res) => {
 
 const getRdv = async (req, res) => {
     try{
-        const rdv = await rdvRepository.getByDoctorId(req.body.doctorId)
+        const rdv = await rdvRepository.getByDoctorCode(req.body.doctorCode)
         res.send(rdv)
     }catch(ex){
         console.log(ex)
         res.status(500).send(null)
+    }
+}
+
+const getTreatments = async (req, res) => {
+    try{
+        /*let result = []
+        const treatments = await treatmentRepository.getByDoctorId(req.body.doctorId)
+        for (let i = 0; i < treatments.length; i++){
+            const rdv = await rdvRepository.getById(treatments[i].rdv)
+            result.push({treatment: treatments[i], rdv: rdv})
+        }*/
+        // const rdvs = await rdvRepository.getById(treatments.rdv)
+        const result = await treatmentRepository.getAllByDoctorId(req.body.doctorId)
+        res.send(result)
+    }catch(ex){
+        console.log(ex)
+        res.status(500).send(false)
     }
 }
 
@@ -126,5 +145,6 @@ module.exports = {
     findBySpecialty,
     find,
     all,
-    getRdv
+    getRdv,
+    getTreatments
 };
