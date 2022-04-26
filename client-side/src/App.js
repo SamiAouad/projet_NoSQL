@@ -9,6 +9,13 @@ import TakeRdv from "./Routes/TakeRdv";
 import RdvDemands from "./Routes/RdvDemands";
 import HomePage from "./Routes/HomePage";
 import DoctorHome from './Routes/DoctorHome';
+/*import SignIn from "./Routes/SignIn";
+import Register from "./Routes/Register";
+import ErrorPage from "./Routes/ErrorPage";
+import PatientHomePage from "./Routes/PatientHomePage";
+import RDV from "./Routes/RDV";
+import DoctorHome from './Routes/DoctorHome';*/
+import GestionPatient from './Routes/GestionPatients';
 
 
 function App() {
@@ -25,6 +32,10 @@ function App() {
             <Route path={'/doctor/rdv'} element={<RdvDemands/>} exact/>
             <Route path='/patient/rdv' element={<TakeRdv/>} exact/>
             <Route path={'/doctor/home'} element={<DoctorHome/>} exact/>
+  <Route path={'/doctor/home'} element={<RDV/>} exact/>*/}
+  {/*<Route path={'doctor/home'} element={<DoctorHome/>} exact/>*/}
+  <Route path={'doctor/gestionpatient'} element={<GestionPatient/>} exact/>
+
         </Routes>
       </BrowserRouter>
   );
