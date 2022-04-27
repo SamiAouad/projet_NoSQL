@@ -13,9 +13,10 @@ const Program = () => {
                  </div>
                
           </div>
-          <div className="col-8 field">
+          <div className="col-8 field  ">
            
             <p className={style.sectionsubtitle}>Mes Consultations</p>
+            <div className=' overflow-auto'>
             <div className={style.eventcardgroup}>
               <div className={style.eventcard}>
               <div className='row'>
@@ -67,6 +68,9 @@ const Program = () => {
                
                 
               </div>
+            </div>
+      
+              
               
               
             </div>

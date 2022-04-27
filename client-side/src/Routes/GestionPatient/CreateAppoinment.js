@@ -3,7 +3,7 @@ import image from '../../asset/images/Doctor.jpg'
 const CreateAppoinement = () => {
     return ( 
         <div>
-              <section className={style.event}>
+          <section className={style.event}>
           <div className={style.eventleft}>
             <div className='row'>
             <div className='col-7'>

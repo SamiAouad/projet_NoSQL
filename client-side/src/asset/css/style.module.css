@@ -509,4 +509,111 @@ font-weight: 400;
   form button:hover{
       background:#21c8ac;
   }
+  .mycontainer{
+    width: 40%;
+  }
   
+
+  /*features*/ 
+  .features {
+    background: #0B2545;
+
+   }
+
+.featuresleft { padding: var(--py) var(--px); }
+
+.features .sectionsubtitle { margin-bottom: 15px; }
+
+.features .sectiontitle {
+  color: var(--white);
+  margin-bottom: 30px;
+}
+
+.featuresitem {
+  display:     flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.featuresitem:not(:last-child) { margin-bottom: 30px; }
+
+.featuresitem .itemiconbox {
+  width:  65px;
+  height: 65px;
+  display:         flex;
+  justify-content: center;
+  align-items:     center;
+  border-radius: 8px;
+}
+
+.featuresitem .blue { background: hsl(222, 87%, 56%); }
+
+.featuresitem .pink { background: hsl(336, 73%, 50%); }
+
+.featuresitem .purple { background: hsl(265, 83%, 44%); }
+
+.featuresitem .wrapper { max-width: calc(100% - 85px); }
+
+.featuresitem .itemtitle {
+  color: var(--white);
+  font-size: var(--fs-4);
+  font-weight: var(--fw-7);
+  margin-bottom: 10px;
+}
+
+.featuresitem .itemtext {
+  font-family: "Roboto", sans-serif;
+  color: hsl(231, 100%, 94%);
+  font-size: var(--fs-6);
+  line-height: 1.6;
+}
+
+.featuresright { height: 500px; }
+
+.featuresright img {
+  width:  100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.myimg{
+  width: 100%;
+}
+
+
+
+.dmtxt{
+  color: white;
+  margin-top: 5px;
+  font-weight: 600;
+}
+
+.myselect{
+ 
+  margin-top: 5px;
+  background-color: #21c8ac8e;
+  width: 30%;
+  color: #0B2545;
+  font-weight: 600;
+  height: 10;
+  border: none;
+}
+.myoption{
+  color: #0B2545;
+  background-color: aliceblue;
+  font-weight: 600;
+}
+
+.mytextarea{
+  width: 80%;
+  margin-top: 5px;
+  background-color: rgba(255, 255, 255, 0.334);
+  border: none;
+  color: #0B2545;
+  border-radius: 5%;
+  font-weight: 600;
+}
+.myfields{
+text-align: left;
+background-color: #21c8ac;
+}

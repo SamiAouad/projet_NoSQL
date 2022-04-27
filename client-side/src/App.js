@@ -1,4 +1,5 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import AcceptPatient from './AcceptPatient';
 /*import SignIn from "./Routes/SignIn";
 import Register from "./Routes/Register";
 import ErrorPage from "./Routes/ErrorPage";
@@ -17,9 +18,9 @@ function App() {
             <Route path={'/signIn'} element={<SignIn/>} exact/>
             <Route path={'/home'} element={<PatientHomePage/>} exact/>
   <Route path={'/doctor/home'} element={<RDV/>} exact/>*/}
-  {/*<Route path={'doctor/home'} element={<DoctorHome/>} exact/>*/}
-  <Route path={'doctor/gestionpatient'} element={<GestionPatient/>} exact/>
-
+  {/*<Route path={'doctor/home'} element={<DoctorHome/>} exact/>
+  <Route path={'doctor/gestionpatient'} element={<GestionPatient/>} exact/>*/}
+<Route path={'doctor/acceptpatient'} element={<AcceptPatient/>} exact/>
         </Routes>
       </BrowserRouter>
   );

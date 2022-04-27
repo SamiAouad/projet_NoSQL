@@ -11,7 +11,7 @@ const Patients = () => {
                 <h2 className={style.sectiontitle}>Voici La Liste de Vos Patients </h2>
                 </div>
                 <div className='col-2'> 
-                <button type="submit" className="btn-text" id="mybtn"> Nouveau Patient </button>
+                <button type="submit" className="btn-text" id="mybtn"> Accepter Patient </button>
                 </div>
                 </div>
                
