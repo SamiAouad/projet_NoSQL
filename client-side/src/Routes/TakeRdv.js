@@ -26,25 +26,22 @@ function TakeRdv() {
     const onSubmit = async () => {
         console.log('Onsubmit')
         let item = new URLSearchParams();
-        console.log("patient:", patient.cni)
-        console.log("doctor:", doctor.code)
-        item.append('patientCni', patient.cni)
-        item.append('doctorCode', doctor.code)
+        item.append('patientId', patient._id)
+        item.append('doctorId', doctor._id)
         item.append('description', formik.values.description)
         item.append('urgent', formik.values.urgent)
         item.append('date', formik.values.date)
         console.log(item)
-        try{
+        try {
             await api.post('/rdv/create', item).then(res => {
-                if (res.status === 500){
+                if (res.status === 500) {
                     navigate('/error/500')
-                }
-                else
+                } else
                     navigate('/home')
             })
-        }catch(message){
+        } catch (message) {
             navigate('/error/500')
-        }finally {
+        } finally {
             localStorage.removeItem('doctor')
         }
 
@@ -53,77 +50,84 @@ function TakeRdv() {
         initialValues: {
             date: '',
             urgent: 0,
-            description: ''
+            description: '',
+            period: ''
         },
         onSubmit,
         validationSchema
     })
 
     return (
-    <div className={style.center}>
-        <div className="row" id={style.myrow}>
-            <div className="col">
-                <div className={style.container} id={style.mycontainer}>
-                    <form>
-                        <div className="row">
-                            <div className="col">
-                                <label>Pour Quand le Rendez-Vous ?</label>
-                                <input type="date" className="form-control" placeholder="Quand  ?" />
-                            </div>
-                            <div className="col">
-                                <label>Quels Sont vos Symptoms ?</label>
-                                <textarea className="form-control" id={style.exampleFormControlTextarea1} />
-                            </div>
-                        </div>
-                        <fieldset className="form-group">
+        <div className={style.center}>
+            <div className="row" id={style.myrow}>
+                <div className="col">
+                    <div className={style.container} id={style.mycontainer}>
+                        <form onSubmit={formik.handleSubmit}>
                             <div className="row">
-                                <div className='col'>
-                                    <label>Choisissez la Période </label>
-                                    <select className="form-select" aria-label="Default select example">
-                                        <option selected>Matinée</option>
-                                        <option value="1">Aprés-Midi</option>
-
-                                    </select>
+                                <div className="col">
+                                    <label>Pour Quand le Rendez-Vous ?</label>
+                                    <input type="date" name={"date"} value={formik.values.date}
+                                           onChange={formik.handleChange}
+                                           className="form-control" placeholder="Quand  ?"/>
                                 </div>
-                                <div className='col'>
-                                    <legend className="col-form-label " id={style.myradio}>Urgence</legend>
-                                    <div className="col-sm-10">
-                                        <div className="form-check">
-                                            <input className="form-check-input" type="radio" name="gridRadios"
-                                                   id={style.gridRadios1} value="1" checked />
-                                            <label className="form-check-label">
-                                                Urgence sans risque
-                                            </label>
-                                        </div>
-                                        <div className="form-check">
-                                            <input className="form-check-input" type="radio" name="gridRadios" id={style.gridRadios2} value="2" />
-                                            <label className="form-check-label">
-                                                Ugrence Vitale
-                                            </label>
-                                        </div>
+                                <div className="col">
+                                    <label>Quels Sont vos Symptoms ?</label>
+                                    <textarea name={"description"} value={formik.values.description}
+                                              onChange={formik.handleChange}
+                                              className="form-control"/>
+                                </div>
+                            </div>
+                            <fieldset className="form-group">
+                                <div className="row">
+                                    <div className='col'>
+                                        <label>Choisissez la Période </label>
+                                        <select className="form-select" value={formik.values.period}
+                                                onChange={formik.handleChange}
+                                                aria-label="Default select example">
+                                            <option selected>Matinée</option>
+                                            <option value="1">Aprés-Midi</option>
+                                        </select>
+                                    </div>
+                                    <div className='col'>
+                                        <legend className="col-form-label " id={style.myradio}>Urgence</legend>
+                                        <div className="col-sm-10">
+                                            <div className="form-check">
+                                                <input className="form-check-input" onChange={formik.handleChange}
+                                                       type="radio" name="urgent" value="1" checked/>
+                                                <label className="form-check-label">
+                                                    Urgence sans risque
+                                                </label>
+                                            </div>
+                                            <div className="form-check">
+                                                <input className="form-check-input" onChange={formik.handleChange}
+                                                       type="radio" name="urgent" value="2"/>
+                                                <label className="form-check-label">
+                                                    Ugrence Vitale
+                                                </label>
+                                            </div>
 
-                                        <div className="form-check ">
-                                            <input className="form-check-input" type="radio" name="gridRadios" id={style.gridRadios3} value="3" />
-                                            <label className="form-check-label">
-                                                Simple Consultation
-                                            </label>
+                                            <div className="form-check ">
+                                                <input className="form-check-input" onChange={formik.handleChange}
+                                                       type="radio" name="urgent" value="3"/>
+                                                <label className="form-check-label">
+                                                    Simple Consultation
+                                                </label>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
+
+
+                            </fieldset>
+
+                            <div className="col">
+                                <button type="submit" className="btn-text" id="mybtn"> Prendre Rendez Vous !</button>
                             </div>
-
-
-
-                        </fieldset>
-
-                        <div className="col">
-                            <button type="submit" className="btn-text" id="mybtn"> Prendre Rendez Vous ! </button>
-                        </div>
-                    </form>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
     );
 }
 

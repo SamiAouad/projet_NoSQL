@@ -22,9 +22,9 @@ const RdvSchema = new mongoose.Schema({
         default: () => false
     },
     date: Date,
+    period: String,
     description: String
-})
-
+}, {strict: false})
 
 
 module.exports = mongoose.model("Rdv", RdvSchema);

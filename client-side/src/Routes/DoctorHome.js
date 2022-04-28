@@ -10,6 +10,7 @@ import {useFormik} from "formik";
 const DoctorHome = () => {
   const [consultations, setConsultations] = useState([])
   const [error, setError] = useState('')
+  const [success, setSuccess] = useState('')
   const navigate = useNavigate()
   const user = JSON.parse(localStorage.getItem('user'))
   const api = axios.create({
@@ -53,12 +54,12 @@ const DoctorHome = () => {
       try {
           await api.post('/calendar/create', item).then(res => {
               if (res.status === 500) {
-                  navigate('/error/500')
+                  setError('insertion failed')
               }
               else if (res.data === false)
-                  navigate('/error/500')
+                  setError('insertion failed')
               else{
-                  setError('insertion successful')
+                  setSuccess('insertion successful')
               }
           })
       } catch (message) {
@@ -208,7 +209,8 @@ const DoctorHome = () => {
                       <option value>09:00-15:00</option>
                     </select>
                     <div className="mb-3"><button className={`btn ${style.btnprimary} ${style.reservebtn}`  }  type="submit">Enregistrez</button></div>
-                    <div className={"text-success"}>{error}</div>
+                    <div className={"text-success"}>{success}</div>
+                    <div className={"text-alert"}>{error}</div>
                   </form>
                 </section>
               </div>

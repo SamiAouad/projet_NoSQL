@@ -23,6 +23,7 @@ router.post('/doctor/create', upload.single("photo"), DoctorService.create)
     .get('/doctor/all', DoctorService.all)
     .post('/doctor/rdv', DoctorService.getRdv)
     .post('/doctor/consultation/', DoctorService.getTreatments)
+    .post('/doctor/appointments', DoctorService.getConsultations)
 
 
 module.exports = router

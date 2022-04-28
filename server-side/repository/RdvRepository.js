@@ -9,6 +9,15 @@ const getByDoctorCode = async (doctorCode) =>{
     }
 }
 
+const getByDoctorId = async (doctorId) =>{
+    console.log(doctorId)
+    try{
+        return await Rdv.find({"doctorId": doctorId})
+    }catch(ex){
+        return null
+    }
+}
+
 const getById = async (id) =>{
     try{
         return await Rdv.findOne({_id: id})
@@ -20,5 +29,6 @@ const getById = async (id) =>{
 
 module.exports = {
     getByDoctorCode,
-    getById
+    getById,
+    getByDoctorId
 }

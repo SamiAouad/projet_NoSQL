@@ -1,26 +1,26 @@
 const Treatment = require('../models/Treatment')
 const mongoose = require("mongoose");
 
-const getByRdvId = async (rdvId) =>{
-    try{
+const getByRdvId = async (rdvId) => {
+    try {
         return await Treatment.findOne({rdv: rdvId})
-    }catch(ex){
+    } catch (ex) {
         return null
     }
 }
 
 
-const getByDoctorId = async (doctorId) =>{
+const getByDoctorId = async (doctorId) => {
     console.log(doctorId)
-    try{
+    try {
         return await Treatment.find({"doctorId": doctorId})
-    }catch(ex){
+    } catch (ex) {
         return null
     }
 }
 
 const getAllByDoctorId = async (doctorId) => {
-    try{
+    try {
         return await Treatment.aggregate([
             {
                 "$lookup": {
@@ -42,7 +42,15 @@ const getAllByDoctorId = async (doctorId) => {
                 "$match": {"doctorId": new mongoose.Types.ObjectId(doctorId)}
             }
         ])
-    }catch(ex){
+    } catch (ex) {
+        return null
+    }
+}
+const getAppointments = async (doctorId) => {
+    try {
+        return await Treatment.find({doctorId: doctorId}).select('appointments')
+    } catch (ex) {
+        console.log(ex)
         return null
     }
 }
@@ -57,5 +65,6 @@ const getAllByDoctorId = async (doctorId) => {
 
 module.exports = {
     getByDoctorId,
-    getAllByDoctorId
+    getAllByDoctorId,
+    getAppointments
 }

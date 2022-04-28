@@ -31,6 +31,8 @@ const TreatmentSchema = new mongoose.Schema({
     },
     appointments: [{
         date: Date,
+        period: String,
+        urgency: String,
         description: {
             type: String,
             default: ""

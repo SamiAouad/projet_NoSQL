@@ -8,7 +8,7 @@ const mongoose = require('mongoose')
 const morgan = require('morgan')
 const config = require('config')
 
-mongoose.connect('mongodb://localhost:27017/test')
+mongoose.connect('mongodb://localhost:27017/ProjetNosql')
 
 
 let corsOptions = {
@@ -16,13 +16,13 @@ let corsOptions = {
     optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 }
 
-if(config.util.getEnv('NODE_ENV') !== 'test') {
+if (config.util.getEnv('NODE_ENV') !== 'test') {
     //use morgan to log at command line
     app.use(morgan('combined')); //'combined' outputs the Apache style LOGs
 }
 
 // Controllers
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.urlencoded({extended: true}))
 
 const patientController = require('./controllers/PatientController')
 const doctorController = require('./controllers/DoctorController')
@@ -45,7 +45,7 @@ app.use(rdvController)
 app.use(userController)
 app.use(calendarController)
 
-server.listen(5000,() => {
+server.listen(5000, () => {
     console.log("SERVER RUNNING");
 });
 

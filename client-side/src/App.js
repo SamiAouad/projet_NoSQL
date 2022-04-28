@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import SignIn from "./Routes/SignIn";
 import DoctorRegister from "./Routes/DoctorRegister";
 import ErrorPage from "./Routes/ErrorPage";
@@ -19,26 +19,27 @@ import GestionPatient from './Routes/GestionPatients';
 
 
 function App() {
-  return (
-      <BrowserRouter>
-        <Routes>
-            <Route path='/' element={<HomePage/>} exact/>
-            <Route path='/doctor/register' element={<DoctorRegister/>} exact/>
-            <Route path='/patient/register' element={<PatientRegister/>} exact/>
-            <Route path={'/error/:code'} element={<ErrorPage/>} exact/>
-            <Route path={'/signIn'} element={<SignIn/>} exact/>
-            <Route path={'/home'} element={<PatientHomePage/>} exact/>
-            <Route path={'/rdv'} element={<TakeRdv/>} exact/>
-            <Route path={'/doctor/rdv'} element={<RdvDemands/>} exact/>
-            <Route path='/patient/rdv' element={<TakeRdv/>} exact/>
-            <Route path={'/doctor/home'} element={<DoctorHome/>} exact/>
-  <Route path={'/doctor/home'} element={<RDV/>} exact/>*/}
-  {/*<Route path={'doctor/home'} element={<DoctorHome/>} exact/>*/}
-  <Route path={'doctor/gestionpatient'} element={<GestionPatient/>} exact/>
+    return (
+        <BrowserRouter>
+            <Routes>
+                <Route path='/' element={<HomePage/>} exact/>
+                <Route path='/doctor/register' element={<DoctorRegister/>} exact/>
+                <Route path='/patient/register' element={<PatientRegister/>} exact/>
+                <Route path={'/error/:code'} element={<ErrorPage/>} exact/>
+                <Route path={'/signIn'} element={<SignIn/>} exact/>
+                <Route path={'/home'} element={<PatientHomePage/>} exact/>
+                <Route path={'/rdv'} element={<TakeRdv/>} exact/>
+                <Route path={'/doctor/rdv'} element={<RdvDemands/>} exact/>
+                <Route path='/patient/rdv' element={<TakeRdv/>} exact/>
+                <Route path={'/doctor/home'} element={<DoctorHome/>} exact/>
+                <Route path={'/doctor/home'} element={<RDV/>} exact/>*/}
+                <Route path={'/patient/home'} element={<PatientHomePage/>} exact/>*/}
+                {/*<Route path={'doctor/home'} element={<DoctorHome/>} exact/>*/}
+                <Route path={'doctor/gestionpatient'} element={<GestionPatient/>} exact/>
 
-        </Routes>
-      </BrowserRouter>
-  );
+            </Routes>
+        </BrowserRouter>
+    );
 }
 
 export default App;

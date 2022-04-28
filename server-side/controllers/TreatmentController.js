@@ -17,6 +17,7 @@ let upload = multer({ storage: storage });
 
 router.post('/treatment/create', TreatmentService.createTreatment)
     .post('/treatment/symptom', TreatmentService.addSymptom)
+    .post('/treatment/appointment', TreatmentService.addAppointment)
 
 
 module.exports = router

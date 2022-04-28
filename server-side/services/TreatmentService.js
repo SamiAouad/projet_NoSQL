@@ -61,9 +61,12 @@ const addSymptom = async (req, res) => {
 }
 
 const addAppointment = async (req, res) => {
-    let appointment = {
+    console.log(req.body)
+    /*let appointment = {
         date: req.body.date,
-        description: req.body.description
+        period: req.body.period,
+        description: req.body.description,
+        urgency: req.body.urgency
     }
     try{
         await Treatment.findOneAndUpdate(
@@ -74,7 +77,7 @@ const addAppointment = async (req, res) => {
     }catch(message){
         console.log(message)
         res.status(500).send(false)
-    }
+    }*/
 }
 
 module.exports = {

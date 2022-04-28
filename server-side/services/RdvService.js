@@ -4,31 +4,32 @@ const PatientRepository = require('../repository/PatientRepository')
 
 
 const createRdv = async (req, res) => {
-    try{
-        const doctor = await DoctorRepository.findByCode(req.body.doctorCode)
-        const patient = await PatientRepository.findByCni(req.body.patientCni)
+    try {
+        console.log(req.body)
         let rdv = new Rdv({
-            patientId: patient._id,
-            doctorId: doctor._id,
-            description: req.body.description,
-            urgent: req.body.urgent,
-            date: req.body.date,
+            "description": req.body.description,
+            "urgent": req.body.urgent,
+            "date": req.body.date,
+            "period": req.body.period,
+            "patientId": req.body.patientId,
+            "doctorId": req.body.doctorId,
         })
         await rdv.save(async (err, rdv) => {
-            if (err){
-                console.log (err)
+            console.log(rdv)
+            if (err) {
+                console.log(err)
                 return res.status(500).send(false)
             }
-            try{
-                await DoctorRepository.addRdv(doctor._id, rdv._id)
-                await PatientRepository.addRdv(patient._id, rdv._id)
-            }catch(message){
+            try {
+                await DoctorRepository.addRdv(req.body.doctorId, rdv._id)
+                await PatientRepository.addRdv(req.body.patientId, rdv._id)
+            } catch (message) {
                 console.log(message)
                 res.status(500).send(false)
             }
         })
         res.status(200).send(true)
-    }catch(ex){
+    } catch (ex) {
         res.status(500).send(false)
     }
 }
