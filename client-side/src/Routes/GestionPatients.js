@@ -1,13 +1,15 @@
 import Patients from "./GestionPatient/Patients";
 import MyProgram from "./GestionPatient/MyProgram";
 import CreateAppoinement from './GestionPatient/CreateAppoinment'
+import NavbarDoctor from "./NavbarDoctor";
 
 const GestionPatient = () => {
     return ( 
         <div>
-        <Patients/>
-        <MyProgram/>
-        <CreateAppoinement/>
+            <NavbarDoctor/>
+            <Patients/>
+            <MyProgram/>
+            <CreateAppoinement/>
       </div>
        );
 }

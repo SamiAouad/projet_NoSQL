@@ -22,7 +22,12 @@ const createPatient = (req, res) => {
         "passwordHash": passwordHash,
         "phone": req.body.phone,
         "gender": req.body.gender,
-        photo: photo
+        "birthday": req.body.birthday,
+        photo: photo,
+        "address": {
+            city: req.body.city,
+            street: req.body.street
+        }
     })
     patient.save().then(() => {
         res.status(200).send(true)

@@ -18,12 +18,13 @@ const RdvSchema = new mongoose.Schema({
         default: () => Date.now()
     },
     urgent: {
-        type: Boolean,
+        type: Number,
         default: () => false
     },
-    date: Date
-})
-
+    date: Date,
+    period: String,
+    description: String
+}, {strict: false})
 
 
 module.exports = mongoose.model("Rdv", RdvSchema);

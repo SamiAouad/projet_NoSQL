@@ -2,29 +2,27 @@ process.env.NODE_ENV = 'test'
 const chai = require('chai')
 const server = require("../../index")
 const chaiHttp = require('chai-http')
+const mongoose = require("mongoose");
 
 chai.should()
 
 chai.use(chaiHttp)
 
-describe('create rdv', () => {
-    it('Expected: valid all fields are provided', (done) => {
+describe('Doctor Treatment', () => {
+    it('Expected: 2 treatments ', (done) => {
             chai.request(server)
-                .post("/rdv/create")
+                .post("/doctor/login")
                 .set('content-type', 'application/x-www-form-urlencoded')
                 .send({
-                    patientCni: 'BB180559',
-                    doctorCode: '12345678',
-                    description: 'this is a description',
-                    urgent: false,
-                    date: new Date(2022, 4, 25)
+                    doctorId: new mongoose.Types.ObjectId('6260a98cbad424eec4818556')
                 })
                 .end( (err, res) => {
                     console.log (res)
                     res.should.have.status(200)
                     res.body.should.equal(true)
+                    done()
                 } )
-            done()
         }
     )
+
 })

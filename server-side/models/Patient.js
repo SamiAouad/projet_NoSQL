@@ -28,6 +28,13 @@ const patientSchema = new mongoose.Schema({
     gender: {
         type: String
     },
+    birthday: {
+        type: Date
+    },
+    address: {
+        city: String,
+        street: String
+    },
     createdAt: {
         type: Date,
         default: () => Date.now()

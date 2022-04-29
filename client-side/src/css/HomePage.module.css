@@ -1,0 +1,103 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap');
+#SectionId {
+  width: 100%;
+  height: 122vh;
+  background: url("../images/homePage/Background.jpg") center / cover no-repeat;
+  color: white;
+  margin-left: 0px;
+}
+
+.myBody{
+  background: linear-gradient(rgb(11,37,69) 0%, white 100%);
+  color: rgb(255,255,255)
+}
+
+.myNavBarBrand{
+  background: url("../images/homePage/Plugin icon - 1Logo.png")
+  center / 80% no-repeat;
+  width: 150px;height: 50px;
+}
+.myNavBarCollapse{
+  font-size: 14px;
+  font-family: Montserrat, sans-serif;
+  color: #ffffff;
+  font-weight: bold;
+  line-height: 17px;
+}
+
+.myNavItem{
+  color: rgb(255,255,255);
+}
+
+#subtitle{
+  color: rgb(11,37,69);font-size: 23.128px;
+}
+
+#imageContainer{
+  margin-top: 19px;
+}
+
+#title {
+  font-family: Montserrat, sans-serif;
+  font-weight: bold;
+  font-size: 47.88px;
+  text-align: center;
+}
+
+#Section-bottom {
+  color: #0B2545;
+}
+
+.parag1 {
+  font-size: 19px;
+  font-family: Montserrat, sans-serif;
+  font-weight: bold;
+}
+
+.Register-btn {
+  height: 58px;
+  width: 100%;
+  background: rgba(80,85,92,0);
+  background-color: #0b2545;
+  border: 3px solid #fff;
+  border-radius: 30px;
+  color: #ffffff;
+  font-family: Montserrat, sans-serif;
+  font-weight: bold;
+  padding-right: 1px;
+}
+
+.container {
+}
+
+img {
+}
+
+#SectionPatient {
+  background: rgb(255,255,255);
+  width: 92%;
+  height: auto;
+  color: rgb(255,255,255);
+}
+
+img {
+}
+
+#paragraph1 {
+  color: rgb(11,37,69);
+  font-size: 24px;
+  font-family: Montserrat, sans-serif;
+  font-weight: bold;
+  margin-top: 81px;
+  width: 100%;
+}
+
+#SectionPatient {
+  overflow: hidden;
+  width: 100%;
+}
+
+#SectionId {
+  overflow: hidden;
+}
+

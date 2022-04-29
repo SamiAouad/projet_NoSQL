@@ -1,33 +1,86 @@
 import  style from  '../css/DoctorHome.module.css'
 import image from '../images/doctorhome/doctor.jpg'
+import NavbarDoctor from "./NavbarDoctor";
+import {useNavigate} from "react-router";
+import axios from "axios";
+import {useEffect, useState} from "react";
+import * as yup from "yup";
+import {useFormik} from "formik";
+
 const DoctorHome = () => {
+  const [consultations, setConsultations] = useState([])
+  const [error, setError] = useState('')
+  const [success, setSuccess] = useState('')
+  const navigate = useNavigate()
+  const user = JSON.parse(localStorage.getItem('user'))
+  const api = axios.create({
+    baseURL: 'http://localhost:5000'
+  })
+
+  useEffect(() => {
+    if (!user)
+      navigate('/SignIn')
+    else
+    if (user.cni)
+      navigate('/doctor/register')
+    const getConsultations = async () => {
+      try{
+        const result = await api.post('doctor/consultation/', {doctorId: user._id})
+        if (result.status === 200)
+          setConsultations(result.data)
+        else
+          navigate(`/doctor/register`)
+      }catch (ex){
+        navigate(`/error/500`)
+        console.log("error")
+      }
+    }
+    getConsultations()
+  }, [])
+      const validationSchema = yup.object({
+        week: yup.string('valeur invalid').required('ce champs est obligatoire'),
+        days: yup.string('valeur invalid').required('ce champs est obligatoire'),
+
+        hours: yup.string('valeur invalid').required('ce champs est obligatoire'),
+    })
+
+    const onSubmit = async () => {
+      console.log('Onsubmit')
+      let item = new URLSearchParams();
+      item.append('doctorId', user._id)
+      item.append('week', formik.values.week)
+        item.append('days', formik.values.days)
+        item.append('hours', formik.values.hours)
+      try {
+          await api.post('/calendar/create', item).then(res => {
+              if (res.status === 500) {
+                  setError('insertion failed')
+              }
+              else if (res.data === false)
+                  setError('insertion failed')
+              else{
+                  setSuccess('insertion successful')
+              }
+          })
+      } catch (message) {
+          navigate('/error/500')
+      }
+
+  }
+  const formik = useFormik({
+      initialValues: {
+          week: '',
+          days: '',
+          hours:''
+      },
+      onSubmit,
+      validationSchema
+  })
     return ( 
         <div>
-        <meta charSet="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
-        <title>MesPatients</title>
-        <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css" />
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:100,400&display=swap" />
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat+Alternates&display=swap" />
-        <link rel="stylesheet" href="assets/css/Contact-Form-Clean.css" />
-        <link rel="stylesheet" href="assets/css/styles.css" />
         <section id={style.SectionOneId}>
           <div id={style.SectionUp}>
-            <nav className="navbar navbar-light navbar-expand-md">
-              <div className="container-fluid"><a className="navbar-brand" href="#" style={{fontWeight: 'bold'}}>Healtho</a><button data-bs-toggle="collapse" className="navbar-toggler" data-bs-target="#navcol-1"><span className="visually-hidden">Toggle navigation</span><span className="navbar-toggler-icon" /></button>
-                <div className="collapse navbar-collapse" id="navcol-1">
-                  <ul className="navbar-nav mx-auto">
-                    <li className="nav-item"><a className="nav-link active" href="#" style={{fontWeight: 'bold', color: 'rgb(255,255,255)'}}>Rendez-Vous</a></li>
-                    <li className="nav-item"><a className="nav-link" href="#" style={{color: 'rgb(11,37,69)', fontWeight: 'bold'}}>Gestion Patient</a></li>
-                    <li className="nav-item"><a className="nav-link" href="#" style={{color: 'rgb(11,37,69)', fontWeight: 'bold'}}>Gestion Consultation</a></li>
-                  </ul>
-                  <ul className="navbar-nav">
-                    <li className="nav-item"><a className="nav-link active" href="#" style={{fontWeight: 'bold', color: 'rgb(255,255,255)'}}>Acceuil</a></li>
-                    <li className="nav-item"><a className="nav-link" href="#" style={{color: 'rgb(11,37,69)', fontWeight: 'bold'}}>Deconnexion</a></li>
-                  </ul>
-                </div>
-              </div>
-            </nav>
+            <NavbarDoctor/>
             <h1 className="text-center" id={style.title} style={{fontWeight: 'bold', fontSize: '35px'}}>Portail Consultation&nbsp;</h1>
           </div>
           <div id={style.Sectionmiddle}>
@@ -43,35 +96,34 @@ const DoctorHome = () => {
                         <tr>
                           <th>Id</th>
                           <th><br />Image</th>
-                          <th>N°Patient</th>
-                          <th>N°Dossier</th>
-                          <th>Traitement</th>
+                          <th>CNI patient</th>
+                          <th>Sexe</th>
                           <th>Date</th>
+                          <th>Urgent</th>
                           <th>Horaire</th>
                           <th>Urgence</th>
                         </tr>
                       </thead>
                       <tbody id={style.Tbody}>
-                        <tr style={{color: 'rgb(255,255,255)'}}>
-                          <td>Cell 1</td>
-                          <td>Cell 2</td>
-                          <td>Cell 2</td>
-                          <td>Cell 1</td>
-                          <td>Cell 2</td>
-                          <td>Cell 2</td>
-                          <td>Cell 1</td>
-                          <td>Cell 2</td>
-                        </tr>
-                        <tr>
-                          <td>Cell 3</td>
-                          <td>Cell 3</td>
-                          <td>Cell 3</td>
-                          <td>Cell 3</td>
-                          <td>Cell 3</td>
-                          <td>Cell 3</td>
-                          <td>Cell 3</td>
-                          <td>Cell 4</td>
-                        </tr>
+                      {
+                        consultations.map(consultation => {
+                          const date = consultation.rdv[0] ? consultation.rdv[0].date : null;
+                          if (new Date(date) >= new Date())
+                          return (
+                              <tr style={{color: 'rgb(255,255,255)'}}>
+                                <td>Cell 1</td>
+                                <td><img alt={'image'} src={`data:image/jpeg;base64,${consultation.patient[0].photo}`}/></td>
+                                <td>{consultation.patient[0].cni}</td>
+                                <td>{consultation.patient[0].gender}</td>
+                                <td>{consultation.rdv[0] ? consultation.rdv[0].date.substr(0, 10) : null}</td>
+                                <td>{consultation.rdv[0] ? consultation.rdv[0].urgent : null}</td>
+                                <td>Cell 1</td>
+                                <td>Cell 2</td>
+                              </tr>
+                          );
+                        })
+                      }
+
                       </tbody>
                     </table>
                   </div>
@@ -96,27 +148,27 @@ const DoctorHome = () => {
                           <th>Urgence</th>
                         </tr>
                       </thead>
-                      <tbody style={{background: '#0b2545'}}>
-                        <tr style={{color: 'rgb(255,255,255)'}}>
-                          <td>Cell 1</td>
-                          <td>Cell 2</td>
-                          <td>Cell 2</td>
-                          <td>Cell 1</td>
-                          <td>Cell 2</td>
-                          <td>Cell 2</td>
-                          <td>Cell 1</td>
-                          <td>Cell 2</td>
-                        </tr>
-                        <tr style={{background: '#0b2545', color: 'rgb(255,255,255)', fontWeight: 'bold'}}>
-                          <td>Cell 3</td>
-                          <td>Cell 3</td>
-                          <td>Cell 3</td>
-                          <td>Cell 3</td>
-                          <td>Cell 3</td>
-                          <td>Cell 3</td>
-                          <td>Cell 3</td>
-                          <td>Cell 4</td>
-                        </tr>
+                      <tbody id={style.Tbody}>
+                      {
+                        consultations.map(consultation => {
+                          console.log(consultation.rdv)
+                          const date = consultation.rdv[0] ? consultation.rdv[0].date : null;
+                          if (date < new Date())
+                            return (
+                                <tr style={{color: 'rgb(255,255,255)'}}>
+                                  <td>Cell 1</td>
+                                  <td><img alt={'image'} src={`data:image/jpeg;base64,${consultation.patient[0].photo}`}/></td>
+                                  <td>{consultation.patient[0].cni}</td>
+                                  <td>{consultation.patient[0].gender}</td>
+                                  <td>{consultation.rdv[0] ? consultation.rdv[0].date.substr(0, 10) : null}</td>
+                                  <td>{consultation.rdv[0] ? consultation.rdv[0].urgent : null}</td>
+                                  <td>Cell 1</td>
+                                  <td>Cell 2</td>
+                                </tr>
+                            );
+                        })
+                      }
+
                       </tbody>
                     </table>
                   </div>
@@ -131,23 +183,34 @@ const DoctorHome = () => {
               <div className="col-md-6" id={style.myCol} style={{height: '136px'}}><img src={image} style={{width: '80%', borderStyle: 'none', borderRadius: '5px'}} /></div>
               <div className="col-md-6">
                 <section className={style.contactclean} style={{background: '#0b2545', marginTop: '90px'}}>
-                  <form method="post" style={{background: '#66ddc9'}}>
+                  <form onSubmit={formik.handleSubmit} style={{background: '#66ddc9'}}>
                     <h2 className="text-center" style={{color: 'rgb(255,255,255)', fontFamily: 'Montserrat, sans-serif', fontWeight: 'bold', textAlign: 'center'}}>Programme de votre Semaine</h2>
+                    
                     <div className="mb-3">
-                      <p>Quels Sont vos Jours de Travail ?</p><select className="form-select">
+                      <p>Semaine :&nbsp;</p>
+                    </div>
+                   <input type={"week"} name={"week"} value={formik.values.week} onChange={formik.handleChange}/>
+                    
+                    <div className="mb-3" >
+                      <p>Quels Sont vos Jours de Travail ?</p>
+                      <select className="form-select" name={"days"} value={formik.values.days} onChange={formik.handleChange}>
                         <option value={12} selected>Lundi-Vendredi</option>
                         <option value={13}>Lundi-Samedi</option>
                       </select>
                     </div>
+                   
                     <div className="mb-3">
                       <p>Horaires de travail :&nbsp;</p>
-                    </div><select className="form-select">
+                    </div>
+                    <select className="form-select" name={"hours"} value={formik.values.hours} onChange={formik.handleChange}>
                       <option value={12} selected>09:00-17:00</option>
                       <option value={13}>08:00-16:00</option>
                       <option value={14}>08:00-14:00</option>
                       <option value>09:00-15:00</option>
                     </select>
-                    <div className="mb-3"><button className={` btn ${style.btnprimary} ${style.reservebtn}`  }  type="button">Enregistrez</button></div>
+                    <div className="mb-3"><button className={`btn ${style.btnprimary} ${style.reservebtn}`  }  type="submit">Enregistrez</button></div>
+                    <div className={"text-success"}>{success}</div>
+                    <div className={"text-alert"}>{error}</div>
                   </form>
                 </section>
               </div>

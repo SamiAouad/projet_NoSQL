@@ -1,5 +1,5 @@
 const express = require('express')
-const TreatmentService = require('../services/TreatmentService')
+const CalendarService = require('../services/CalendarService')
 
 const router = express.Router()
 let multer = require('multer')
@@ -15,9 +15,7 @@ let storage = multer.diskStorage({
 
 let upload = multer({ storage: storage });
 
-router.post('/treatment/create', TreatmentService.createTreatment)
-    .post('/treatment/symptom', TreatmentService.addSymptom)
-    .post('/treatment/appointment', TreatmentService.addAppointment)
+router.post('/calendar/create', CalendarService.create)
 
 
 module.exports = router
