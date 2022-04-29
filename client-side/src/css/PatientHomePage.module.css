@@ -1,0 +1,140 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400&family=Roboto&display=swap');
+.mysection{
+
+    background-image: url('../images/PatientHomePage/BackPat.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow: hidden;
+    width: 100%;
+    height: 100vh;
+}
+#myimg{
+    margin-top: 10%;
+    margin-bottom: 5%;
+    width: 100%;
+   border-top-right-radius: 15%;
+    border-bottom-right-radius: 15%;
+}
+.title{
+    color: #131126;
+    margin-top: 10%;
+    text-align: center;
+    font-weight: 600;
+    font-size: 2em;
+    font-family: "Montserrat";
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+.subtitle{
+    color: white;
+    margin-top: 5%;
+    font-weight: 600;
+   font-size: 80%;
+    font-family: "Montserrat";
+    letter-spacing: 0.08em;
+    margin-left: 15%;
+}
+#inputGroupSelect01{
+    margin-top: 3%;
+    margin-bottom: 3%;
+    width: 80%;
+    font-size: medium;
+    font-family: "Montserrat";
+   background-color: #4FBDBA;
+   color: #131126;
+    font-weight: 600;
+    max-height: 15vh;
+ 
+    border-radius: 5%;
+}
+.mycontainer{
+    margin-top: 10%;
+    margin-right: 5%;
+    margin-left: 5%;
+    background-color: #131126cb;
+    width: 90%;
+    border: white solid; 
+}
+
+.mysecondsection{
+
+    background-image: url('../images/PatientHomePage/Image.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow: hidden;
+    width: 100%;
+    height: 100vh;
+}
+.mysecondimg{
+   padding-left: 35%;
+    margin-top: 12%;
+    margin-left: 15%;
+}
+
+.secondsubtitle{
+    color: white;
+    margin-top: 5%;
+    font-weight: 600;
+    font-size: 100%;
+    font-family: "Montserrat";
+    letter-spacing: 0.08em;
+    margin-left: 5%;
+}
+.thirdsubtitle{
+    color: white;
+    margin-top: 10%;
+    font-weight: 600;
+    font-size: 100%;
+    font-family: "Montserrat";
+    letter-spacing: 0.08em;
+    margin-left: -5%;
+}
+.mythirdcontainer{
+    margin-top: 5%;
+}
+/* CSS */
+.mybutton {
+    margin-top: 8%;
+    margin-right: 45%;
+    width: 80%;
+  background-color: #131126;
+  border : 1px solid transparent;
+  border-radius: .75rem;
+  box-sizing: border-box;
+  color: #FFFFFF;
+  cursor: pointer;
+  flex: 0 0 auto;
+  font-family: "Montserrat";
+  font-size: 1.125rem;
+  font-weight: 600;
+  line-height: 1.5rem;
+  
+  text-align: center;
+  text-decoration: none #6B7280 solid;
+  text-decoration-thickness: auto;
+  transition-duration: .2s;
+  transition-property: background-color,border-color,color,fill,stroke;
+  transition-timing-function: cubic-bezier(.4, 0, 0.2, 1);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+
+}
+
+.mybutton:hover {
+  background-color: #4FBDBA;
+}
+
+.mybutton:focus {
+  box-shadow: none;
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+
+@media (min-width: 768px) {
+  .mybutton {
+    padding: .75rem 1.5rem;
+  }
+}

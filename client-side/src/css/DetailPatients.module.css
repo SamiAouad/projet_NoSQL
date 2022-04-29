@@ -1,0 +1,93 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400&family=Roboto&display=swap');
+.mysection{
+
+    background-color:#131126;
+    overflow: hidden;
+    width: 100%;
+    height: 100vh;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+   
+  
+}
+.title{
+    color: white;
+    margin-top: 2rem;
+    text-align: center;
+    font-weight: 600;
+    font-size: 2em;
+    font-family: "Montserrat";
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+.subtitle{
+    color: white;
+    margin-bottom: 22%;
+    font-weight: 600;
+    font-size: medium;
+    font-family: "Montserrat";
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-left: 15%;
+}
+
+#myrow{
+    margin-top: 5%;
+    background-image: url('../images/detailspatient/BackgroundDetails.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.myimage{
+    width: 40%;
+    margin-left: 15%;
+    margin-top: 15%;
+    margin-bottom: 15%;
+    
+     }
+
+.mycontainer{
+         width: 60%;
+         margin-left: 20%;
+         margin-top: 6%;
+     }
+   
+.myprogress{
+         margin-top: 2%;
+         margin-bottom: 8%;
+     }
+
+.mysecondrow {
+
+     }
+     .mysecondsection{
+
+        background-image:url('../images/detailspatient/Background2.jpg');
+        overflow: hidden;
+        width: 100%;
+        height: 100vh;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+       
+      
+    }
+    #mytxtHI{
+        margin-top: 60%;
+        margin-left: 35%;
+    }
+     #mytable{
+         background-color: aliceblue;
+         margin-top: 30%;
+         margin-left: 12%;
+         
+     }
+    .thead{
+        color: #131126;
+        font-weight: 600;
+        background: linear-gradient(90deg, #66DDC9 0%,white 100%);
+    }
+    .tbody{
+        background: linear-gradient(90deg, #66ddc973 0%,#0b254570 100%);
+    }
