@@ -2,7 +2,7 @@ import style from '../css/Register.module.css'
 import * as yup from 'yup'
 import {useState} from "react";
 import {useNavigate} from "react-router";
-import { useFormik } from "formik";
+import {useFormik} from "formik";
 import axios from 'axios';
 
 
@@ -11,9 +11,13 @@ const api = axios.create({
 })
 
 const DoctorRegister = () => {
+    function range(start, end) {
+        return Array(end - start + 1).fill().map((_, idx) => end - idx)
+    }
+
     const navigate = useNavigate();
     const [file, setFile] = useState()
-    const [error, setError] = useState('')
+    // const [error, setError] = useState('')
 
     const validationSchema = yup.object({
         code: yup.string('valeur invalid').required('ce champs est obligatoire'),
@@ -45,16 +49,14 @@ const DoctorRegister = () => {
         item.append('street', formik.values.street)
         item.append('password', formik.values.password)
         item.append('photo', file)
-        try{
+        try {
             await api.post('/doctor/create', item).then(res => {
-                if (res.status === 500){
+                if (res.status === 500) {
                     navigate('/error/500')
-                }
-
-                else
+                } else
                     console.log('looking good')
             })
-        }catch(message){
+        } catch (message) {
             navigate('/error/500')
         }
 
@@ -84,7 +86,7 @@ const DoctorRegister = () => {
             <div className={style.container}>
                 <header>Registration</header>
                 <form onSubmit={formik.handleSubmit}>
-                    <div className={ `${style.form} ${style.first}`}>
+                    <div className={`${style.form} ${style.first}`}>
                         <div className={`${style.details}`}>
                             <span className={style.title}>Information personnel</span>
 
@@ -92,36 +94,45 @@ const DoctorRegister = () => {
 
                                 <div className={style.inputField}>
                                     <label>Code</label>
-                                    <input type ="text" name={"code"} value={formik.values.code} onChange={formik.handleChange}
-                                           placeholder='Entrez votre nom' required />
-                                    {formik.errors.code ? <div className="text-danger">{formik.errors.code}</div> : null}
+                                    <input type="text" name={"code"} value={formik.values.code}
+                                           onChange={formik.handleChange}
+                                           placeholder='Entrez votre nom' required/>
+                                    {formik.errors.code ?
+                                        <div className="text-danger">{formik.errors.code}</div> : null}
                                 </div>
 
                                 <div className={style.inputField}>
                                     <label>Nom</label>
-                                    <input type ="text" name={"lastName"} value={formik.values.lastName} onChange={formik.handleChange}
-                                           placeholder='Entrez votre nom' required />
-                                    {formik.errors.lastName ? <div className="text-danger">{formik.errors.lastName}</div> : null}
+                                    <input type="text" name={"lastName"} value={formik.values.lastName}
+                                           onChange={formik.handleChange}
+                                           placeholder='Entrez votre nom' required/>
+                                    {formik.errors.lastName ?
+                                        <div className="text-danger">{formik.errors.lastName}</div> : null}
                                 </div>
 
                                 <div className={style.inputField}>
                                     <label>Prenom</label>
-                                    <input type ="text" name={"firstName"} value={formik.values.firstName} onChange={formik.handleChange}
-                                           placeholder='Entrez votre prenom ' required />
-                                    {formik.errors.firstName ? <div className="text-danger">{formik.errors.firstName}</div> : null}
+                                    <input type="text" name={"firstName"} value={formik.values.firstName}
+                                           onChange={formik.handleChange}
+                                           placeholder='Entrez votre prenom ' required/>
+                                    {formik.errors.firstName ?
+                                        <div className="text-danger">{formik.errors.firstName}</div> : null}
                                 </div>
 
                                 <div className={style.inputField}>
                                     <label>Numero de telephone</label>
-                                    <input type ="text" name={"phone"}  value={formik.values.phone} onChange={formik.handleChange}
-                                           placeholder='Entrez votre numero de telephone' required />
-                                    {formik.errors.phone ? <div className="text-danger">{formik.errors.phone}</div> : null}
+                                    <input type="text" name={"phone"} value={formik.values.phone}
+                                           onChange={formik.handleChange}
+                                           placeholder='Entrez votre numero de telephone' required/>
+                                    {formik.errors.phone ?
+                                        <div className="text-danger">{formik.errors.phone}</div> : null}
                                 </div>
 
 
                                 <div className={style.inputField}>
                                     <label>Université</label>
-                                    <select name="university" onChange={formik.handleChange} value={formik.values.university}>
+                                    <select name="university" onChange={formik.handleChange}
+                                            value={formik.values.university}>
                                         <option value="abd el malek essadi">FMP TANGER</option>
                                         <option value="universite Hassan II">FMP RABAT</option>
                                         <option value="abd el malek essadi">FMP AGADIR</option>
@@ -129,48 +140,48 @@ const DoctorRegister = () => {
                                         <option value="abd el malek essadi">FMP OUJDA</option>
                                         <option value="universite Hassan II">FMP MARRAKECH</option>
                                         <option value="abd el malek essadi">FMP FES</option>
-                                        
+
                                     </select>
-                                    {formik.errors.university ? <div className="text-danger">{formik.errors.university}</div> : null}
+                                    {formik.errors.university ?
+                                        <div className="text-danger">{formik.errors.university}</div> : null}
                                 </div>
                                 <div className={style.inputField}>
                                     <label>promo</label>
-                                    <select name="promotion" onChange={formik.handleChange} value={formik.values.promotion}>
-                                        <option value="2021">2021</option>
-                                        <option value="2020">2020</option>
-                                        <option value="2019">2019</option>
-                                        <option value="2018">2018</option>
-                                        <option value="2017">2017</option>
-                                        <option value="2016">2016</option>
-                                        <option value="2021">2015</option>
-                                        <option value="2014">2014</option>
-                                        <option value="2013">2013</option>
-                                        <option value="2012">2012</option>
-                                        <option value="2011">2011</option>
-                                        <option value="2010">2010</option>
-                                        
+                                    <select name="promotion" onChange={formik.handleChange}
+                                            value={formik.values.promotion}>
+                                        {
+                                            range(1949, 2022).map((element, key) => {
+                                                return (
+                                                    <option key={key} value={element}>{element}</option>
+                                                )
+                                            })
+                                        }
                                     </select>
-                                    {formik.errors.promotion ? <div className="text-danger">{formik.errors.promotion}</div> : null}
+                                    {formik.errors.promotion ?
+                                        <div className="text-danger">{formik.errors.promotion}</div> : null}
                                 </div>
                             </div>
                         </div>
 
-                        <div className={ `${style.detail} ${style.Id}`}>
+                        <div className={`${style.detail} ${style.Id}`}>
                             <span className={style.title}>Personal Identification</span>
 
                             <div className={style.fields}>
 
                                 <div className={style.inputField}>
                                     <label>email</label>
-                                    <input type ="text" name={"email"} onChange={formik.handleChange} value={formik.values.email}
-                                        placeholder=' exemple@test.com ' required />
-                                    {formik.errors.email ? <div className="text-danger">{formik.errors.email}</div> : null}
+                                    <input type="text" name={"email"} onChange={formik.handleChange}
+                                           value={formik.values.email}
+                                           placeholder=' exemple@test.com ' required/>
+                                    {formik.errors.email ?
+                                        <div className="text-danger">{formik.errors.email}</div> : null}
 
                                 </div>
 
                                 <div className={style.inputField}>
                                     <label>Specialité</label>
-                                    <select name="specialty" onChange={formik.handleChange} value={formik.values.specialty}>
+                                    <select name="specialty" onChange={formik.handleChange}
+                                            value={formik.values.specialty}>
                                         <option value="L’anesthésiologie">L’anesthésiologie</option>
                                         <option value="L’andrologie">L’andrologie</option>
                                         <option value="cardiologie">cardiologie</option>
@@ -182,7 +193,8 @@ const DoctorRegister = () => {
                                         <option value="L’endocrinologie">L’endocrinologie</option>
                                         <option value="neurologie">neurologie</option>
                                     </select>
-                                    {formik.errors.specialty ? <div className="text-danger">{formik.errors.specialty}</div> : null}
+                                    {formik.errors.specialty ?
+                                        <div className="text-danger">{formik.errors.specialty}</div> : null}
                                 </div>
 
                                 <div className={style.inputField}>
@@ -199,33 +211,38 @@ const DoctorRegister = () => {
                                         <option value="Fes">Fes</option>
                                         <option value="Meknes">Meknes</option>
                                     </select>
-                                    {formik.errors.city ? <div className="text-danger">{formik.errors.city}</div> : null}
+                                    {formik.errors.city ?
+                                        <div className="text-danger">{formik.errors.city}</div> : null}
                                 </div>
                                 <div className={style.inputField}>
                                     <label>Adresse</label>
-                                    <input type ="text" name={"street"} placeholder='Enterez votre adresse' onChange={formik.handleChange}
-                                           value={formik.values.street} required />
-                                    {formik.errors.street ? <div className="text-danger">{formik.errors.street}</div> : null}
+                                    <input type="text" name={"street"} placeholder='Enterez votre adresse'
+                                           onChange={formik.handleChange}
+                                           value={formik.values.street} required/>
+                                    {formik.errors.street ?
+                                        <div className="text-danger">{formik.errors.street}</div> : null}
                                 </div>
 
                                 <div className={style.inputField}>
                                     <label>Password</label>
-                                    <input type ="password" name={"password"} value={formik.values.password}
-                                           onChange={formik.handleChange} placeholder='Enter Password' required />
-                                    {formik.errors.password ? <div className="text-danger">{formik.errors.password}</div> : null}
+                                    <input type="password" name={"password"} value={formik.values.password}
+                                           onChange={formik.handleChange} placeholder='Enter Password' required/>
+                                    {formik.errors.password ?
+                                        <div className="text-danger">{formik.errors.password}</div> : null}
                                 </div>
 
                                 <div className={style.inputField}>
                                     <label>Confirm Password</label>
-                                    <input type ="password" name={"passwordConf"} value={formik.values.passwordConf}
-                                           onChange={formik.handleChange}  placeholder='Confirm Password ' required />
-                                    {formik.errors.passwordConf ? <div className="text-danger">{formik.errors.passwordConf}</div> : null}
+                                    <input type="password" name={"passwordConf"} value={formik.values.passwordConf}
+                                           onChange={formik.handleChange} placeholder='Confirm Password ' required/>
+                                    {formik.errors.passwordConf ?
+                                        <div className="text-danger">{formik.errors.passwordConf}</div> : null}
                                 </div>
                                 <div className={style.submitbtn}>
-                                    <label>Photo  : </label>
+                                    <label>Photo : </label>
                                     <input type='file' id='photo' accept="image/png" onChange={e => {
                                         setFile(e.target.files[0]);
-                                        }}/>
+                                    }}/>
                                 </div>
                             </div>
                         </div>

@@ -1,6 +1,7 @@
 const Treatment = require('../models/Treatment')
 const Doctor = require("../models/Doctor");
 const mongoose = require("mongoose");
+const treatmentRepository = require('../repository/TreatmentRepository')
 
 
 /*const createTreatment = (req, res) => {
@@ -34,10 +35,10 @@ const createTreatment = async (req, res) => {
         symptoms: req.body.symptoms,
         rdv: req.body.rdv
     })
-    try{
+    try {
         await treatment.save()
         return res.status(200).send(true)
-    }catch(ex){
+    } catch (ex) {
         return res.status(500).send(false)
     }
 
@@ -48,13 +49,13 @@ const addSymptom = async (req, res) => {
         description: req.body.description,
         severity: req.body.severity
     }
-    try{
+    try {
         await Treatment.findOneAndUpdate(
-            { _id: new mongoose.mongo.ObjectId(req.body.treatmentId) },
-            { $push: { symptoms: symptom } },
+            {_id: new mongoose.mongo.ObjectId(req.body.treatmentId)},
+            {$push: {symptoms: symptom}},
         );
         res.status(200).send(true)
-    }catch(message){
+    } catch (message) {
         console.log(message)
         res.status(500).send(false)
     }
@@ -80,8 +81,33 @@ const addAppointment = async (req, res) => {
     }*/
 }
 
+const getAllById = async (req, res) => {
+    try {
+        const result = await treatmentRepository.getAllById(req.params.id)
+        res.send(result)
+    } catch (ex) {
+        res.status(500).send(false)
+    }
+}
+
+const addPrescription = async (req, res) => {
+    console.log(req.body)
+    try {
+        await Treatment.findOneAndUpdate(
+            {_id: new mongoose.mongo.ObjectId(req.body.treatmentId)},
+            {"prescription.photo": req.body.photo},
+        );
+        res.status(200).send(true)
+    } catch (message) {
+        console.log(message)
+        res.status(500).send(false)
+    }
+}
+
 module.exports = {
     createTreatment,
     addSymptom,
-    addAppointment
+    addAppointment,
+    getAllById,
+    addPrescription
 };

@@ -6,7 +6,7 @@ import axios from "axios";
 
 const Patients = () => {
     function listToMatrix(list, elementsPerSubArray) {
-        var matrix = [], i, k;
+        let matrix = [], i, k;
 
         for (i = 0, k = -1; i < list.length; i++) {
             if (i % elementsPerSubArray === 0) {
@@ -76,7 +76,7 @@ const Patients = () => {
                                                                 <img alt={'image'}
                                                                      src={`data:image/jpeg;base64,${consultation.patient[0].photo.data}`}/>
                                                                 <div className={style.coursetagbox}>
-                                                                    <a href="#"
+                                                                    <a href={`/patient/${consultation._id}`}
                                                                        className={`${style.badgetag} ${style.orange} ${style.textdecorationnone}`}> +
                                                                         Detail</a>
                                                                 </div>

@@ -9,7 +9,7 @@ const calendarSchema = new mongoose.Schema({
     week: String,
     schedule: {
         days: String,
-        hours: Number
+        hours: String
     }
 })
 

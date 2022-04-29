@@ -13,10 +13,10 @@ let storage = multer.diskStorage({
     }
 });
 
-let upload = multer({ storage: storage });
+let upload = multer({storage: storage});
 
 router.post('/patient/create', upload.single("photo"), PatientService.createPatient)
-    .get('/patient/:id')
+    .get('/patient/:id', PatientService.getPatient)
     .delete('/patient/:id')
     .put('/patient/:id')
 

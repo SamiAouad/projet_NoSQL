@@ -46,6 +46,34 @@ const getAllByDoctorId = async (doctorId) => {
         return null
     }
 }
+
+const getAllById = async (id) => {
+    try {
+        return await Treatment.aggregate([
+            {
+                "$lookup": {
+                    from: "rdvs",
+                    localField: 'rdv',
+                    foreignField: '_id',
+                    as: "rdv"
+                }
+            },
+            {
+                "$lookup": {
+                    from: "patients",
+                    localField: 'patientId',
+                    foreignField: '_id',
+                    as: "patient"
+                }
+            },
+            {
+                "$match": {"_id": new mongoose.Types.ObjectId(id)}
+            }
+        ])
+    } catch (ex) {
+        return null
+    }
+}
 const getAppointments = async (doctorId) => {
     try {
         return await Treatment.find({doctorId: doctorId}).select('appointments')
@@ -66,5 +94,6 @@ const getAppointments = async (doctorId) => {
 module.exports = {
     getByDoctorId,
     getAllByDoctorId,
-    getAppointments
+    getAppointments,
+    getAllById
 }

@@ -9,8 +9,9 @@ import TakeRdv from "./Routes/TakeRdv";
 import RdvDemands from "./Routes/RdvDemands";
 import HomePage from "./Routes/HomePage";
 import DoctorHome from './Routes/DoctorHome';
-import AcceptPatient from './AcceptPatient';
+import AcceptPatient from './Routes/AcceptPatient';
 import GestionPatient from './Routes/GestionPatients';
+import PatientPage from "./Routes/PatientPage";
 
 
 function App() {
@@ -27,11 +28,11 @@ function App() {
                 <Route path={'/doctor/rdv'} element={<RdvDemands/>} exact/>
                 <Route path='/patient/rdv' element={<TakeRdv/>} exact/>
                 <Route path={'/doctor/home'} element={<DoctorHome/>} exact/>
-                <Route path={'/doctor/home'} element={<RDV/>} exact/>*/}
                 <Route path={'/patient/home'} element={<PatientHomePage/>} exact/>*/}
                 {/*<Route path={'doctor/home'} element={<DoctorHome/>} exact/>*/}
                 <Route path={'doctor/gestionpatient'} element={<GestionPatient/>} exact/>
                 <Route path={'doctor/acceptpatient'} element={<AcceptPatient/>} exact/>
+                <Route path={'patient/:id'} element={<PatientPage/>} exact/>
 
 
             </Routes>

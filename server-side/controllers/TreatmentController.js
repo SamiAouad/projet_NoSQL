@@ -13,11 +13,13 @@ let storage = multer.diskStorage({
     }
 });
 
-let upload = multer({ storage: storage });
+let upload = multer({storage: storage});
 
 router.post('/treatment/create', TreatmentService.createTreatment)
     .post('/treatment/symptom', TreatmentService.addSymptom)
     .post('/treatment/appointment', TreatmentService.addAppointment)
+    .get('/treatment/:id', TreatmentService.getAllById)
+    .post('/treatment/add/prescription', upload.single("photo"), TreatmentService.addPrescription)
 
 
 module.exports = router

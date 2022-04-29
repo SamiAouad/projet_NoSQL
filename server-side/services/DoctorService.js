@@ -123,13 +123,6 @@ const getRdv = async (req, res) => {
 
 const getTreatments = async (req, res) => {
     try {
-        /*let result = []
-        const treatments = await treatmentRepository.getByDoctorId(req.body.doctorId)
-        for (let i = 0; i < treatments.length; i++){
-            const rdv = await rdvRepository.getById(treatments[i].rdv)
-            result.push({treatment: treatments[i], rdv: rdv})
-        }*/
-        // const rdvs = await rdvRepository.getById(treatments.rdv)
         const result = await treatmentRepository.getAllByDoctorId(req.body.doctorId)
         res.send(result)
     } catch (ex) {
@@ -151,6 +144,16 @@ const getConsultations = async (req, res) => {
     }
 }
 
+const getRdvWithPatients = async (req, res) => {
+    try {
+        const result = await rdvRepository.getRdvAndPatients(req.body.doctorId)
+        res.status(200).send(result)
+    } catch (ex) {
+        console.log(ex)
+        res.status(500).send(false)
+    }
+}
+
 module.exports = {
     create,
     login,
@@ -160,5 +163,6 @@ module.exports = {
     all,
     getRdv,
     getTreatments,
-    getConsultations
+    getConsultations,
+    getRdvWithPatients
 };
