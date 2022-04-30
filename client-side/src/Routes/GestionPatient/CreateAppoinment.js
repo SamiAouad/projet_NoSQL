@@ -3,22 +3,22 @@ import image from '../../asset/images/Doctor.jpg'
 import * as yup from "yup";
 import {useFormik} from "formik";
 import {useState} from "react";
-import {useNavigate} from "react-router";
+import {useNavigate, useParams} from "react-router";
 import axios from "axios";
 
 const api = axios.create({
     baseURL: `http://localhost:5000/`
 })
 
-const CreateAppoinement = () => {
+const CreateAppoinement = ({treatmentId}) => {
     const navigate = useNavigate()
     const [error, setError] = useState('')
     const [success, setSuccess] = useState('')
-    const [treatmentId, setTreatmentId] = useState('')
     const user = localStorage.getItem('user')
     const validationSchema = yup.object({})
 
     const onSubmit = async () => {
+        console.log("submitting")
         let item = new URLSearchParams();
         item.append('treatmentId', treatmentId)
         item.append('date', formik.values.date)

@@ -1,28 +1,48 @@
 import React, {useEffect, useState} from 'react';
 import style from "../../asset/css/style.module.css";
 import image1 from "../../asset/images/PatientPatient.png";
+import axios from "axios";
 import * as yup from "yup";
 import {useFormik} from "formik";
 import {useNavigate} from "react-router";
-import axios from "axios";
+import {Table} from "react-bootstrap";
 
-function AddPrescription(props) {
-    const [treatments, setTreatments] = useState([])
-    const [loading, setLoading] = useState(true)
+const api = axios.create({
+    baseURL: `http://localhost:5000/`
+})
+
+function AddPrescription({treatmentId}) {
+    const [meds, setMeds] = useState([])
+    const [error, setError] = useState('')
+    const [refresh, setRefresh] = useState(false)
     const navigate = useNavigate()
     const user = JSON.parse(localStorage.getItem('user'))
+    const [file, setFile] = useState()
+
+    const uploadPrescriptionPhoto = async () => {
+        const item = new URLSearchParams();
+        item.append("photo", file)
+        item.append("treatmentId", treatmentId)
+        try {
+            await api.post('/treatment/add/prescription', item)
+        } catch (ex) {
+            console.log(ex)
+            setError("une erreur s'est survenue")
+        }
+    }
 
     useEffect(() => {
+        console.log(user)
         if (!user)
             navigate('/SignIn')
         else if (user.cni)
             navigate('/doctor/register')
-        const getTreatments = async () => {
+        const getMeds = async () => {
             try {
-                const result = await api.post('doctor/treatments/', {doctorId: user._id})
+                const result = await api.get(`treatment/meds/${treatmentId}`, {doctorId: user._id})
+                console.log("meds: ", result.data)
                 if (result.status === 200) {
-                    setTreatments(result.data)
-                    setLoading(false)
+                    setMeds(result.data)
                 } else
                     navigate(`/doctor/register`)
             } catch (ex) {
@@ -30,28 +50,36 @@ function AddPrescription(props) {
                 console.log("error")
             }
         }
-        getTreatments()
-    })
+        getMeds()
+    }, [refresh])
 
-
-    const api = axios.create({
-        baseURL: 'http://localhost:5000'
-    })
     const validationSchema = yup.object({
-        code: yup.string('valeur invalid').required('ce champs est obligatoire'),
+        name: yup.string('valeur invalid').required('ce champs est obligatoire'),
+        dose: yup.number('valeur invalid').required('ce champs est obligatoire'),
+        unit: yup.string('valeur invalid').required('ce champs est obligatoire'),
+        when: yup.string('valeur invalid').required('ce champs est obligatoire'),
+        duration: yup.number('valeur invalid').required('ce champs est obligatoire'),
+        description: yup.string('valeur invalid').required('ce champs est obligatoire'),
     })
 
     const onSubmit = async () => {
-        console.log('Onsubmit')
-        let item = new FormData();
-        item.append('code', formik.values.code)
-
+        console.log(formik.values)
+        let item = new URLSearchParams();
+        item.append('treatmentId', treatmentId)
+        item.append('name', formik.values.name)
+        item.append('dose', formik.values.dose)
+        item.append('unit', formik.values.unit)
+        item.append('when', formik.values.when)
+        item.append('duration', formik.values.duration)
+        item.append('description', formik.values.description)
         try {
-            await api.post('/doctor/create', item).then(res => {
+            await api.post('/treatment/add/med', item).then(res => {
                 if (res.status === 500) {
                     navigate('/error/500')
-                } else
+                } else {
                     console.log('looking good')
+                    setRefresh(!refresh)
+                }
             })
         } catch (message) {
             navigate('/error/500')
@@ -59,16 +87,22 @@ function AddPrescription(props) {
 
     }
     const formik = useFormik({
-        initialValues: {},
+        initialValues: {
+            name: '',
+            dose: '',
+            unit: '',
+            when: '',
+            duration: '',
+            description: '',
+        },
         onSubmit,
         validationSchema
     })
-    if (loading)
-        return <div>Loading</div>
-    return (
-        <section className={style.features}>
-            <div className={style.featuresleft}>
 
+
+    return (
+        <section className={`row ${style.features}`}>
+            <div className={`${style.featuresleft}`}>
                 <h2 className={style.sectiontitle}>Création Dossier Médicale </h2>
                 <div className='row'>
                     <div className='col-3'>
@@ -76,58 +110,102 @@ function AddPrescription(props) {
                     </div>
                     <div className='col-5'>
                         <div className={style.container} id={style.mycontainer}>
-                            <form>
+                            <form onSubmit={formik.handleSubmit}>
+
                                 <div className="row">
-                                    <label className={style.dmtxt}> Patient
-                                        : </label> {/* Liste des Noms des patients */}
-                                    <select name={"rdvId"} onChange={formik.handleSubmit}
-                                            className={style.myselect}>
-                                        {
-                                            treatments.map((element, key) => {
-                                                return (
-                                                    <option key={key} className={style.myoption}
-                                                            value={element._id}>
-                                                        {element.patient[0].firstName} {element.patient[0].lastName}</option>
-                                                )
-                                            })
-                                        }
+                                    <label className={style.dmtxt}>Nom De Medicament : </label>
+                                    <input type={"text"} className={style.mytextarea} name={"name"}
+                                           value={formik.values.name} onChange={formik.handleChange}/>
+                                </div>
+
+                                <div className="row">
+                                    <label className={style.dmtxt}>Dose : </label>
+                                    <input type={"text"} className={`col ${style.mytextarea}`} name={"dose"}
+                                           value={formik.values.dose} onChange={formik.handleChange}/>
+
+                                    <select className={`col offset-1 ${style.mytextarea}`} name={"unit"}
+                                            value={formik.values.unit} onChange={formik.handleChange}>
+                                        <option value="g">g</option>
+                                        <option value="mg">mg</option>
                                     </select>
                                 </div>
 
                                 <div className="row">
-                                    <label className={style.dmtxt}>Traitement : </label>
-                                    <textarea className={style.mytextarea} id="exampleFormControlTextarea1"
-                                              defaultValue={""}/> {/* ajout du traitement ou bien modification */}
+                                    <label className={style.dmtxt}>Quand : </label>
+                                    <input type={"text"} className={style.mytextarea} name={"when"}
+                                           value={formik.values.when} onChange={formik.handleChange}/>
                                 </div>
 
                                 <div className="row">
-                                    <label className={style.dmtxt}>Medicaments : </label>
-                                    <textarea className={style.mytextarea} id="exampleFormControlTextarea1"
-                                              defaultValue={""}/> {/* ajout des medocs ou bien modification */}
+                                    <label className={style.dmtxt}>Durée en jours : </label>
+                                    <input type={"text"} className={style.mytextarea} name={"duration"}
+                                           value={formik.values.duration} onChange={formik.handleChange}/>
                                 </div>
 
                                 <div className="row">
-                                    <div className="input-group">
-
-                                        <div className="custom-file">
-
-                                            <label className={style.dmtxt} htmlFor="inputGroupFile01">Ordonnance
-                                                : </label>
-                                            <input type="file" className="custom-file-input m-lg-2" id="mybtn"/>
-                                        </div>
-                                    </div>
+                                    <label className={style.dmtxt}>Description suplémentaire : </label>
+                                    <textarea className={style.mytextarea} name={"description"}
+                                              value={formik.values.description} onChange={formik.handleChange}/>
                                 </div>
                                 <div className="col-4 mt-4">
-                                    <button type="submit" className="btn-text" id="mybtn"> Enregistrer</button>
+                                    <button type="submit" className="btn-text" id="mybtn"> Ajouter</button>
                                 </div>
                             </form>
+                            <div className="row">
+                                <div className="input-group">
+                                    <div className="custom-file">
+                                        <label className={style.dmtxt} htmlFor="inputGroupFile01">Ordonnance
+                                            : </label>
+                                        <input type='file' id='photo' accept="image/png" onChange={e => {
+                                            setFile(e.target.files[0]);
+                                        }}/>
+                                        <button onClick={uploadPrescriptionPhoto}
+                                                className="custom-file-input m-lg-2">Upload
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-
                     </div>
                     <div className='col-4'>
                         <img className={style.myimg} src={image1}/>
                     </div>
                 </div>
+            </div>
+            <div className={style.mysecondsection}>
+                <div className='row'>
+                    <div className='col'>
+                        <Table id={style.mytable} responsive="md">
+                            <thead className={style.thead}>
+                            <tr>
+                                <th className={"text-white"}>#</th>
+                                <th className={"text-white"}>Nom</th>
+                                <th className={"text-white"}>Dose</th>
+                                <th className={"text-white"}>Quand</th>
+                                <th className={"text-white"}>Durée</th>
+                                <th className={"text-white"}>Description</th>
+                            </tr>
+                            </thead>
+                            <tbody className={style.tbody}>
+                            {
+                                meds.map((med, key) => {
+                                    return (
+                                        <tr key={key}>
+                                            <td className={"text-white"}>{key + 1}</td>
+                                            <td className={"text-white"}>{med.name}</td>
+                                            <td className={"text-white"}>{med.dose}{med.unit}</td>
+                                            <td className={"text-white"}>{med.when}</td>
+                                            <td className={"text-white"}>{med.duration}</td>
+                                            <td className={"text-white"}>{med.description}</td>
+                                        </tr>
+                                    )
+                                })
+                            }
+                            </tbody>
+                        </Table>
+                    </div>
+                </div>
+
             </div>
         </section>
     );

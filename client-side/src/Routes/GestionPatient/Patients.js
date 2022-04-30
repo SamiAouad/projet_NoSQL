@@ -1,5 +1,4 @@
 import style from '../../asset/css/style.module.css'
-import image from '../../asset/images/Agnaou.png'
 import {useEffect, useState} from "react";
 import {useNavigate} from "react-router";
 import axios from "axios";
@@ -76,7 +75,7 @@ const Patients = () => {
                                                                 <img alt={'image'}
                                                                      src={`data:image/jpeg;base64,${consultation.patient[0].photo.data}`}/>
                                                                 <div className={style.coursetagbox}>
-                                                                    <a href={`/patient/${consultation._id}`}
+                                                                    <a href={`/doctor/treatment/${consultation._id}`}
                                                                        className={`${style.badgetag} ${style.orange} ${style.textdecorationnone}`}> +
                                                                         Detail</a>
                                                                 </div>

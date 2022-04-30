@@ -46,6 +46,33 @@ const getAllByDoctorId = async (doctorId) => {
         return null
     }
 }
+const getAllByPatientId = async (patientId) => {
+    try {
+        return await Treatment.aggregate([
+            {
+                "$lookup": {
+                    from: "rdvs",
+                    localField: 'rdv',
+                    foreignField: '_id',
+                    as: "rdv"
+                }
+            },
+            {
+                "$lookup": {
+                    from: "doctors",
+                    localField: 'doctorId',
+                    foreignField: '_id',
+                    as: "doctor"
+                }
+            },
+            {
+                "$match": {"patientId": new mongoose.Types.ObjectId(patientId)}
+            }
+        ])
+    } catch (ex) {
+        return null
+    }
+}
 
 const getAllById = async (id) => {
     try {
@@ -82,6 +109,15 @@ const getAppointments = async (doctorId) => {
         return null
     }
 }
+
+const getAppointmentsBuPatientId = async (patientId) => {
+    try {
+        return await Treatment.find({patientId: patientId}).select('appointments')
+    } catch (ex) {
+        console.log(ex)
+        return null
+    }
+}
 /*const getByDoctorCode = async (doctorCode) => {
     try {
         return await Treatment.find({doctorCode: doctorCode})
@@ -90,10 +126,32 @@ const getAppointments = async (doctorId) => {
     }
 }*/
 
+const getByPatientId = async (patientId) => {
+    console.log(patientId)
+    try {
+        return await Treatment.find({"patientId": patientId})
+    } catch (ex) {
+        return null
+    }
+}
+
+const getMedsById = async (treatmentId) => {
+    try {
+        const result = await Treatment.find({"_id": treatmentId}).select("prescription")
+        return result[0].prescription.meds
+    } catch (ex) {
+        return null
+    }
+}
+
 
 module.exports = {
     getByDoctorId,
     getAllByDoctorId,
     getAppointments,
-    getAllById
+    getAllById,
+    getAppointmentsBuPatientId,
+    getByPatientId,
+    getAllByPatientId,
+    getMedsById
 }

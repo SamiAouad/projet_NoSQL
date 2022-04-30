@@ -20,6 +20,9 @@ router.post('/treatment/create', TreatmentService.createTreatment)
     .post('/treatment/appointment', TreatmentService.addAppointment)
     .get('/treatment/:id', TreatmentService.getAllById)
     .post('/treatment/add/prescription', upload.single("photo"), TreatmentService.addPrescription)
+    .get('/treatment/patient/:patientId', TreatmentService.getByPatientId)
+    .post('/treatment/add/med', TreatmentService.addMed)
+    .get('/treatment/meds/:treatmentId', TreatmentService.getMeds)
 
 
 module.exports = router

@@ -63,22 +63,22 @@ const addSymptom = async (req, res) => {
 
 const addAppointment = async (req, res) => {
     console.log(req.body)
-    /*let appointment = {
+    let appointment = {
         date: req.body.date,
         period: req.body.period,
         description: req.body.description,
         urgency: req.body.urgency
     }
-    try{
+    try {
         await Treatment.findOneAndUpdate(
-            { _id: new mongoose.mongo.ObjectId(req.body.treatmentId) },
-            { $push: { appointments: appointment } },
+            {_id: new mongoose.mongo.ObjectId(req.body.treatmentId)},
+            {$push: {appointments: appointment}},
         );
         res.status(200).send(true)
-    }catch(message){
+    } catch (message) {
         console.log(message)
         res.status(500).send(false)
-    }*/
+    }
 }
 
 const getAllById = async (req, res) => {
@@ -104,10 +104,53 @@ const addPrescription = async (req, res) => {
     }
 }
 
+const getByPatientId = async (req, res) => {
+    try {
+        const result = await treatmentRepository.getAllByPatientId(req.params.patientId)
+        res.send(result)
+    } catch (ex) {
+        res.status(500).send(false)
+    }
+}
+
+const addMed = async (req, res) => {
+    console.log(req.body)
+    let med = {
+        name: req.body.name,
+        dose: req.body.dose,
+        unit: req.body.unit,
+        when: req.body.when,
+        duration: req.body.duration,
+        description: req.body.description
+    }
+    try {
+        await Treatment.findOneAndUpdate(
+            {_id: new mongoose.mongo.ObjectId(req.body.treatmentId)},
+            {$push: {"prescription.meds": med}},
+        );
+        res.status(200).send(true)
+    } catch (message) {
+        console.log(message)
+        res.status(500).send(false)
+    }
+}
+
+const getMeds = async (req, res) => {
+    try {
+        const result = await treatmentRepository.getMedsById(req.params.treatmentId)
+        res.send(result)
+    } catch (ex) {
+        res.status(500).send(false)
+    }
+}
+
 module.exports = {
     createTreatment,
     addSymptom,
     addAppointment,
     getAllById,
-    addPrescription
+    addPrescription,
+    getByPatientId,
+    addMed,
+    getMeds
 };

@@ -2,11 +2,11 @@ import React, {useEffect, useState} from 'react';
 import axios from "axios";
 import {useNavigate} from "react-router";
 
-function PatientHomePage() {
+function PatientHomePage2() {
     const navigate = useNavigate();
     const user = JSON.parse(localStorage.getItem('user'))
     const [loading, setLoading] = useState(true)
-    const [doctors, setDoctors]= useState([])
+    const [doctors, setDoctors] = useState([])
     const api = axios.create({
         baseURL: 'http://localhost:5000'
     })
@@ -25,7 +25,7 @@ function PatientHomePage() {
         navigate('/rdv')
     }
 
-    if (loading){
+    if (loading) {
         return (
             <div>Loading</div>
         )
@@ -48,4 +48,4 @@ function PatientHomePage() {
     );
 }
 
-export default PatientHomePage;
+export default PatientHomePage2;
