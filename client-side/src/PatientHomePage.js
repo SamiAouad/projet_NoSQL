@@ -3,6 +3,9 @@ import image from './images/PatientHomePage/BackgroundPatient.jpg'
 import firsticon from './images/PatientHomePage/icon.png'
 import secondicon from './images/PatientHomePage/secondicon.png'
 import thirsticon from './images/PatientHomePage/third.png'
+import Information from './images/PatientHomePage/IconInformation.png'
+import Traitement from './images/PatientHomePage/Icontraitement.png'
+import Symptomes from './images/PatientHomePage/IconSymptomes.png'
 const PatientHomePage = () => {
     return ( 
         <div>
@@ -130,6 +133,24 @@ const PatientHomePage = () => {
                         </div>
                 </div>
                </div>
+            </section>
+            <section className={style.mythirdsection}>
+                <div className='row'>
+                  <h1 className={style.thirdstitle}>Faites Le Suivie de Votre Traitement</h1>
+                  <div className='col'>
+                        <img src={Traitement} className={style.mythirdIcon}/>
+                        <a  href='#' className={style.fourthtitle}> Mon Traitement </a>
+                  </div>
+                  <div className='col'>
+                        <img src={Information} className={style.mythirdIcon}/>
+                        <a  href='#' className={style.fourthtitle}> Mes Rendez-Vous </a>
+                  </div>
+                  <div className='col'>
+                        <img src={Symptomes} className={style.mythirdIcon}/>
+                        <a  href='#' className={style.fourthtitle}> Des Ameliorations </a>
+                  </div>
+                </div>
+               
             </section>
         </div>
      );

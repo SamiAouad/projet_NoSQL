@@ -67,11 +67,27 @@
     width: 100%;
     height: 100vh;
 }
-.mysecondimg{
-   padding-left: 35%;
-    margin-top: 12%;
-    margin-left: 15%;
+.mythirdsection{
+
+    background-image: url('../images/PatientHomePage/Section3.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow: hidden;
+    width: 100%;
+    height: 100vh;
 }
+.mythirdIcon{
+   padding-left: 30%;
+    margin-top: 12%;
+    margin-left: 3%;
+}
+.mysecondimg{
+    padding-left: 35%;
+     margin-top: 12%;
+     margin-left: 15%;
+ }
+ 
 
 .secondsubtitle{
     color: white;
@@ -81,6 +97,31 @@
     font-family: "Montserrat";
     letter-spacing: 0.08em;
     margin-left: 5%;
+}
+.thirdstitle{
+    color: white;
+    padding-left: 30%;
+    margin-top: 10%;
+    font-weight: 600;
+    font-size: 1.8rem;
+    font-family: "Montserrat";
+    letter-spacing: 0.08em;
+    margin-left: 5%;
+}
+.fourthtitle{
+
+    color: white;
+    padding-left: 15%;
+    margin-top: 1%;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    font-family: "Montserrat";
+    letter-spacing: 0.08em;
+    margin-left: 20%;
+}
+.fourthtitle:hover{
+    color: #4FBDBA;
 }
 .thirdsubtitle{
     color: white;

@@ -1,6 +1,6 @@
 //import AcceptPatient from './AcceptPatient';
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
-import SignIn from "./Routes/SignIn";
+/*import SignIn from "./Routes/SignIn";
 import DoctorRegister from "./Routes/DoctorRegister";
 import ErrorPage from "./Routes/ErrorPage";
 import PatientHomePage from "./Routes/PatientHomePage";
@@ -10,7 +10,7 @@ import TakeRdv from "./Routes/TakeRdv";
 import RdvDemands from "./Routes/RdvDemands";
 import HomePage from "./Routes/HomePage";
 import DoctorHome from './Routes/DoctorHome';
-import AcceptPatient from './Routes/AcceptPatient';
+import AcceptPatient from './Routes/AcceptPatient';*/
 import PatientHomePage from './PatientHomePage';
 //import SignIn from "./Routes/SignIn";
 //import DoctorRegister from "./Routes/DoctorRegister";
@@ -28,11 +28,11 @@ import ErrorPage from "./Routes/ErrorPage";
 import PatientHomePage from "./Routes/PatientHomePage";
 import RDV from "./Routes/RDV";
 import DoctorHome from './Routes/DoctorHome';*/
-import GestionPatient from './Routes/GestionPatients';
-import PatientPage from "./Routes/PatientPage";
+//import GestionPatient from './Routes/GestionPatients';
+//import PatientPage from "./Routes/PatientPage";
 //import GestionPatient from './Routes/GestionPatients';
 //import DetailPatient from './DetailPatient';
-
+function App() {
 
     return (
         <BrowserRouter>
@@ -48,9 +48,9 @@ import PatientPage from "./Routes/PatientPage";
                 <Route path='/patient/rdv' element={<TakeRdv/>} exact/>
                 <Route path={'/doctor/home'} element={<DoctorHome/>} exact/>
                 <Route path={'/patient/home'} element={<PatientHomePage/>} exact/>*/}
-                <Route path={'/doctor/home'} element={<RDV/>} exact/>
+                {/*<Route path={'/doctor/home'} element={<RDV/>} exact/>*/}
                 <Route path={'/patient/home'} element={<PatientHomePage/>} exact/>
-                <Route path={'doctor/acceptpatient'} element={<AcceptPatient/>} exact/>
+                {/*<Route path={'doctor/acceptpatient'} element={<AcceptPatient/>} exact/>*/}
                 {/*<Route path={'doctor/home'} element={<DoctorHome/>} exact/>
                 <Route path={'doctor/gestionpatient'} element={<GestionPatient/>} exact/>
                 <Route path={'doctor/acceptpatient'} element={<AcceptPatient/>} exact/>
@@ -58,7 +58,7 @@ import PatientPage from "./Routes/PatientPage";
 
 
                 <Route path={'doctor/detailpatient'} element={<DetailPatient/>} exact/>*/}
-                <Route path={'patient/homepagepatient'} element={<PatientHomePage/>} exact/>
+                
             </Routes>
         </BrowserRouter>
     );
