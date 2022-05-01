@@ -18,14 +18,13 @@ let upload = multer({storage: storage});
 router.post('/doctor/create', upload.single("photo"), DoctorService.create)
     .post('/doctor/login', DoctorService.login)
     .get("/doctor/find", DoctorService.find)
-    .get('/doctor/findByCity', DoctorService.findByCity)
-    .get('/doctor/findBySpecialty', DoctorService.findBySpecialty)
     .get('/doctor/all', DoctorService.all)
     // .post('/doctor/rdv', DoctorService.getRdv)
     .post('/doctor/consultation/', DoctorService.getTreatments)
     .post('/doctor/appointments', DoctorService.getConsultations)
     .post('/doctor/rdv', DoctorService.getRdvWithPatients)
     .post('/doctor/treatments', DoctorService.getTreatments)
+    .post('/doctor/find/specialty/city', DoctorService.findByCityAndSpecialty)
 
 
 module.exports = router

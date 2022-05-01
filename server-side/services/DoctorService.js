@@ -4,6 +4,7 @@ let fs = require('fs');
 let path = require('path');
 const rdvRepository = require('../repository/RdvRepository')
 const treatmentRepository = require('../repository/TreatmentRepository')
+const doctorRepository = require('../repository/DoctorRepository')
 const mongoose = require("mongoose");
 
 const create = (req, res) => {
@@ -58,23 +59,6 @@ const login = async (req, res) => {
 
 }
 
-const findByCity = async (req, res) => {
-    try {
-        let doctors = await Doctor.find({"address.city": req.body.city})
-        return res.status(200).send(doctors)
-    } catch (ex) {
-        return res.status(200).send(null)
-    }
-}
-
-const findBySpecialty = async (req, res) => {
-    try {
-        let doctors = await Doctor.find({"specialty": req.body.specialty})
-        return res.status(200).send(doctors)
-    } catch (ex) {
-        return res.status(200).send(null)
-    }
-}
 
 const find = async (req, res) => {
     try {
@@ -154,15 +138,24 @@ const getRdvWithPatients = async (req, res) => {
     }
 }
 
+const findByCityAndSpecialty = async (req, res) => {
+    try {
+        const result = await doctorRepository.findByCityAndSpecialty(req.body.city, req.body.specialty)
+        res.status(200).send(result)
+    } catch (ex) {
+        console.log(ex)
+        res.status(500).send(false)
+    }
+}
+
 module.exports = {
     create,
     login,
-    findByCity,
-    findBySpecialty,
     find,
     all,
     getRdv,
     getTreatments,
     getConsultations,
-    getRdvWithPatients
+    getRdvWithPatients,
+    findByCityAndSpecialty
 };

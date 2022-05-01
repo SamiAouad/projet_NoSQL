@@ -3,8 +3,28 @@ import image from '../images/PatientHomePage/BackgroundPatient.jpg'
 import firsticon from '../images/PatientHomePage/icon.png'
 import secondicon from '../images/PatientHomePage/secondicon.png'
 import thirsticon from '../images/PatientHomePage/third.png'
+import * as yup from "yup";
+import {useFormik} from "formik";
+import {useNavigate} from "react-router";
 
 const PatientHomePage = () => {
+    const navigate = useNavigate()
+    const validationSchema = yup.object({
+        city: yup.string('valeur invalid').required('ce champs est obligatoire'),
+        specialty: yup.string('valeur invalid').required('ce champs est obligatoire'),
+    })
+
+    const onSubmit = async () => {
+        navigate(`/patient/search/doctor/${formik.values.specialty}/${formik.values.city}`)
+    }
+    const formik = useFormik({
+        initialValues: {
+            specialty: '',
+            city: '',
+        },
+        onSubmit,
+        validationSchema
+    })
     return (
         <div>
             <section className={style.mysection}>
@@ -18,15 +38,14 @@ const PatientHomePage = () => {
                             <div className={style.mycontainer}>
                                 <div className='row'>
                                     <div className='col-8'>
-                                        <form className={style.myform}>
+                                        <form onSubmit={formik.handleSubmit} className={style.myform}>
                                             <div className='row'>
 
                                                 <div className='col-4'>
-
                                                     <label className={style.subtitle}>Des Symptomes ? </label>
                                                 </div>
                                                 <div className='col-6'>
-                                                    <select class="custom-select" id={style.inputGroupSelect01}>
+                                                    <select className="custom-select" id={style.inputGroupSelect01}>
                                                         <option selected>courbatures</option>
                                                         <option value="1">Akinésie</option>
                                                         <option value="2">Blocage du genou</option>
@@ -45,7 +64,11 @@ const PatientHomePage = () => {
                                                     <label className={style.subtitle}>Quel Specialiste ? </label>
                                                 </div>
                                                 <div className='col-6'>
-                                                    <select class="custom-select" id={style.inputGroupSelect01}>
+                                                    <select name={'specialty'} className="custom-select"
+                                                            value={formik.values.specialty}
+                                                            onChange={formik.handleChange}
+                                                            id={style.inputGroupSelect01}>
+                                                        <option value=""></option>
                                                         <option value="L’anesthésiologie">L’anesthésiologie</option>
                                                         <option value="L’andrologie">L’andrologie</option>
                                                         <option value="cardiologie">cardiologie</option>
@@ -65,28 +88,32 @@ const PatientHomePage = () => {
 
                                             <div className='row'>
                                                 <div className='col-4'>
-
                                                     <label className={style.subtitle}>Dans Quelle Ville ? </label>
                                                 </div>
                                                 <div className='col-6'>
-                                                    <select class="custom-select" id={style.inputGroupSelect01}>
-                                                        <option selected>Rabat</option>
-                                                        <option value="1">Fes</option>
-                                                        <option value="2">Marrakech</option>
-                                                        <option value="3">Tanger</option>
-                                                        <option value="4">Agadir</option>
-                                                        <option value="5">Meknes</option>
-                                                        <option value="6">Dakhla</option>
-                                                        <option value="7">Nador</option>
-                                                        <option value="8">Tetouan</option>
+                                                    <select name={'city'} className="custom-select"
+                                                            value={formik.values.city}
+                                                            onChange={formik.handleChange}
+                                                            id={style.inputGroupSelect01}>
+                                                        <option value={"Rabat"} selected>Rabat</option>
+                                                        <option value="Fes">Fes</option>
+                                                        <option value="Marrakech">Marrakech</option>
+                                                        <option value="Tanger">Tanger</option>
+                                                        <option value="Agadir">Agadir</option>
+                                                        <option value="Meknes">Meknes</option>
+                                                        <option value="Dakhla">Dakhla</option>
+                                                        <option value="Nador">Nador</option>
+                                                        <option value="Tetouan">Tetouan</option>
                                                     </select>
                                                 </div>
                                             </div>
+                                            <div className='col-4'>
+                                                <button className={style.mybutton} type="submit">Faite votre Recherche
+                                                </button>
+                                            </div>
                                         </form>
                                     </div>
-                                    <div className='col-4'>
-                                        <button class={style.mybutton} role="button">Faite votre Recherche</button>
-                                    </div>
+
 
                                 </div>
 

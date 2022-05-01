@@ -12,6 +12,7 @@ import HomePage from "./Routes/HomePage";
 import DoctorHome from './Routes/DoctorHome';
 import GestionPatient from './Routes/GestionPatients';
 import DetailPatient from './Routes/DetailPatient';
+import SearchingDoctor from "./Routes/SearchingDoctor";
 
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
                 <Route path={'doctor/gestionpatient'} element={<GestionPatient/>} exact/>
                 <Route path={'/doctor/treatment/:id'} element={<DetailPatient/>} exact/>
                 <Route path={'patient/homepagepatient'} element={<PatientHomePage/>} exact/>
+                <Route path={'patient/search/doctor/:specialty/:city'} element={<SearchingDoctor/>} exact/>
             </Routes>
         </BrowserRouter>
     );
