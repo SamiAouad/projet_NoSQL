@@ -129,9 +129,8 @@ const DetailPatient = () => {
                                     <label> Traitement : </label>
                                     <ProgressBar variant="info" now={30}/>
                                     <label> Symptomes : </label>
-                                    <ProgressBar variant="warning" now={40}/>
-                                    <label> Signes Critiques : </label>
-                                    <ProgressBar variant="danger" now={10}/>
+                                    <ProgressBar variant="danger" now={20}/>
+                                  
                                 </div>
                             </div>
                         </div>
