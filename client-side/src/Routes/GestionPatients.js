@@ -11,7 +11,6 @@ const GestionPatient = () => {
             <Patients/>
             <MyProgram/>
             <CreateAppoinement/>
-            <AddPrescription/>
         </div>
     );
 }
