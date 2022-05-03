@@ -12,6 +12,7 @@ import HomePage from "./Routes/HomePage";
 import DoctorHome from './Routes/DoctorHome';
 import AcceptPatient from './Routes/AcceptPatient';*/
 import PatientHomePage from './PatientHomePage';
+import PatientRdv from './Routes/PatientRdv';
 import SearchingDoctor from './Routes/SearchingDoctor';
 //import SignIn from "./Routes/SignIn";
 //import DoctorRegister from "./Routes/DoctorRegister";
@@ -51,7 +52,8 @@ function App() {
                 <Route path={'/patient/home'} element={<PatientHomePage/>} exact/>*/}
                 {/*<Route path={'/doctor/home'} element={<RDV/>} exact/>*/}
                 {/*<Route path={'/patient/home'} element={<PatientHomePage/>} exact/>*/}
-                <Route path={'/patient/searchdoctor'} element={<SearchingDoctor/>} exact/>
+                {/*<Route path={'/patient/searchdoctor'} element={<SearchingDoctor/>} exact/>*/}
+                <Route path={'/patient/mesrdv'} element={<PatientRdv/>} exact/>
                 {/*<Route path={'doctor/acceptpatient'} element={<AcceptPatient/>} exact/>*/}
                 {/*<Route path={'doctor/home'} element={<DoctorHome/>} exact/>
                 <Route path={'doctor/gestionpatient'} element={<GestionPatient/>} exact/>
