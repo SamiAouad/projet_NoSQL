@@ -130,7 +130,8 @@ const PatientRdv = () => {
                                                         <td>{key + 1}</td>
                                                         <td>{data.doctor[0].firstName} {data.doctor[0].lastName}</td>
                                                         <td>{data.doctor[0].specialty}</td>
-                                                        <td><a href={`patient/treatment/${consultation._id}`}>Detail</a>
+                                                        <td><a
+                                                            href={`/patient/treatment/${consultation._id}`}>Detail</a>
                                                         </td>
                                                         <td>{consultation.date.substr(0, 10)}  </td>
                                                         <td>{consultation.period}</td>

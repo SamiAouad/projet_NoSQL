@@ -30,6 +30,7 @@ const Program = () => {
             console.log('an error has occurred')
         }
     }
+    console.log('user', user._id)
 
     useEffect(() => {
         console.log(user)
@@ -72,8 +73,47 @@ const Program = () => {
                         <p className={style.sectionsubtitle}>Mes Consultations</p>
                         {
                             appointments.map(element => {
-                                element.appointments.map((appointment, key) => {
-                                    const date = appointment.date.substr(0, 10).split('-')
+                                return (
+                                    element.appointments.map((appointment, key) => {
+                                        const date = appointment.date.substr(0, 10).split('-')
+                                        return (
+                                            <div key={key} className={style.eventcardgroup}>
+                                                <div className={style.eventcard}>
+                                                    <div className='row'>
+                                                        <div className='col-4'>
+                                                            <div className={style.contentleft}>
+                                                                <p className={style.day}>{date[0]}</p>
+                                                                <p className={style.month}>{months[date[1] - 1]}, {date[2]}</p>
+                                                            </div>
+
+                                                        </div>
+                                                        <div className='col-8'>
+                                                            <div className={style.contentright}>
+                                                                <div className={style.schedule}>
+                                                                    <p className={style.time}>{appointment.period}</p>
+                                                                </div>
+                                                                <p className={style.eventname}>{element.patient[0].firstName} </p>
+                                                                <p className={style.eventname}> {appointment.description} </p>
+                                                                <div>
+                                                                    <button className=" btn-text "
+                                                                            onClick={() => cancelAppointment(element._id, key)}> Annuler
+                                                                        ?
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        )
+                                    })
+                                )
+                            })
+                        }
+                        {
+                            rdv.map((element, key) => {
+                                const date = element.date.substr(0, 10).split('-')
+                                if (element.status)
                                     return (
                                         <div key={key} className={style.eventcardgroup}>
                                             <div className={style.eventcard}>
@@ -88,13 +128,13 @@ const Program = () => {
                                                     <div className='col-8'>
                                                         <div className={style.contentright}>
                                                             <div className={style.schedule}>
-                                                                <p className={style.time}>{appointment.period}</p>
+                                                                <p className={style.time}>{element.period}</p>
                                                             </div>
-                                                            <p className={style.eventname}>{element.patient[0].firstName} </p>
-                                                            <p className={style.eventname}> Motife </p>
+                                                            <p className={style.eventname}>{element.patient[0].firstName} {element.patient[0].lastName}</p>
+                                                            <p className={style.eventname}> {element.description} </p>
                                                             <div>
                                                                 <button className=" btn-text "
-                                                                        onClick={() => cancelAppointment(element._id, key)}> Annuler
+                                                                        onClick={() => cancelRdv(element._id)}> Annuler
                                                                     ?
                                                                 </button>
                                                             </div>
@@ -104,41 +144,6 @@ const Program = () => {
                                             </div>
                                         </div>
                                     )
-                                })
-                            })
-                        }
-                        {
-                            rdv.map((element, key) => {
-                                const date = element.date.substr(0, 10).split('-')
-                                return (
-                                    <div key={key} className={style.eventcardgroup}>
-                                        <div className={style.eventcard}>
-                                            <div className='row'>
-                                                <div className='col-4'>
-                                                    <div className={style.contentleft}>
-                                                        <p className={style.day}>{date[0]}</p>
-                                                        <p className={style.month}>{months[date[1] - 1]}, {date[2]}</p>
-                                                    </div>
-
-                                                </div>
-                                                <div className='col-8'>
-                                                    <div className={style.contentright}>
-                                                        <div className={style.schedule}>
-                                                            <p className={style.time}>{element.period}</p>
-                                                        </div>
-                                                        <p className={style.eventname}>{element.patient[0].firstName} {element.patient[0].lastName}</p>
-                                                        <p className={style.eventname}> Motife </p>
-                                                        <div>
-                                                            <button className=" btn-text "
-                                                                    onClick={() => cancelRdv(element._id)}> Annuler ?
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                )
                             })
                         }
                     </div>

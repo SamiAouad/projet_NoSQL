@@ -86,7 +86,7 @@ const DetailPatient = () => {
                                  src={`data:image/jpeg;base64,${treatment.patient[0].photo.data}`}/>
                         </div>
                         <div>
-                            <h3 className={style.subtitle}> AGNAOU MOHAMED
+                            <h3 className={style.subtitle}> {treatment.patient[0].firstName} {treatment.patient[0].lastName}
                             </h3>
                         </div>
                     </div>
@@ -129,7 +129,7 @@ const DetailPatient = () => {
                                     <ProgressBar variant="info" now={30}/>
                                     <label> Symptomes : </label>
                                     <ProgressBar variant="danger" now={20}/>
-                                  
+
                                 </div>
                             </div>
                         </div>
@@ -160,7 +160,7 @@ const DetailPatient = () => {
                                             <td>{key + 1}</td>
                                             <td>{consultation.doctor[0].code}</td>
                                             <td>{consultation.doctor[0].firstName} {consultation.doctor[0].lastName}</td>
-                                            <td>{consultation.rdv[0] ? consultation.rdv[0].date : "introuvable"}</td>
+                                            <td>{consultation.rdv[0] ? consultation.rdv[0].date.substr(0, 10) : "introuvable"}</td>
                                             <td>{consultation.rdv[0] ? consultation.rdv[0].description : "introuvable"}</td>
                                         </tr>
                                     )

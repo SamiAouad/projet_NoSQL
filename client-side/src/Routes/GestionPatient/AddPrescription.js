@@ -20,8 +20,8 @@ function AddPrescription({treatmentId}) {
     const [file, setFile] = useState()
 
     const uploadPrescriptionPhoto = async () => {
-        const item = new URLSearchParams();
-        item.append("photo", file)
+        const item = new FormData();
+        item.append("file", file)
         item.append("treatmentId", treatmentId)
         try {
             await api.post('/treatment/add/prescription', item)

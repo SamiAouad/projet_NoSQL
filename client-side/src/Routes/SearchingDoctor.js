@@ -66,9 +66,9 @@ const SearchingDoctor = () => {
     const formik = useFormik({
         initialValues: {
             date: '',
-            urgent: '',
+            urgent: '0',
             description: '',
-            period: '',
+            period: 'matin',
         },
         onSubmit,
         validationSchema
@@ -118,7 +118,7 @@ const SearchingDoctor = () => {
                                 <p id={stylesec.mysectext}>Urgence de votre Rendez-vous : </p>
                                 <select className="custom-select" id={stylesec.myinputSelect} name={"urgent"}
                                         value={formik.values.urgent} onChange={formik.handleChange}>
-                                    <option selected>Simple Consultation</option>
+                                    <option value="0">Simple Consultation</option>
                                     <option value="1">Urgence Cardiaque</option>
                                     <option value="2">Urgences respiratoires</option>
                                     <option value="3">Pertes de connaissance</option>

@@ -83,6 +83,11 @@ const Amelioration = () => {
                             <tbody className={style.tbody}>
                             {
                                 treatments.map((treatment, key) => {
+                                    let objectUrl = null
+                                    if (treatment.prescription && treatment.prescription.photo) {
+                                        let blob = new Blob([treatment.prescription.photo.data], {type: "image/png"});
+                                        objectUrl = URL.createObjectURL(blob);
+                                    }
                                     return (
                                         <tr>
                                             <td>{key}</td>
@@ -95,7 +100,7 @@ const Amelioration = () => {
                                                 {
                                                     treatment.prescription && treatment.prescription.photo ?
                                                         <>
-                                                            <a href={treatment.prescription.photo}
+                                                            <a href={`data:image/jpeg;base64,${treatment.prescription.photo.data}`}
                                                                download="VotreOrdonnance">
                                                                 <button type="button"
                                                                         className={style.mybutton}>Ordonnance
@@ -185,4 +190,4 @@ const Amelioration = () => {
         </div>);
 }
 
-export default Amelioration;
+export default Amelioration

@@ -10,7 +10,6 @@ const GestionPatient = () => {
             <NavbarDoctor/>
             <Patients/>
             <MyProgram/>
-            <CreateAppoinement/>
         </div>
     );
 }

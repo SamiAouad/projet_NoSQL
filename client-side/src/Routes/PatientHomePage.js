@@ -23,7 +23,7 @@ const PatientHomePage = () => {
     const formik = useFormik({
         initialValues: {
             specialty: '',
-            city: '',
+            city: 'rabat',
         },
         onSubmit,
         validationSchema
@@ -105,15 +105,15 @@ const PatientHomePage = () => {
                                                             value={formik.values.city}
                                                             onChange={formik.handleChange}
                                                             id={style.inputGroupSelect01}>
-                                                        <option value={"Rabat"} selected>Rabat</option>
-                                                        <option value="Fes">Fes</option>
-                                                        <option value="Marrakech">Marrakech</option>
-                                                        <option value="Tanger">Tanger</option>
-                                                        <option value="Agadir">Agadir</option>
-                                                        <option value="Meknes">Meknes</option>
-                                                        <option value="Dakhla">Dakhla</option>
-                                                        <option value="Nador">Nador</option>
-                                                        <option value="Tetouan">Tetouan</option>
+                                                        <option value={"rabat"} selected>Rabat</option>
+                                                        <option value="fes">Fes</option>
+                                                        <option value="marrakech">Marrakech</option>
+                                                        <option value="tanger">Tanger</option>
+                                                        <option value="agadir">Agadir</option>
+                                                        <option value="meknes">Meknes</option>
+                                                        <option value="dakhla">Dakhla</option>
+                                                        <option value="nador">Nador</option>
+                                                        <option value="tetouan">Tetouan</option>
                                                     </select>
                                                 </div>
                                             </div>

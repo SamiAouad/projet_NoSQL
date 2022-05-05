@@ -2,6 +2,8 @@ const Treatment = require('../models/Treatment')
 const mongoose = require("mongoose");
 const treatmentRepository = require('../repository/TreatmentRepository')
 const rdvRepository = require('../repository/RdvRepository')
+const fs = require("fs");
+const path = require("path");
 
 
 const createTreatment = async (req, res) => {
@@ -90,17 +92,25 @@ const getAllById = async (req, res) => {
 }
 
 const addPrescription = async (req, res) => {
-    console.log(req.body)
+    console.log(req.body.file)
+    let photo = null
+    if (typeof req.file !== 'undefined') {
+        photo = {
+            data: fs.readFileSync(path.resolve(__dirname, '../uploads/' + req.file.filename)),
+            contentType: 'image/png'
+        }
+    }
     try {
         await Treatment.findOneAndUpdate(
             {_id: new mongoose.mongo.ObjectId(req.body.treatmentId)},
-            {"prescription.photo": req.body.photo},
+            {"prescription.photo": photo},
         );
         res.status(200).send(true)
     } catch (message) {
         console.log(message)
         res.status(500).send(false)
     }
+    fs.unlinkSync(path.resolve(__dirname, '../uploads/' + req.file.filename))
 }
 
 const getByPatientId = async (req, res) => {
