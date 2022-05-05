@@ -1,11 +1,8 @@
 import style from '../asset/css/style.module.css'
-import image1 from '../asset/images/PatientPatient.png'
 import {useEffect, useState} from "react";
 import axios from "axios";
 import {useNavigate} from "react-router";
 import NavbarDoctor from "./NavbarDoctor";
-import * as yup from "yup";
-import {useFormik} from "formik";
 
 const AcceptPatient = () => {
     const [rdv, setRdv] = useState([])

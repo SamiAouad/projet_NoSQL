@@ -1,0 +1,155 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400&family=Roboto&display=swap');
+
+.mysection {
+    background-color: #131126;
+    overflow: hidden;
+    width: 100%;
+    height: auto;
+}
+
+.mysecsection {
+    background-image: url('../images/amelioration/ImageSection.jpg');
+    overflow: hidden;
+    width: 100%;
+    height: 100vh;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#myfield {
+    background-image: url('../images/amelioration/Background.jpg');
+    overflow: hidden;
+    width: 50%;
+    height: 100vh;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.mytitle {
+    color: #131126;
+    font-family: 'Montserrat';
+    font-weight: 600;
+    margin-top: 5%;
+    margin-left: 2%;
+}
+
+.mysectitle {
+    color: white;
+    font-family: 'Montserrat';
+    font-weight: 600;
+    margin-top: 5%;
+    margin-left: 2%;
+}
+
+#myinputSelect {
+    color: #131313;
+    background-color: #ffffff98;
+    border: 1px solid #E5E5E5;
+    border-radius: 5px 5px 5px 5px;
+    box-shadow: 0 0 10px #E8E8E8 inset;
+    height: 5%;
+    width: 40%;
+    margin-left: 11%;
+}
+
+#mysecinputSelect {
+    color: #131313;
+    background-color: #ffffff98;
+    border: 1px solid #E5E5E5;
+    border-radius: 5px 5px 5px 5px;
+    box-shadow: 0 0 10px #E8E8E8 inset;
+    height: 25%;
+    width: 40%;
+    margin-left: 20%;
+}
+
+.mysectext {
+    color: white;
+    font-weight: 500;
+    font-family: 'Montserrat';
+    margin-top: 10%;
+    margin-left: 20%;
+}
+
+.myfourthtitle {
+    color: aliceblue;
+    margin-top: 3%;
+    padding-left: 10%;
+    width: 100%;
+    font-family: 'Montserrat';
+}
+
+#myimg {
+    width: 20%;
+    margin-top: 1%;
+    margin-left: 40%;
+}
+
+#mysecimg {
+    width: 80%;
+    margin-top: 40%;
+    margin-left: 30%;
+}
+
+.mytext {
+    color: #131126;
+    font-family: 'Montserrat';
+    font-weight: 600;
+    margin-top: 6%;
+    margin-left: 2%;
+}
+
+#mytable {
+    background-color: aliceblue;
+    margin-top: 2%;
+    width: 95%;
+    margin-left: 2%;
+    padding-right: 5%;
+
+}
+
+.mybutton {
+    align-items: center;
+    margin-top: 3%;
+    margin-left: 11%;
+    appearance: none;
+    background-color: #131126;
+    border-radius: 24px;
+    border-style: none;
+    box-shadow: rgba(0, 0, 0, .2) 0 3px 5px -1px, rgba(0, 0, 0, .14) 0 6px 10px 0, rgba(0, 0, 0, .12) 0 1px 18px 0;
+    box-sizing: border-box;
+    color: #ffffff;
+    font-weight: 500;
+    font-family: 'Montserrat';
+    cursor: pointer;
+    display: inline-flex;
+    fill: currentcolor;
+    font-family: "Montserrat", Arial, sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    height: 48px;
+    justify-content: center;
+    letter-spacing: .25px;
+    line-height: normal;
+    max-width: 100%;
+    overflow: visible;
+    padding: 2px 24px;
+    position: relative;
+    text-align: center;
+    text-transform: none;
+    transition: box-shadow 280ms cubic-bezier(.4, 0, .2, 1), opacity 15ms linear 30ms, transform 270ms cubic-bezier(0, 0, .2, 1) 0ms;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    width: auto;
+    will-change: transform, opacity;
+    z-index: 0;
+}
+
+.mybutton:hover {
+    background: #f6f9fed8;
+    color: #131126;
+    font-weight: 500;
+}

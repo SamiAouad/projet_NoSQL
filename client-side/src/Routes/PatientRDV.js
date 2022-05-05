@@ -25,19 +25,11 @@ const PatientRdv = () => {
             return navigate('/error/404')
         const getRdv = async () => {
             try {
-                const result = await api.get(`/rdv/patient/${user._id}`)
+                let result = await api.get(`/rdv/patient/${user._id}`)
                 if (result.status === 500)
                     return navigate('/error/500')
                 setRdv(result.data)
-                setLoading(false)
-            } catch (ex) {
-                console.log(ex)
-                navigate("/error/403")
-            }
-        }
-        const getConsultations = async () => {
-            try {
-                const result = await api.get(`/treatment/appointments/patient/${user._id}`)
+                result = await api.get(`/treatment/appointments/patient/${user._id}`)
                 console.log("consultations: ", result.data)
                 if (result.status === 500)
                     return navigate('/error/500')
@@ -49,7 +41,6 @@ const PatientRdv = () => {
             }
         }
         getRdv()
-        getConsultations()
     }, [])
 
     const validationSchema = yup.object({
@@ -131,18 +122,22 @@ const PatientRdv = () => {
                             {
                                 consultations ?
                                     consultations.map((data) => {
-                                        data.appointments.map((consultation, key) => {
-                                            return (
-                                                <tr key={key}>
-                                                    <td>{key + 1}</td>
-                                                    <td>{data.doctor[0].firstName} {data.doctor[0].lastName}</td>
-                                                    <td>{data.doctor[0].specialty}</td>
-                                                    <td>{consultation.status ? "Accepté" : "En Attente"} </td>
-                                                    <td>{consultation.date.substr(0, 10)}  </td>
-                                                    <td>{consultation.period}</td>
-                                                </tr>
-                                            )
-                                        })
+                                        console.log("appointments test: ", data.appointments)
+                                        return (
+                                            data.appointments.map((consultation, key) => {
+                                                return (
+                                                    <tr key={key}>
+                                                        <td>{key + 1}</td>
+                                                        <td>{data.doctor[0].firstName} {data.doctor[0].lastName}</td>
+                                                        <td>{data.doctor[0].specialty}</td>
+                                                        <td><a href={`patient/treatment/${consultation._id}`}>Detail</a>
+                                                        </td>
+                                                        <td>{consultation.date.substr(0, 10)}  </td>
+                                                        <td>{consultation.period}</td>
+                                                    </tr>
+                                                )
+                                            })
+                                        )
                                     }) : null
                             }
                             </tbody>

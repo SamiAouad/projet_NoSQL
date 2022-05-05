@@ -13,7 +13,7 @@ const findByCode = async (code) => {
 
 const findByEmail = async (email) => {
     try {
-        return await Doctor.findOne({email: email}, {_id: 1})
+        return await Doctor.findOne({email: email})
     } catch (message) {
         console.log(message)
         return null

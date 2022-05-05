@@ -5,6 +5,7 @@ import PatientImage from "../images/homePage/Patient.png"
 import {useNavigate} from "react-router";
 
 function HomePage() {
+    const user = JSON.parse(localStorage.getItem('user'))
     const navigate = useNavigate()
     const logout = () => {
         localStorage.clear()
@@ -15,7 +16,7 @@ function HomePage() {
             <section className="d-flex flex-column justify-content-between" id={style.SectionId}>
                 <div id="Section-top">
                     <nav className="navbar navbar-light navbar-expand-md">
-                        <div className="container-fluid"><a className={`navbar-brand ${style.myNavBarBrand}`} href="#"/>
+                        <div className="container-fluid"><a className={`navbar-brand ${style.myNavBarBrand}`} href="/"/>
                             <button data-bs-toggle="collapse" className="navbar-toggler" data-bs-target="#navcol-1">
                                 <span className="visually-hidden">Toggle navigation</span><span
                                 className="navbar-toggler-icon"/></button>
@@ -25,8 +26,6 @@ function HomePage() {
                                     </li>
                                     <li className="nav-item"><a className={`nav-link ${style.myNavItem}`}
                                                                 href="/doctor/home">Portail-Médecin</a></li>
-                                    <li className="nav-item"><a className={`nav-link ${style.myNavItem}`}
-                                                                href="#">Portail-Laboratoire</a></li>
                                     <li className="nav-item"><a className={`nav-link ${style.myNavItem}`}
                                                                 href="/patient/home">Portail-Patient</a></li>
                                 </ul>
@@ -39,6 +38,9 @@ function HomePage() {
                                                        onClick={logout}>Deconnexion
                                                     </a>
                                                 </li>
+                                                <li className="nav-item"><a className="nav-link active"
+                                                >{user.firstName} {user.lastName}</a>
+                                                </li>
                                             </ul>
                                         </>
                                         :
@@ -47,6 +49,7 @@ function HomePage() {
                                                 <li className="nav-item"><a className="nav-link active"
                                                                             href="/signin">Connexion</a>
                                                 </li>
+
                                             </ul>
                                         </>
                                 }
@@ -88,8 +91,8 @@ function HomePage() {
                                 </p>
                             </div>
                             <div className="col align-self-center">
-                                <button className="btn btn-light Register-btn" type="button">Rejoignez-Nous
-                                    !&nbsp;</button>
+                                <a href={'/doctor/register'} className="btn btn-light Register-btn" type="button">Rejoignez-Nous
+                                    !&nbsp;</a>
                             </div>
                         </div>
                     </div>
@@ -112,9 +115,10 @@ function HomePage() {
                                 disponibles pour tous, et rapidement&nbsp;!<br/>L’accompagnement et l’écoute sont
                                 inhérents au rétablissement d’un patient. En facilitant les échanges entre le personnel
                                 médical et le patient, Healtho propose un suivi permanent<br/><br/></p>
-                            <button
+                            <a
                                 className="btn btn-light text-center d-xxl-flex justify-content-xxl-center align-items-xxl-center Register-btn"
-                                type="button" style={{width: '76%'}}>Rejoignez-Nous !&nbsp;</button>
+                                type="button" href={'/patient/register'} style={{width: '76%'}}>Rejoignez-Nous
+                                !&nbsp;</a>
                         </div>
                     </div>
                 </div>

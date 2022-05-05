@@ -9,7 +9,7 @@ const NavbarDoctor = () => {
     }
     return (
         <nav className="navbar navbar-light navbar-expand-md">
-            <div className="container-fluid"><a className="navbar-brand" href="/doctor/home"
+            <div className="container-fluid"><a className="navbar-brand" href="/"
                                                 style={{fontWeight: 'bold'}}>Healtho</a>
                 <button data-bs-toggle="collapse" className="navbar-toggler" data-bs-target="#navcol-1"><span
                     className="visually-hidden">Toggle navigation</span><span className="navbar-toggler-icon"/></button>
