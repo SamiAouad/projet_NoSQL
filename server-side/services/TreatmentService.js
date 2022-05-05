@@ -1,9 +1,25 @@
 const Treatment = require('../models/Treatment')
-const Doctor = require("../models/Doctor");
 const mongoose = require("mongoose");
 const treatmentRepository = require('../repository/TreatmentRepository')
+const rdvRepository = require('../repository/RdvRepository')
 
 
+const createTreatment = async (req, res) => {
+    const treatment = new Treatment({
+        patientId: req.body.patientId,
+        doctorId: req.body.doctorId,
+        appointments: req.body.appointments,
+        symptoms: req.body.symptoms,
+        rdv: req.body.rdvId
+    })
+    try {
+        await treatment.save()
+        await rdvRepository.acceptRdv(req.body.rdvId)
+        return res.status(200).send(true)
+    } catch (ex) {
+        return res.status(500).send(false)
+    }
+}
 /*const createTreatment = (req, res) => {
     const reqSymptoms = JSON.parse(req.body.symptoms) // not yet tested (problem of symptoms arrays)
     let symptoms = []
@@ -26,23 +42,6 @@ const treatmentRepository = require('../repository/TreatmentRepository')
         res.status(500).send(false)
     });
 }*/
-const createTreatment = async (req, res) => {
-    console.log(req.body)
-    let treatment = new Treatment({
-        patientId: req.body.patientId,
-        doctorId: req.body.doctorId,
-        appointments: req.body.appointments,
-        symptoms: req.body.symptoms,
-        rdv: req.body.rdv
-    })
-    try {
-        await treatment.save()
-        return res.status(200).send(true)
-    } catch (ex) {
-        return res.status(500).send(false)
-    }
-
-}
 
 const addSymptom = async (req, res) => {
     let symptom = {
@@ -144,6 +143,24 @@ const getMeds = async (req, res) => {
     }
 }
 
+const deleteAppointment = async (req, res) => {
+    try {
+        await Treatment.updateOne({_id: req.params.treatmentId}, {$pullAll: {appointments: [req.params.index]}})
+        res.send(true)
+    } catch (ex) {
+        res.status(500).send(false)
+    }
+}
+
+const getAppointmentsByPatientId = async (req, res) => {
+    try {
+        const result = await treatmentRepository.getAllByPatientId(req.params.patientId)
+        res.status(200).send(result)
+    } catch (ex) {
+        res.status(500).send(false)
+    }
+}
+
 module.exports = {
     createTreatment,
     addSymptom,
@@ -152,5 +169,7 @@ module.exports = {
     addPrescription,
     getByPatientId,
     addMed,
-    getMeds
+    getMeds,
+    deleteAppointment,
+    getAppointmentsByPatientId
 };

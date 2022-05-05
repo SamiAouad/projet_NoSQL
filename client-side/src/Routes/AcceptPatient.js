@@ -1,5 +1,4 @@
 import style from '../asset/css/style.module.css'
-import image from '../asset/images/Agnaou.png'
 import image1 from '../asset/images/PatientPatient.png'
 import {useEffect, useState} from "react";
 import axios from "axios";
@@ -12,6 +11,29 @@ const AcceptPatient = () => {
     const [rdv, setRdv] = useState([])
     const user = JSON.parse(localStorage.getItem('user'))
     const [loading, setLoading] = useState(true)
+    const [refresh, setRefresh] = useState(false)
+
+    const acceptRdv = async (rdv) => {
+        console.log(rdv)
+        const item = new URLSearchParams()
+        item.append("patientId", rdv.patientId)
+        item.append("doctorId", rdv.doctorId)
+        item.append("rdvId", rdv._id)
+        try {
+            const result = await api.post("/treatment/create", item)
+            if (result.status === 500)
+                navigate('/error/500')
+            else {
+                setRefresh(!refresh)
+            }
+        } catch (ex) {
+            console.log(ex)
+            navigate('/error/500')
+        }
+    }
+    const refuseRdv = (rdv) => {
+        console.log("refuse ", rdv)
+    }
 
     function listToMatrix(list, elementsPerSubArray) {
         let matrix = [], i, k;
@@ -41,7 +63,7 @@ const AcceptPatient = () => {
             navigate('/doctor/register')
         const getRdv = async () => {
             try {
-                const result = await api.post('doctor/rdv/', {doctorId: user._id})
+                const result = await api.get(`doctor/rdv/demands/${user._id}`)
                 if (result.status === 200) {
                     setRdv(result.data)
                     setLoading(false)
@@ -53,7 +75,7 @@ const AcceptPatient = () => {
             }
         }
         getRdv()
-    }, [])
+    }, [refresh])
     if (loading) {
         return <div>Loading</div>
     }
@@ -76,10 +98,10 @@ const AcceptPatient = () => {
                                                             <img
                                                                 src={`data:image/jpeg;base64,${col.patient[0].photo.data}`}
                                                                 alt="course banner"/>
-                                                            <button type='submit'
+                                                            <button onClick={() => acceptRdv(col)}
                                                                     className='btn-bg-danger mt-2'> Accepter
                                                             </button>
-                                                            <button type='submit'
+                                                            <button onClick={refuseRdv}
                                                                     className='btn-bg-danger m-lg-2'> Decliner
                                                             </button>
 

@@ -6,9 +6,12 @@ import thirsticon from '../images/PatientHomePage/third.png'
 import * as yup from "yup";
 import {useFormik} from "formik";
 import {useNavigate} from "react-router";
+import {useEffect} from "react";
+import PatientNavbar from "./PatientNavbar";
 
 const PatientHomePage = () => {
     const navigate = useNavigate()
+    const user = JSON.parse(localStorage.getItem('user'))
     const validationSchema = yup.object({
         city: yup.string('valeur invalid').required('ce champs est obligatoire'),
         specialty: yup.string('valeur invalid').required('ce champs est obligatoire'),
@@ -25,12 +28,19 @@ const PatientHomePage = () => {
         onSubmit,
         validationSchema
     })
+    useEffect(() => {
+        if (!user)
+            return navigate('/signin')
+        if (user.code)
+            return navigate('/signin')
+    }, [])
     return (
         <div>
+            <PatientNavbar/>
             <section className={style.mysection}>
                 <div className='row'>
                     <div className='col-4'>
-                        <img id={style.myimg} src={image}></img>
+                        <img id={style.myimg} src={image}/>
                     </div>
                     <div className='col-8'>
                         <div className='row'>
@@ -68,7 +78,7 @@ const PatientHomePage = () => {
                                                             value={formik.values.specialty}
                                                             onChange={formik.handleChange}
                                                             id={style.inputGroupSelect01}>
-                                                        <option value=""></option>
+                                                        <option value=""/>
                                                         <option value="L’anesthésiologie">L’anesthésiologie</option>
                                                         <option value="L’andrologie">L’andrologie</option>
                                                         <option value="cardiologie">cardiologie</option>

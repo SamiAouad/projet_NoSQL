@@ -1,9 +1,15 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import style from '../css/HomePage.module.css'
 import Image from '../images/homePage/Image.png'
 import PatientImage from "../images/homePage/Patient.png"
+import {useNavigate} from "react-router";
 
 function HomePage() {
+    const navigate = useNavigate()
+    const logout = () => {
+        localStorage.clear()
+        navigate('/')
+    }
     return (
         <div>
             <section className="d-flex flex-column justify-content-between" id={style.SectionId}>
@@ -22,12 +28,29 @@ function HomePage() {
                                     <li className="nav-item"><a className={`nav-link ${style.myNavItem}`}
                                                                 href="#">Portail-Laboratoire</a></li>
                                     <li className="nav-item"><a className={`nav-link ${style.myNavItem}`}
-                                                                href="#">Portail-Patient</a></li>
+                                                                href="/patient/home">Portail-Patient</a></li>
                                 </ul>
-                                <ul className="navbar-nav">
-                                    <li className="nav-item"><a className="nav-link active" href="/Signin">Connexion</a>
-                                    </li>
-                                </ul>
+                                {
+                                    localStorage.getItem('user') ?
+                                        <>
+                                            <ul className="navbar-nav">
+                                                <li className="nav-item">
+                                                    <a className="nav-link active"
+                                                       onClick={logout}>Deconnexion
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </>
+                                        :
+                                        <>
+                                            <ul className="navbar-nav">
+                                                <li className="nav-item"><a className="nav-link active"
+                                                                            href="/signin">Connexion</a>
+                                                </li>
+                                            </ul>
+                                        </>
+                                }
+
                             </div>
                         </div>
                     </nav>

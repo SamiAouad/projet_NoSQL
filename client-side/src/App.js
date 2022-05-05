@@ -13,6 +13,8 @@ import DoctorHome from './Routes/DoctorHome';
 import GestionPatient from './Routes/GestionPatients';
 import DetailPatient from './Routes/DetailPatient';
 import SearchingDoctor from "./Routes/SearchingDoctor";
+import PatientRDV from "./Routes/PatientRDV";
+import AcceptPatient from "./Routes/AcceptPatient";
 
 
 function App() {
@@ -20,13 +22,17 @@ function App() {
         <BrowserRouter>
             <Routes>
                 <Route path={'/doctor/home'} element={<DoctorHome/>} exact/>
+                <Route path={'/doctor/register'} element={<DoctorRegister/>} exact/>
                 <Route path={'/'} element={<HomePage/>} exact/>
                 <Route path={'/Signin'} element={<SignIn/>} exact/>
                 <Route path={'/DoctorRegister'} element={<DoctorRegister/>} exact/>
                 <Route path={'doctor/gestionpatient'} element={<GestionPatient/>} exact/>
+                <Route path={'doctor/acceptpatient'} element={<AcceptPatient/>} exact/>
                 <Route path={'/doctor/treatment/:id'} element={<DetailPatient/>} exact/>
-                <Route path={'patient/homepagepatient'} element={<PatientHomePage/>} exact/>
+                <Route path={'patient/home'} element={<PatientHomePage/>} exact/>
                 <Route path={'patient/search/doctor/:specialty/:city'} element={<SearchingDoctor/>} exact/>
+                <Route path={'patient/rdv/'} element={<PatientRDV/>} exact/>
+                <Route path={'patient/register/'} element={<PatientRegister/>} exact/>
             </Routes>
         </BrowserRouter>
     );

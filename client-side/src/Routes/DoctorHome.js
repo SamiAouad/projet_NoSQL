@@ -19,9 +19,9 @@ const DoctorHome = () => {
 
     useEffect(() => {
         if (!user)
-            navigate('/SignIn')
+            return navigate('/SignIn')
         else if (user.cni)
-            navigate('/doctor/register')
+            return navigate('/doctor/register')
         const getConsultations = async () => {
             try {
                 const result = await api.post('doctor/consultation/', {doctorId: user._id})

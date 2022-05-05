@@ -6,6 +6,7 @@ import {useNavigate, useParams} from "react-router";
 import axios from "axios";
 import * as yup from "yup";
 import {useFormik} from "formik";
+import PatientNavbar from "./PatientNavbar";
 
 
 const SearchingDoctor = () => {
@@ -40,6 +41,8 @@ const SearchingDoctor = () => {
         period: yup.string('valeur invalid').required('ce champs est obligatoire')
     })
     const onSubmit = async () => {
+        console.log(formik.values)
+
         const item = new URLSearchParams()
         item.append('patientId', user._id)
         item.append('doctorId', doctorId)
@@ -95,146 +98,151 @@ const SearchingDoctor = () => {
         getDoctors()
     }, [])
     return (
-        <form onSubmit={formik.handleSubmit}>
-            <section className={stylesec.mysection}>
-                <div className='row' id={stylesec.myrow}>
-                    <h1 className={stylesec.mytext}>
-                        Préparer sa consultation
-                    </h1>
-                    <div className='col-5'>
-                        <p id={stylesec.mysectext}>Pourquoi voulez-vous consulter ?</p>
-                        <textarea name={"description"} className={stylesec.mytextarea} value={formik.values.description}
-                                  onChange={formik.handleChange}
-                                  id="exampleFormControlTextarea1" rows="3"/>
-                    </div>
-                    <div className='row'>
+        <div>
+            <PatientNavbar/>
+            <form onSubmit={formik.handleSubmit}>
+                <section className={stylesec.mysection}>
+                    <div className='row' id={stylesec.myrow}>
+                        <h1 className={stylesec.mytext}>
+                            Préparer sa consultation
+                        </h1>
                         <div className='col-5'>
-                            <p id={stylesec.mysectext}>Urgence de votre Rendez-vous : </p>
-                            <select className="custom-select" id={stylesec.myinputSelect} name={"urgent"}
-                                    value={formik.values.urgent} onChange={formik.handleChange}>
-                                <option selected>Simple Consultation</option>
-                                <option value="1">Urgence Cardiaque</option>
-                                <option value="2">Urgences respiratoires</option>
-                                <option value="3">Pertes de connaissance</option>
-                                <option value="4">Saignements et hémorragie</option>
-                                <option value="5">Intoxications</option>
-                                <option value="6">Empoisonnement</option>
-                                <option value="7">Accidents graves</option>
-                            </select>
+                            <p id={stylesec.mysectext}>Pourquoi voulez-vous consulter ?</p>
+                            <textarea name={"description"} className={stylesec.mytextarea}
+                                      value={formik.values.description}
+                                      onChange={formik.handleChange}
+                                      id="exampleFormControlTextarea1" rows="3"/>
                         </div>
-                    </div>
-                    <div className='row'>
-                        <div className='col-5'>
-                            <p id={stylesec.mysectext}>Date : </p>
-                            <input type={"date"} id={stylesec.myinputSelect} name={"date"}
-                                   value={formik.values.date} onChange={formik.handleChange}/>
+                        <div className='row'>
+                            <div className='col-5'>
+                                <p id={stylesec.mysectext}>Urgence de votre Rendez-vous : </p>
+                                <select className="custom-select" id={stylesec.myinputSelect} name={"urgent"}
+                                        value={formik.values.urgent} onChange={formik.handleChange}>
+                                    <option selected>Simple Consultation</option>
+                                    <option value="1">Urgence Cardiaque</option>
+                                    <option value="2">Urgences respiratoires</option>
+                                    <option value="3">Pertes de connaissance</option>
+                                    <option value="4">Saignements et hémorragie</option>
+                                    <option value="5">Intoxications</option>
+                                    <option value="6">Empoisonnement</option>
+                                    <option value="7">Accidents graves</option>
+                                </select>
+                            </div>
                         </div>
-                    </div>
-                    <div className='row'>
-                        <div className='col-5'>
-                            <p id={stylesec.mysectext}>Urgence de votre Rendez-vous : </p>
-                            <select className="custom-select" id={stylesec.myinputSelect} name={"period"}
-                                    value={formik.values.period} onChange={formik.handleChange}>
-                                <option value="matin">matin</option>
-                                <option value="après midi">après midi</option>
-                            </select>
+                        <div className='row'>
+                            <div className='col-5'>
+                                <p id={stylesec.mysectext}>Date : </p>
+                                <input type={"date"} id={stylesec.myinputSelect} name={"date"}
+                                       value={formik.values.date} onChange={formik.handleChange}/>
+                            </div>
                         </div>
+                        <div className='row'>
+                            <div className='col-5'>
+                                <p id={stylesec.mysectext}>Urgence de votre Rendez-vous : </p>
+                                <select className="custom-select" id={stylesec.myinputSelect} name={"period"}
+                                        value={formik.values.period} onChange={formik.handleChange}>
+                                    <option value="matin">matin</option>
+                                    <option value="après midi">après midi</option>
+                                </select>
+                            </div>
+                        </div>
+                        <a className={stylesec.mybutton} href={`#browse`}
+                           role="button">Aller
+                            choisir votre Spécialiste
+                        </a>
+
                     </div>
-                    <a className={stylesec.mybutton} href={`#browse`}
-                       role="button">Aller
-                        choisir votre Spécialiste
-                    </a>
-
-                </div>
-            </section>
-            <section className={style.mysection} id={"browse"}>
-                <div className='row' id={style.myid}>
-                    {
-                        listToMatrix(doctors, 3).map((list, key) => {
-                            return (
-                                <div key={key}>
-                                    {
-                                        list.map((doctor, key2) => {
-                                            return (
-                                                <div key={key2} className='col-4'>
-                                                    <div className={style.coursecard}>
-                                                        <div className={style.coursebanner}>
-                                                            <img
-                                                                src={image}
-                                                                alt="course banner"/>
-                                                            <button type='submit'
-                                                                    onClick={() => setDoctorId(doctor._id)}
-                                                                    className='btn-bg-danger mt-3 '> Demander Un
-                                                                Rendez-Vous
-                                                            </button>
-                                                        </div>
-
-                                                        <div className={style.coursecontent}>
-
-                                                            <h3 className={style.cardtitle}>
-                                                                <p>{doctor.firstName} {doctor.lastName}</p>
-                                                            </h3>
-                                                            <div className={`${style.wrapper} ${style.borderbottom}`}>
-                                                                <div>
-                                                                    <div
-                                                                        className={`row ${style.authorname} ${style.textdecorationnone}`}>
-                                                                        <div
-                                                                            className={"col-12"}>Addresse: {doctor.address.street}</div>
-                                                                    </div>
-                                                                    <div
-                                                                        className={`row ${style.authorname} ${style.textdecorationnone}`}>
-                                                                        <div
-                                                                            className={"col-3"}>Sexe:{doctor.gender}</div>
-                                                                        <div
-                                                                            className={"col-4"}>specialite
-                                                                        </div>
-                                                                    </div>
-                                                                    <div
-                                                                        className={`row ${style.authorname} ${style.textdecorationnone}`}>
-                                                                        <div className={"col-6"}>Email:</div>
-                                                                        <div
-                                                                            className={"col-6"}>{doctor.email}
-                                                                        </div>
-                                                                    </div>
-                                                                    <div
-                                                                        className={`row ${style.authorname} ${style.textdecorationnone}`}>
-                                                                        <div className={"col-6"}>Telephone :
-                                                                        </div>
-                                                                        <div
-                                                                            className={"col-6"}>{doctor.phone}
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
+                </section>
+                <section className={style.mysection} id={"browse"}>
+                    <div className='row' id={style.myid}>
+                        {
+                            listToMatrix(doctors, 3).map((list, key) => {
+                                return (
+                                    <div key={key}>
+                                        {
+                                            list.map((doctor, key2) => {
+                                                return (
+                                                    <div key={key2} className='col-4'>
+                                                        <div className={style.coursecard}>
+                                                            <div className={style.coursebanner}>
+                                                                <img
+                                                                    src={image}
+                                                                    alt="course banner"/>
+                                                                <button type='submit'
+                                                                        onClick={() => setDoctorId(doctor._id)}
+                                                                        className='btn-bg-danger mt-3 '> Demander Un
+                                                                    Rendez-Vous
+                                                                </button>
                                                             </div>
-                                                            <div className={style.wrapper}>
-                                                                <div className={style.courseprice}>
-                                                                    <p className={style.authorname}>Education </p>
-                                                                    <p className={style.authorname}>
-                                                                        Ce praticien est un laureat
-                                                                        de {doctor.education.university}
-                                                                        promotion {doctor.education.promotion}
-                                                                    </p>
+
+                                                            <div className={style.coursecontent}>
+
+                                                                <h3 className={style.cardtitle}>
+                                                                    <p>{doctor.firstName} {doctor.lastName}</p>
+                                                                </h3>
+                                                                <div
+                                                                    className={`${style.wrapper} ${style.borderbottom}`}>
+                                                                    <div>
+                                                                        <div
+                                                                            className={`row ${style.authorname} ${style.textdecorationnone}`}>
+                                                                            <div
+                                                                                className={"col-12"}>Addresse: {doctor.address.street}</div>
+                                                                        </div>
+                                                                        <div
+                                                                            className={`row ${style.authorname} ${style.textdecorationnone}`}>
+                                                                            <div
+                                                                                className={"col-3"}>Sexe:{doctor.gender}</div>
+                                                                            <div
+                                                                                className={"col-4"}>specialite
+                                                                            </div>
+                                                                        </div>
+                                                                        <div
+                                                                            className={`row ${style.authorname} ${style.textdecorationnone}`}>
+                                                                            <div className={"col-6"}>Email:</div>
+                                                                            <div
+                                                                                className={"col-6"}>{doctor.email}
+                                                                            </div>
+                                                                        </div>
+                                                                        <div
+                                                                            className={`row ${style.authorname} ${style.textdecorationnone}`}>
+                                                                            <div className={"col-6"}>Telephone :
+                                                                            </div>
+                                                                            <div
+                                                                                className={"col-6"}>{doctor.phone}
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
-                                                                <div>
-                                                                    <p></p>
+                                                                <div className={style.wrapper}>
+                                                                    <div className={style.courseprice}>
+                                                                        <p className={style.authorname}>Education </p>
+                                                                        <p className={style.authorname}>
+                                                                            Ce praticien est un laureat
+                                                                            de {doctor.education.university}
+                                                                            promotion {doctor.education.promotion}
+                                                                        </p>
+                                                                    </div>
+                                                                    <div>
+                                                                        <p></p>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            )
-                                        })
-                                    }
-                                </div>
-                            )
-                        })
-                    }
+                                                )
+                                            })
+                                        }
+                                    </div>
+                                )
+                            })
+                        }
 
-                </div>
+                    </div>
 
-            </section>
+                </section>
 
-        </form>
+            </form>
+        </div>
     );
 }
 

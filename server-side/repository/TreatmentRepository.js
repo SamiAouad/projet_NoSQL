@@ -103,14 +103,27 @@ const getAllById = async (id) => {
 }
 const getAppointments = async (doctorId) => {
     try {
-        return await Treatment.find({doctorId: doctorId}).select('appointments')
+        // return await Treatment.find({doctorId: doctorId}).select('appointments')
+        return await Treatment.aggregate([
+            {
+                "$lookup": {
+                    from: "patients",
+                    localField: 'patientId',
+                    foreignField: '_id',
+                    as: "patient"
+                }
+            },
+            {
+                "$match": {"doctorId": new mongoose.Types.ObjectId(doctorId)}
+            }
+        ])
     } catch (ex) {
         console.log(ex)
         return null
     }
 }
 
-const getAppointmentsBuPatientId = async (patientId) => {
+const getAppointmentsByPatientId = async (patientId) => {
     try {
         return await Treatment.find({patientId: patientId}).select('appointments')
     } catch (ex) {
@@ -150,8 +163,8 @@ module.exports = {
     getAllByDoctorId,
     getAppointments,
     getAllById,
-    getAppointmentsBuPatientId,
+    getAppointmentsBuPatientId: getAppointmentsByPatientId,
     getByPatientId,
     getAllByPatientId,
-    getMedsById
+    getMedsById,
 }

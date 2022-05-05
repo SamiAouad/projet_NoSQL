@@ -137,6 +137,15 @@ const getRdvWithPatients = async (req, res) => {
         res.status(500).send(false)
     }
 }
+const getRdvDemandsWithPatients = async (req, res) => {
+    try {
+        const result = await rdvRepository.getRdvDemandsAndPatients(req.params.doctorId)
+        res.status(200).send(result)
+    } catch (ex) {
+        console.log(ex)
+        res.status(500).send(false)
+    }
+}
 
 const findByCityAndSpecialty = async (req, res) => {
     try {
@@ -157,5 +166,6 @@ module.exports = {
     getTreatments,
     getConsultations,
     getRdvWithPatients,
-    findByCityAndSpecialty
+    findByCityAndSpecialty,
+    getRdvDemandsWithPatients
 };

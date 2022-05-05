@@ -23,7 +23,16 @@ const RdvSchema = new mongoose.Schema({
     },
     date: Date,
     period: String,
-    description: String
+    description: String,
+    status: {
+        type: Boolean,
+        default: false
+    },
+    fiche: {
+        state: String,
+        disease: Boolean,
+        consumption: String
+    }
 }, {strict: false})
 
 

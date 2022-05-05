@@ -23,6 +23,7 @@ router.post('/doctor/create', upload.single("photo"), DoctorService.create)
     .post('/doctor/consultation/', DoctorService.getTreatments)
     .post('/doctor/appointments', DoctorService.getConsultations)
     .post('/doctor/rdv', DoctorService.getRdvWithPatients)
+    .get('/doctor/rdv/demands/:doctorId', DoctorService.getRdvDemandsWithPatients)
     .post('/doctor/treatments', DoctorService.getTreatments)
     .post('/doctor/find/specialty/city', DoctorService.findByCityAndSpecialty)
 

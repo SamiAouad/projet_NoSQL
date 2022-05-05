@@ -13,9 +13,12 @@ let storage = multer.diskStorage({
     }
 });
 
-let upload = multer({ storage: storage });
+let upload = multer({storage: storage});
 
 router.post('/rdv/create', RdvService.createRdv)
+    .get('/rdv/patient/:patientId', RdvService.getByPatientId)
+    .post('/rdv/add/fiche', RdvService.addFiche)
+    .delete('/rdv/:id', RdvService.deleteById)
 
 
 module.exports = router
