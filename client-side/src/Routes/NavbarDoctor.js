@@ -8,7 +8,8 @@ const NavbarDoctor = () => {
         navigate("/")
     }
     return (
-        <nav className="navbar navbar-light navbar-expand-md">
+        <section className={stylenavd.mysection}>
+ <nav className="navbar navbar-light navbar-expand-md">
             <div className="container-fluid"><a className="navbar-brand" href="/doctor/home"
                                                 style={{fontWeight: 'bold'}}>Healtho</a>
                 <button data-bs-toggle="collapse" className="navbar-toggler" data-bs-target="#navcol-1"><span
@@ -37,6 +38,8 @@ const NavbarDoctor = () => {
                 </div>
             </div>
         </nav>
+        </section>
+       
 
     );
 }
