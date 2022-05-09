@@ -1,5 +1,5 @@
 import style from '../../asset/css/style.module.css'
-import image from '../../asset/images/Background.jpg'
+import image from '../../asset/images/Doctorpic.jpg'
 import {useEffect, useState} from "react";
 import {useNavigate} from "react-router";
 import axios from "axios";

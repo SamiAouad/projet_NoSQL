@@ -116,7 +116,7 @@ html {
   font-family: "Roboto", sans-serif;
   font-size: var(--fs-2);
   font-weight: var(--fw-8);
-  color: var(--oxford-blue);
+  color: white;
   line-height: 1.3;
 }
 
@@ -233,7 +233,7 @@ html {
 .coursecard .cardtitle { margin-bottom: 20px; }
 
 .coursecard .cardtitle a {
-  color: var(--oxford-blue);
+ 
   color: white;
   font-size: var(--fs-4);
   font-weight: var(--fw-7);
@@ -241,7 +241,7 @@ html {
   transition: var(--default-transition);
 }
 
-.coursecard:hover .cardtitle a { color: var(--red-orange-color-wheel); }
+.coursecard:hover .cardtitle a { color:#131126; }
 
 .coursecard .wrapper {
   display:         flex;
@@ -277,7 +277,7 @@ font-weight: 400;
   transition: var(--default-transition);
 }
 
-.coursecard .authorname:hover { color: var(--oxford-blue); }
+.coursecard .authorname:hover { color: #131126; }
 
 .coursecard .rating {
   display:     flex;
@@ -413,13 +413,13 @@ font-weight: 400;
 .eventcard .day {
   font-size: var(--fs-3);
   font-weight: var(--fw-7);
-  color: #0B2545;
+  color: white;
 }
 
 .eventcard .month {
   font-size: var(--fs-6);
   font-weight: var(--fw-5);
-  color: #0B2545;
+  color: white;
 }
 
 .event .schedule {
@@ -435,7 +435,7 @@ font-weight: 400;
 }
 
 .event .schedule .time {
-  color: #0B2545;
+  color: white;
   font-family: "Roboto", sans-serif;
   font-weight: 600;
   padding-right: 20px;
@@ -444,7 +444,7 @@ font-weight: 400;
 }
 
 .eventcard .eventname {
-  color: #0B2545;
+  color: white;
   font-size: 18px;
   font-weight: 600;
   line-height: 1.6;

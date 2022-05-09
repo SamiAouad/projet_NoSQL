@@ -1,4 +1,4 @@
-import style from '../css/DoctorHome.module.css'
+import styleDh from '../css/DoctorHome.module.css'
 import image from '../images/doctorhome/doctor.jpg'
 import NavbarDoctor from "./NavbarDoctor";
 import {useNavigate} from "react-router";
@@ -76,24 +76,21 @@ const DoctorHome = () => {
     })
     return (
         <div>
-            <section id={style.SectionOneId}>
-                <div id={style.SectionUp}>
+
+                <section className={styleDh.myfirstsection}>
+                <div className={styleDh.mydiv}>
                     <NavbarDoctor/>
-                    <h1 className="text-center" id={style.title} style={{fontWeight: 'bold', fontSize: '35px'}}>Portail
-                        Consultation&nbsp;</h1>
                 </div>
-                <div id={style.Sectionmiddle}>
-                    <div className="container">
-                        <div className="row" style={{marginTop: '70px'}}>
-                            <div className="col-md-6 align-self-center" id={style.mycolumn}>
-                                <p className="text-center" id={style.mypara}
-                                   style={{fontSize: '27px', fontWeight: 'bold'}}>Consultation de la journée</p>
+                <h1 id={styleDh.myfirstitle} >Portail Consultation&nbsp;</h1>
+                    <div className="container mt-5">
+                        <div className="row"  id = {styleDh.myfirstrow}>
+                            <div className="col-md-6 align-self-center">
+                                <p id={styleDh.mytext}>Consultation de la journée</p>
                             </div>
                             <div className="col-md-6">
-                                <div className="table-responsive text-start"
-                                     style={{fontSize: '13px', borderStyle: 'none'}}>
+                                <div className="table-responsive text-start">
                                     <table className="table table-striped table-bordered">
-                                        <thead id={style.Thead}>
+                                        <thead id={styleDh.Thead}>
                                         <tr>
                                             <th>Id</th>
                                             <th><br/>Image</th>
@@ -105,13 +102,13 @@ const DoctorHome = () => {
                                             <th>Urgence</th>
                                         </tr>
                                         </thead>
-                                        <tbody id={style.Tbody}>
+                                        <tbody id={styleDh.Tbody}>
                                         {
                                             consultations.map(consultation => {
                                                 const date = consultation.rdv[0] ? consultation.rdv[0].date : null;
                                                 if (new Date(date) >= new Date())
                                                     return (
-                                                        <tr style={{color: 'rgb(255,255,255)'}}>
+                                                        <tr >
                                                             <td>Cell 1</td>
                                                             <td><img alt={'image'}
                                                                      src={`data:image/jpeg;base64,${consultation.patient[0].photo}`}/>
@@ -132,21 +129,15 @@ const DoctorHome = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className="row" style={{marginTop: '70px'}}>
-                            <div className="col-md-6 align-self-center" style={{width: '463px'}}>
-                                <p className="text-center" id="mypara-1"
-                                   style={{fontSize: '27px', fontWeight: 'bold', color: '#0b2545'}}>Dernières
-                                    Consultations</p>
+                        <div className="row"id = {styleDh.myfirstrow} >
+                            <div className="col-md-6 align-self-center">
+                                <p id={styleDh.mytext}>Dernières Consultations</p>
                             </div>
                             <div className="col-md-6">
                                 <div className="table-responsive text-start"
-                                     style={{fontSize: '13px', borderStyle: 'none'}}>
+                                    >
                                     <table className="table table-striped table-bordered">
-                                        <thead style={{
-                                            background: 'linear-gradient(90deg, #66ddc9, #0b2545 100%), #ffffff',
-                                            fontWeight: 'bold',
-                                            color: 'rgb(255,255,255)'
-                                        }}>
+                                        <thead id={styleDh.Thead}>
                                         <tr>
                                             <th>Id</th>
                                             <th><br/>Image</th>
@@ -158,14 +149,14 @@ const DoctorHome = () => {
                                             <th>Urgence</th>
                                         </tr>
                                         </thead>
-                                        <tbody id={style.Tbody}>
+                                        <tbody id={styleDh.Tbody}>
                                         {
                                             consultations.map(consultation => {
                                                 console.log(consultation.rdv)
                                                 const date = consultation.rdv[0] ? consultation.rdv[0].date : null;
                                                 if (date < new Date())
                                                     return (
-                                                        <tr style={{color: 'rgb(255,255,255)'}}>
+                                                        <tr styleDh={{color: 'rgb(255,255,255)'}}>
                                                             <td>Cell 1</td>
                                                             <td><img alt={'image'}
                                                                      src={`data:image/jpeg;base64,${consultation.patient[0].photo}`}/>
@@ -187,25 +178,19 @@ const DoctorHome = () => {
                             </div>
                         </div>
                     </div>
-                </div>
-            </section>
-            <section id={style.SectionTwoId} style={{width: '100%', height: '100vh'}}>
+                </section>
+                
+               
+               
+            
+            <section className={styleDh.mysecondsection}>
                 <div className="container">
-                    <div className="row">
-                        <div className="col-md-6" id={style.myCol} style={{height: '136px'}}><img src={image} style={{
-                            width: '80%',
-                            borderStyle: 'none',
-                            borderRadius: '5px'
-                        }}/></div>
-                        <div className="col-md-6">
-                            <section className={style.contactclean} style={{background: '#0b2545', marginTop: '90px'}}>
-                                <form onSubmit={formik.handleSubmit} style={{background: '#66ddc9'}}>
-                                    <h2 className="text-center" style={{
-                                        color: 'rgb(255,255,255)',
-                                        fontFamily: 'Montserrat, sans-serif',
-                                        fontWeight: 'bold',
-                                        textAlign: 'center'
-                                    }}>Programme de votre Semaine</h2>
+                    <div className="row" id={styleDh.myfirstrow}>
+                        <div className="col-md-4" ><img src={image} id={styleDh.myimg} /></div>
+                        <div className="col-md-8">
+                            <section className={styleDh.contactclean} >
+                                <form onSubmit={formik.handleSubmit} >
+                                    <h2 className="text-center" >Programme de votre Semaine</h2>
 
                                     <div className="mb-3">
                                         <p>Semaine :&nbsp;</p>
@@ -233,7 +218,7 @@ const DoctorHome = () => {
                                         <option value={"09:00-15:00"}>09:00-15:00</option>
                                     </select>
                                     <div className="mb-3">
-                                        <button className={`btn ${style.btnprimary} ${style.reservebtn}`}
+                                        <button className={`btn ${styleDh.btnprimary} ${styleDh.reservebtn}`}
                                                 type="submit">Enregistrez
                                         </button>
                                     </div>
