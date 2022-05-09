@@ -1,22 +1,47 @@
-body {
+
+  
+
+.mydiv{
+  background-color: #505e6c8f;
+}
+.myfirstsection{
+  width: 100%;
+  height: 100vh;
+  background-image: url('../images/doctorhome/Picture.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  }
+  #myimg{
+    width: 100%;
+    margin-top: 10%;
+    border-radius: 10%;
+  }
+
+  .mysecondsection{
     width: 100%;
     height: 100vh;
-    margin: -1px;
-    background: url("../images/doctorhome/Background.jpg") center / cover no-repeat;
-  }
-  
-  #SectionOneId {
-    width: 100%;
-    height: 100vh;
-    font-family: Montserrat, sans-serif;
-    color: #0b2545;
-  }
-  
-  #title {
-    font-size: 32px;
-    margin-top: 29px;
-  }
-  
+    background-color: #54ACAB;
+    }
+
+#myfirstitle{
+  color: white;
+  font-family: 'Montserrat';
+  font-weight: 600;
+  margin-left: 35%;
+  margin-top: 3%;
+}
+.myfirstrow{
+  margin-top: 30%;
+width: 100%;
+color: white;
+}
+
+#mytext{
+  color: white;
+  font-family: 'Montserrat';
+
+}
   #Thead {
     background: linear-gradient(90deg, #66ddc9 0%, #0b2545 100%), #ffffff;
     color: #ffffff;
@@ -24,23 +49,14 @@ body {
     font-family: Montserrat, sans-serif;
   }
   
-  #mycolumn {
-    width: 463px;
-  }
-  
-  #mypara {
-  }
   
   #Tbody {
     background: #0b2545;
     color: rgb(255,255,255);
   }
   
-  #SectionTwoId {
-  }
   
-  #mybtn {
-  }
+
   
   .mybtn {
     background: #0b2545;
@@ -61,8 +77,11 @@ body {
   }
 
   .contactclean {
-    background: #f1f7fc;
+    background: #131126;
+    width: 100%;
+    margin-top: 5%;
     padding: 80px 0;
+    border-radius: 5%;
   }
   
   @media (max-width:767px) {
@@ -73,12 +92,12 @@ body {
   
   .contactclean form {
     max-width: 480px;
-    width: 90%;
+    width: 100%;
     margin: 0 auto;
-    background-color: #ffffff;
+    background-color: #ffffff7e;
     padding: 40px;
-    border-radius: 4px;
-    color: #505e6c;
+    border-radius: 5%;
+    color: white;
     box-shadow: 1px 1px 5px rgba(0,0,0,0.1);
   }
   
@@ -132,4 +151,8 @@ body {
     color: #fff;
   }
   
-  
+  .myNavBarBrand{
+    background: url("../images/homePage/logo.png")
+    center / 80% no-repeat;
+    width: 150px;height: 50px;
+  } 

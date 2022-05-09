@@ -1,5 +1,5 @@
-import style from '../css/SignIn.module.css';
-import {Form, FormControl, FormGroup, ControlLabel, HelpBlock, Checkbox, Radio, Button} from 'react-bootstrap';
+import styleSign from '../css/SignIn.module.css';
+import {Form, Button} from 'react-bootstrap';
 import image from '../images/signIn/PatientPatient.png'
 import axios from "axios";
 import {useNavigate} from "react-router";
@@ -49,13 +49,15 @@ const SignIn = () => {
         validationSchema
     })
     return (
-        <div className='container'>
-            <div className={'row ' + style.content}>
+       
+        <div>
+            <section className={styleSign.mysection}>
+            <div className={'row ' + styleSign.content}>
                 <div className='col-md-6 mb-3'>
                     <img src={image} className='img-fluid'/>
                 </div>
                 <div className='col-md-6'>
-                    <div className={style.content2}>
+                    <div className={styleSign.content2}>
                         <h3 className='signin-text mb-3 text-center'> Bienvenue a HEALTHO </h3>
                         <Form className='col-centered' onSubmit={formik.handleSubmit}>
                             <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -74,15 +76,15 @@ const SignIn = () => {
                                     <div className="text-danger">{formik.errors.password}</div> : null}
                             </Form.Group>
 
-                            <Button variant="primary" type="submit" className='d-grid'>
+                            <Button  type="submit" className={styleSign.mybutton}>
                                 Submit
                             </Button>
                             <div className='my-3'>
                                 <span>Don't Have an account ?
                                     <a href='/doctor/register'
-                                       className=' text-white btn btn-outline-primary'> Register As Doctor </a>
+                                      className={styleSign.mybutton}> Register As Doctor </a>
                                     <a href='/patient/register'
-                                       className=' text-white btn btn-outline-primary'> Register As Patient </a>
+                                       className={styleSign.mybutton}> Register As Patient </a>
                                 </span>
                             </div>
                             {error ? <div className="text-danger">{error}</div> : null}
@@ -91,6 +93,7 @@ const SignIn = () => {
                 </div>
 
             </div>
+        </section>
         </div>
 
     );
