@@ -12,7 +12,8 @@ const PrescriptionSchema = new mongoose.Schema({
     photo: {
         data: Buffer,
         contentType: String
-    }
+    },
+
 })
 
 const TreatmentSchema = new mongoose.Schema({
@@ -45,6 +46,11 @@ const TreatmentSchema = new mongoose.Schema({
     rdv: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Rdv"
+    },
+    progress: {
+        treatmentState: Number,
+        state: Number,
+        recovery: Number
     }
 })
 

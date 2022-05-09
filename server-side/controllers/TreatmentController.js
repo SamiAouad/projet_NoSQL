@@ -26,6 +26,7 @@ router.post('/treatment/create', TreatmentService.createTreatment)
     .get('/treatment/meds/:treatmentId', TreatmentService.getMeds)
     .delete('/treatment/appointment/:treatmentId/:index')
     .get('/treatment/appointments/patient/:patientId', TreatmentService.getAppointmentsByPatientId)
+    .post('/treatment/add/progress', TreatmentService.addProgress)
 
 
 module.exports = router

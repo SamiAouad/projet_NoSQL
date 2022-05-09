@@ -1,12 +1,15 @@
 import style from '../css/Amelioration.module.css'
 import {Table} from 'react-bootstrap';
-import file from '../Prescription/TestOrdonnance.pdf'
 import logo from '../images/amelioration/Image.png'
 import {useEffect, useState} from "react";
 import {useNavigate} from "react-router";
 import axios from "axios";
+import * as yup from "yup";
+import {useFormik} from "formik";
 
 const Amelioration = () => {
+    const [error, setError] = useState("")
+    const [success, setSuccess] = useState("")
     const [treatments, setTreatments] = useState([])
     const navigate = useNavigate()
     const [loading, setLoading] = useState(true)
@@ -14,12 +17,48 @@ const Amelioration = () => {
     const api = axios.create({
         baseURL: 'http://localhost:5000'
     })
+    const validationSchema = yup.object({
+        treatmentId: yup.string('invalid input').required('this field is required'),
+        treatmentState: yup.number('invalid input').required('this field is required'),
+        state: yup.number('invalid input').required('this field is required'),
+        recovery: yup.number('invalid input').required('this field is required'),
+    })
+
+    const onSubmit = async () => {
+        setError("")
+        setSuccess("")
+        console.log(formik.values)
+        let item = new URLSearchParams();
+        item.append('treatmentId', formik.values.treatmentId)
+        item.append('treatmentState', formik.values.treatmentState)
+        item.append('state', formik.values.state)
+        item.append('recovery', formik.values.recovery)
+        try {
+            const result = await api.post('/treatment/add/progress', item)
+            if (result.data)
+                setSuccess("Merci pour votre participation")
+            else
+                setError("Une erreur s'est survenue essayer une autre fois")
+        } catch (message) {
+            setError("Une erreur s'est survenue essayer une autre fois")
+        }
+    }
+    const formik = useFormik({
+        initialValues: {
+            treatmentId: '',
+            treatmentState: '',
+            state: 0,
+            recovery: 0
+        },
+        onSubmit,
+        validationSchema
+    })
 
     useEffect(() => {
         if (!user)
-            navigate('/')
+            return navigate('/')
         if (user.code)
-            navigate('/')
+            return navigate('/')
         const getTreatments = async () => {
             const result = await api.get(`/treatment/patient/${user._id}`)
             console.log('consultations: ', result.data)
@@ -28,33 +67,10 @@ const Amelioration = () => {
         }
         getTreatments()
     }, [])
-    const PatientData = [
-        {
-            id: "1",
-            NumDossier: "P1110",
-            Doctor: "AHMAD TAZI",
-            Date: "12/09/2021",
-            Medicament: "Doliprane-Rhumix",
-            Duree: "1 mois",
-        },
-        {
-            id: "2",
-            NumDossier: "P1110",
-            Doctor: " BENANI SMIRES",
-            Date: "12/09/2021",
-            Medicament: "Astrazeneka-Ansuline",
-            Duree: "2 semaine"
-        },
-        {
-            id: "3",
-            NumDossier: "P1110",
-            Doctor: " LGEZAR",
-            Date: "12/09/2021",
-            Medicament: "VitamineC-VitamineD",
-            Duree: "3 semaine"
-        },
-        {id: "4", NumDossier: "P1110", Doctor: " LBENJ", Date: "12/09/2021", Medicament: "EAU ", Duree: "5 mois"},
-    ]
+
+    if (loading)
+        return (<p>Loading</p>)
+
     return (
         <div>
             <section className={style.mysection}>
@@ -90,7 +106,7 @@ const Amelioration = () => {
                                     }
                                     return (
                                         <tr>
-                                            <td>{key}</td>
+                                            <td>{key + 1}</td>
                                             <td>{treatment.doctor[0].firstName} {treatment.doctor[0].lastName}</td>
                                             <td>{treatment.doctor[0].specialty}</td>
                                             <td>{treatment.doctor[0].specialty}</td>
@@ -121,43 +137,49 @@ const Amelioration = () => {
                     </div>
                 </div>
             </section>
-            <section className={style.mysecsection}>
+            <form onSubmit={formik.handleSubmit} className={style.mysecsection}>
                 <div className='row'>
                     <div className='col-6'>
                         <h4 className={style.mysectitle}>Veuillez Sairee vos Symptomes aupres de votre
                             specialiste <br/> Afin qu'il puisse suivre vos ameliorations </h4>
                         <p className={style.myfourthtitle}>Nom de Votre Medecin
                             : </p> {/* la liste des Medecins dialo */}
-                        <select class="custom-select" id={style.myinputSelect}>
-                            <option selected>AHMAD TAZI</option>
-                            <option value="1">BENANI SMIRES</option>
-                            <option value="2">LGEZAR</option>
-                            <option value="3">LBENJ</option>
+                        <select name={"treatmentId"} value={formik.values.treatmentId} onChange={formik.handleChange}
+                                className="custom-select" id={style.myinputSelect}>
+                            <option value={""}>Choisir...</option>
+                            {
+                                treatments.map((treatment, key) => {
+                                    return (
+                                        <option key={key} value={treatment._id}>
+                                            {treatment.doctor[0].firstName} {treatment.doctor[0].lastName}</option>
+                                    )
+                                })
+                            }
                         </select>
                         <div className='row'>
                             <div className='col-6'>
                                 <p className={style.mysectext}>Etat de votre Traitement , y-a-t-il des Symptomes
                                     Secondaire ?</p>
-                                <select class="custom-select" id={style.mysecinputSelect}>
-                                    <option selected>oui</option>
-                                    <option value="1">non</option>
-                                    <option value="2">je me sens pas bien</option>
-                                    <option value="3">Aucune idee</option>
+                                <select name={"treatmentState"} value={formik.values.treatmentState}
+                                        onChange={formik.handleChange}
+                                        className="custom-select" id={style.mysecinputSelect}>
+                                    <option value={0}>non</option>
+                                    <option value={1}>Benigne</option>
+                                    <option value={2}>Grave</option>
+                                    <option value={3}>Critique</option>
                                 </select>
                             </div>
                             <div className='col-6'>
                                 <p className={style.mysectext}>A l'echelle de (1-10) comment jugez-vous votre état </p>
-                                <select class="custom-select" id={style.mysecinputSelect}>
-                                    <option selected>1</option>
-                                    <option value="1">2</option>
-                                    <option value="2">3</option>
-                                    <option value="2">4</option>
-                                    <option value="2">5</option>
-                                    <option value="2">6</option>
-                                    <option value="2">7</option>
-                                    <option value="2">8</option>
-                                    <option value="2">9</option>
-                                    <option value="2">10</option>
+                                <select name={"state"} value={formik.values.state} onChange={formik.handleChange}
+                                        className="custom-select" id={style.mysecinputSelect}>
+                                    {
+                                        [...Array(10).keys()].map(element => {
+                                            return (
+                                                <option value={element + 1}>{element + 1}</option>
+                                            )
+                                        })
+                                    }
                                 </select>
                             </div>
 
@@ -166,27 +188,26 @@ const Amelioration = () => {
                         <div className='col-6'>
                             <p className={style.mysectext}>Au cours des dernières 24 heures, avez-vous ressenti un
                                 Rétablissement ? a l'echelle de 1 a 10 </p>
-                            <select class="custom-select" id={style.mysecinputSelect}>
-                                <option selected>1</option>
-                                <option value="1">2</option>
-                                <option value="2">3</option>
-                                <option value="2">4</option>
-                                <option value="2">5</option>
-                                <option value="2">6</option>
-                                <option value="2">7</option>
-                                <option value="2">8</option>
-                                <option value="2">9</option>
-                                <option value="2">10</option>
+                            <select name={"recovery"} value={formik.values.recovery} onChange={formik.handleChange}
+                                    class="custom-select" id={style.mysecinputSelect}>
+                                {
+                                    [...Array(10).keys()].map(element => {
+                                        return (
+                                            <option value={element + 1}>{element + 1}</option>
+                                        )
+                                    })
+                                }
                             </select>
                         </div>
-                        <button className={style.mybutton} role="button">Enregistrer</button>
-
+                        <button className={style.mybutton} type={"submit"}>Enregistrer</button>
+                        {error ? <p className={"text-danger"}>{error}</p> : null}
+                        {success ? <p className={"text-success"}>{success}</p> : null}
                     </div>
                     <div className='col-6'>
-                        <img src={logo} id={style.mysecimg}/>
+                        <img alt={"logo"} src={logo} id={style.mysecimg}/>
                     </div>
                 </div>
-            </section>
+            </form>
         </div>);
 }
 

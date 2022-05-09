@@ -30,8 +30,11 @@ const DoctorRegister = () => {
         specialty: yup.string('valeur invalid').required('ce champs est obligatoire'),
         city: yup.string('valeur invalid').required('ce champs est obligatoire'),
         street: yup.string('valeur invalid').required('ce champs est obligatoire'),
-        password: yup.string('valeur invalid').required('ce champs est obligatoire'),
-        passwordConf: yup.string('valeur invalid').required('ce champs est obligatoire'),
+        password: yup.string('valeur invalid').required('ce champs est obligatoire')
+            .min(8, 'Password is too short - should be 8 chars minimum.').matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d\w\W]{8,}$/
+                , 'Mot de passe doit contenir au moins un chiffre une majuscule et une minuscule'),
+        passwordConf: yup.string('valeur invalid').required('ce champs est obligatoire')
+            .oneOf([yup.ref('password'), null], 'doit être le même que le mot de passe'),
     })
 
     const onSubmit = async () => {

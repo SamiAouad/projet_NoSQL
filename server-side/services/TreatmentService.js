@@ -171,6 +171,25 @@ const getAppointmentsByPatientId = async (req, res) => {
     }
 }
 
+const addProgress = async (req, res) => {
+    console.log(req.body)
+    let progress = {
+        treatmentState: req.body.treatmentState,
+        state: req.body.state,
+        recovery: req.body.recovery,
+    }
+    try {
+        await Treatment.findOneAndUpdate(
+            {_id: new mongoose.mongo.ObjectId(req.body.treatmentId)},
+            {progress: progress},
+        );
+        res.status(200).send(true)
+    } catch (message) {
+        console.log(message)
+        res.status(500).send(false)
+    }
+}
+
 module.exports = {
     createTreatment,
     addSymptom,
@@ -181,5 +200,6 @@ module.exports = {
     addMed,
     getMeds,
     deleteAppointment,
-    getAppointmentsByPatientId
+    getAppointmentsByPatientId,
+    addProgress
 };
