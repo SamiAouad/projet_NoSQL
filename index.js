@@ -7,6 +7,7 @@ const bodyParser = require("body-parser")
 const mongoose = require('mongoose')
 const morgan = require('morgan')
 const config = require('config')
+const path = require('path')
 
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/GestionMedicale')
 
@@ -48,7 +49,10 @@ app.use(calendarController)
 const port = process.env.PORT || 5000
 
 if (process.env.NODE_ENV === 'production') {
-    app.use(express.static("../client-side/build"));
+    app.use("/client-side/build");
+    app.get('*', (req, res) => {
+        res.sendFile(path.resolve(__dirname, '/client-side/build', 'index.html'))
+    })
 }
 
 server.listen(port, () => {
