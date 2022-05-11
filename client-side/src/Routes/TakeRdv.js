@@ -33,7 +33,7 @@ function TakeRdv() {
         item.append('date', formik.values.date)
         console.log(item)
         try {
-            await api.post('/rdv/create', item).then(res => {
+            await api.post('/api/rdv/create', item).then(res => {
                 if (res.status === 500) {
                     navigate('/error/500')
                 } else

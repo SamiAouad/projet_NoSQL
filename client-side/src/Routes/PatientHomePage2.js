@@ -13,7 +13,7 @@ function PatientHomePage2() {
     useEffect(() => {
         console.log(user)
         const getAllDoctors = async () => {
-            const result = await api.get("doctor/all");
+            const result = await api.get("/api/doctor/all");
             setDoctors(result.data);
             setLoading(false);
         };

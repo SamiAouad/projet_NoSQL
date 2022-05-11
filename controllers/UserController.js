@@ -13,9 +13,9 @@ let storage = multer.diskStorage({
     }
 });
 
-let upload = multer({ storage: storage });
+let upload = multer({storage: storage});
 
-router.post('/login' , userService.login)
+router.post('/api/login', userService.login)
 
 
 module.exports = router

@@ -9,7 +9,9 @@ const morgan = require('morgan')
 const config = require('config')
 const path = require('path')
 
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/GestionMedicale')
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/GestionMedicale').then(() => {
+    console.log("CONNECTION TO MONGO OKAY!!!")
+})
 
 
 let corsOptions = {
@@ -17,10 +19,10 @@ let corsOptions = {
     optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 }
 
-if (config.util.getEnv('NODE_ENV') !== 'test') {
+/*if (config.util.getEnv('NODE_ENV') !== 'test') {
     //use morgan to log at command line
     app.use(morgan('combined')); //'combined' outputs the Apache style LOGs
-}
+}*/
 
 // Controllers
 app.use(bodyParser.urlencoded({extended: true}))
@@ -48,10 +50,10 @@ app.use(calendarController)
 
 const port = process.env.PORT || 5000
 
-if (process.env.NODE_ENV === 'production') {
-    app.use("/client-side/build");
+if (true) {
+    app.use(express.static("client-side/build"));
     app.get('*', (req, res) => {
-        res.sendFile(path.resolve(__dirname, '/client-side/build', 'index.html'))
+        res.sendFile(path.resolve(__dirname, 'client-side/build', 'index.html'))
     })
 }
 

@@ -34,7 +34,7 @@ const Amelioration = () => {
         item.append('state', formik.values.state)
         item.append('recovery', formik.values.recovery)
         try {
-            const result = await api.post('/treatment/add/progress', item)
+            const result = await api.post('/api/treatment/add/progress', item)
             if (result.data)
                 setSuccess("Merci pour votre participation")
             else
@@ -60,7 +60,7 @@ const Amelioration = () => {
         if (user.code)
             return navigate('/')
         const getTreatments = async () => {
-            const result = await api.get(`/treatment/patient/${user._id}`)
+            const result = await api.get(`/api/treatment/patient/${user._id}`)
             console.log('consultations: ', result.data)
             setTreatments(result.data)
             setLoading(false)

@@ -25,9 +25,9 @@ const SignIn = () => {
         item.append('email', formik.values.email)
         item.append('password', formik.values.password)
         try {
-            await api.post('/login', item).then(res => {
+            await api.post('/api/login', item).then(res => {
                 if (res.status === 500) {
-                    navigate('/error/500')
+                    navigate('/')
                 } else if (res.data === false)
                     setError('Email ou mot de passe incorrect')
                 else {
@@ -36,7 +36,7 @@ const SignIn = () => {
                 }
             })
         } catch (message) {
-            navigate('/error/500')
+            navigate('/')
         }
 
     }
@@ -49,51 +49,53 @@ const SignIn = () => {
         validationSchema
     })
     return (
-       
+
         <div>
             <section className={styleSign.mysection}>
-            <div className={'row ' + styleSign.content}>
-                <div className='col-md-6 mb-3'>
-                    <img src={image} className='img-fluid'/>
-                </div>
-                <div className='col-md-6'>
-                    <div className={styleSign.content2}>
-                        <h3 className='signin-text mb-3 text-center'> Bienvenue a HEALTHO </h3>
-                        <Form className='col-centered' onSubmit={formik.handleSubmit}>
-                            <Form.Group className="mb-3" controlId="formBasicEmail">
-                                <Form.Label className='text-dark'>Email address</Form.Label>
-                                <Form.Control name={'email'} onChange={formik.handleChange} value={formik.values.email}
-                                              className='bg-transparent ' type="email" placeholder="Enter email"/>
-                                {formik.errors.email ? <div className="text-danger">{formik.errors.email}</div> : null}
-                            </Form.Group>
+                <div className={'row ' + styleSign.content}>
+                    <div className='col-md-6 mb-3'>
+                        <img src={image} className='img-fluid'/>
+                    </div>
+                    <div className='col-md-6'>
+                        <div className={styleSign.content2}>
+                            <h3 className='signin-text mb-3 text-center'> Bienvenue a HEALTHO </h3>
+                            <Form className='col-centered' onSubmit={formik.handleSubmit}>
+                                <Form.Group className="mb-3" controlId="formBasicEmail">
+                                    <Form.Label className='text-dark'>Email address</Form.Label>
+                                    <Form.Control name={'email'} onChange={formik.handleChange}
+                                                  value={formik.values.email}
+                                                  className='bg-transparent ' type="email" placeholder="Enter email"/>
+                                    {formik.errors.email ?
+                                        <div className="text-danger">{formik.errors.email}</div> : null}
+                                </Form.Group>
 
-                            <Form.Group className="mb-3" controlId="formBasicPassword">
-                                <Form.Label className='text-dark'>Password</Form.Label>
-                                <Form.Control name={'password'} onChange={formik.handleChange}
-                                              value={formik.values.password}
-                                              className='bg-transparent ' type="password" placeholder="Password"/>
-                                {formik.errors.password ?
-                                    <div className="text-danger">{formik.errors.password}</div> : null}
-                            </Form.Group>
+                                <Form.Group className="mb-3" controlId="formBasicPassword">
+                                    <Form.Label className='text-dark'>Password</Form.Label>
+                                    <Form.Control name={'password'} onChange={formik.handleChange}
+                                                  value={formik.values.password}
+                                                  className='bg-transparent ' type="password" placeholder="Password"/>
+                                    {formik.errors.password ?
+                                        <div className="text-danger">{formik.errors.password}</div> : null}
+                                </Form.Group>
 
-                            <Button  type="submit" className={styleSign.mybutton}>
-                                Submit
-                            </Button>
-                            <div className='my-3'>
+                                <Button type="submit" className={styleSign.mybutton}>
+                                    Submit
+                                </Button>
+                                <div className='my-3'>
                                 <span>Don't Have an account ?
                                     <a href='/doctor/register'
-                                      className={styleSign.mybutton}> Register As Doctor </a>
+                                       className={styleSign.mybutton}> Register As Doctor </a>
                                     <a href='/patient/register'
                                        className={styleSign.mybutton}> Register As Patient </a>
                                 </span>
-                            </div>
-                            {error ? <div className="text-danger">{error}</div> : null}
-                        </Form>
+                                </div>
+                                {error ? <div className="text-danger">{error}</div> : null}
+                            </Form>
+                        </div>
                     </div>
-                </div>
 
-            </div>
-        </section>
+                </div>
+            </section>
         </div>
 
     );

@@ -13,9 +13,9 @@ let storage = multer.diskStorage({
     }
 });
 
-let upload = multer({ storage: storage });
+let upload = multer({storage: storage});
 
-router.post('/calendar/create', CalendarService.create)
+router.post('/api/calendar/create', CalendarService.create)
 
 
 module.exports = router

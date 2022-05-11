@@ -17,7 +17,7 @@ const AcceptPatient = () => {
         item.append("doctorId", rdv.doctorId)
         item.append("rdvId", rdv._id)
         try {
-            const result = await api.post("/treatment/create", item)
+            const result = await api.post("/api/treatment/create", item)
             if (result.status === 500)
                 navigate('/error/500')
             else {
@@ -60,7 +60,7 @@ const AcceptPatient = () => {
             navigate('/doctor/register')
         const getRdv = async () => {
             try {
-                const result = await api.get(`doctor/rdv/demands/${user._id}`)
+                const result = await api.get(`/api/doctor/rdv/demands/${user._id}`)
                 if (result.status === 200) {
                     setRdv(result.data)
                     setLoading(false)

@@ -53,7 +53,7 @@ const DoctorRegister = () => {
         item.append('password', formik.values.password)
         item.append('photo', file)
         try {
-            await api.post('/doctor/create', item).then(res => {
+            await api.post('/api/doctor/create', item).then(res => {
                 if (res.status === 500) {
                     navigate('/error/500')
                 } else {

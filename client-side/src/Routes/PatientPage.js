@@ -21,7 +21,7 @@ function PatientPage(props) {
         item.append("photo", file)
         item.append("treatmentId", treatment[0]._id)
         try {
-            await api.post('/treatment/add/prescription', item)
+            await api.post('/api/treatment/add/prescription', item)
         } catch (ex) {
             console.log(ex)
             setError("une erreur s'est survenue")
@@ -35,7 +35,7 @@ function PatientPage(props) {
             navigate('/doctor/register')
         const getPatient = async () => {
             try {
-                const result = await api.get(`treatment/${params.id}`)
+                const result = await api.get(`/api/treatment/${params.id}`)
                 if (result.status === 200) {
                     setLoading(false)
                     console.log(result.data)

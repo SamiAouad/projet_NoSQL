@@ -29,7 +29,7 @@ const DetailPatient = () => {
         item.append("photo", file)
         item.append("treatmentId", treatment[0]._id)
         try {
-            await api.post('/treatment/add/prescription', item)
+            await api.post('/api/treatment/add/prescription', item)
         } catch (ex) {
             console.log(ex)
             setError("une erreur s'est survenue")
@@ -43,7 +43,7 @@ const DetailPatient = () => {
             navigate('/doctor/register')
         const getPatient = async () => {
             try {
-                const result = await api.get(`treatment/${params.id}`)
+                const result = await api.get(`/api/treatment/${params.id}`)
                 if (result.status === 200) {
                     setLoading(false)
                     setTreatment(result.data[0])
@@ -59,7 +59,7 @@ const DetailPatient = () => {
         }
         const getConsultations = async (patientId) => {
             try {
-                const result = await api.get(`treatment/patient/${patientId}`)
+                const result = await api.get(`/api/treatment/patient/${patientId}`)
                 if (result.status === 200) {
                     setLoading(false)
                     setConsultations(result.data)

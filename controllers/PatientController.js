@@ -15,9 +15,9 @@ let storage = multer.diskStorage({
 
 let upload = multer({storage: storage});
 
-router.post('/patient/create', upload.single("photo"), PatientService.createPatient)
-    .get('/patient/:id', PatientService.getPatient)
-    .delete('/patient/:id')
-    .put('/patient/:id')
+router.post('/api/patient/create', upload.single("photo"), PatientService.createPatient)
+    .get('/api/patient/:id', PatientService.getPatient)
+    .delete('/api/patient/:id')
+    .put('/api/patient/:id')
 
 module.exports = router

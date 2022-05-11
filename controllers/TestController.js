@@ -13,9 +13,9 @@ let storage = multer.diskStorage({
     }
 });
 
-let upload = multer({ storage: storage });
+let upload = multer({storage: storage});
 
-router.post('/rdv', upload.single("photo"), TestService.createTest)
+router.post('/api/rdv', upload.single("photo"), TestService.createTest)
 
 
 module.exports = router

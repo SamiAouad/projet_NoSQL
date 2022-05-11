@@ -25,11 +25,11 @@ const PatientRdv = () => {
             return navigate('/error/404')
         const getRdv = async () => {
             try {
-                let result = await api.get(`/rdv/patient/${user._id}`)
+                let result = await api.get(`/api/rdv/patient/${user._id}`)
                 if (result.status === 500)
                     return navigate('/error/500')
                 setRdv(result.data)
-                result = await api.get(`/treatment/appointments/patient/${user._id}`)
+                result = await api.get(`/api/treatment/appointments/patient/${user._id}`)
                 console.log("consultations: ", result.data)
                 if (result.status === 500)
                     return navigate('/error/500')
@@ -56,7 +56,7 @@ const PatientRdv = () => {
         item.append('consumption', formik.values.consumption)
         item.append('rdvId', formik.values.rdvId)
         try {
-            await api.post('/rdv/add/fiche', item).then(res => {
+            await api.post('/api/rdv/add/fiche', item).then(res => {
                 if (res.status === 500) {
                     navigate('/error/500')
                 } else

@@ -43,7 +43,7 @@ const DoctorRegister = () => {
         item.append('birthday', formik.values.birthday)
         item.append('photo', file)
         try {
-            await api.post('/patient/create', item).then(res => {
+            await api.post('/api/patient/create', item).then(res => {
                 if (res.status === 500) {
                     navigate('/error/500')
                 } else

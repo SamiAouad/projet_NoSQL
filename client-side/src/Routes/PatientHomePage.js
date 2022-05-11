@@ -18,7 +18,7 @@ const PatientHomePage = () => {
     })
 
     const onSubmit = async () => {
-        navigate(`/patient/search/doctor/${formik.values.specialty}/${formik.values.city}`)
+        navigate(`/api/patient/search/doctor/${formik.values.specialty}/${formik.values.city}`)
     }
     const formik = useFormik({
         initialValues: {

@@ -24,7 +24,7 @@ const DoctorHome = () => {
             return navigate('/doctor/register')
         const getConsultations = async () => {
             try {
-                const result = await api.post('doctor/consultation/', {doctorId: user._id})
+                const result = await api.post('/api/doctor/consultation/', {doctorId: user._id})
                 if (result.status === 200)
                     setConsultations(result.data)
                 else
@@ -51,7 +51,7 @@ const DoctorHome = () => {
         item.append('days', formik.values.days)
         item.append('hours', formik.values.hours)
         try {
-            await api.post('/calendar/create', item).then(res => {
+            await api.post('/api/calendar/create', item).then(res => {
                 if (res.status === 500) {
                     setError('insertion failed')
                 } else if (res.data === false)
@@ -77,120 +77,118 @@ const DoctorHome = () => {
     return (
         <div>
 
-                <section className={styleDh.myfirstsection}>
+            <section className={styleDh.myfirstsection}>
                 <div className={styleDh.mydiv}>
                     <NavbarDoctor/>
                 </div>
-                <h1 id={styleDh.myfirstitle} >Portail Consultation&nbsp;</h1>
-                    <div className="container mt-5">
-                        <div className="row"  id = {styleDh.myfirstrow}>
-                            <div className="col-md-6 align-self-center">
-                                <p id={styleDh.mytext}>Consultation de la journée</p>
-                            </div>
-                            <div className="col-md-6">
-                                <div className="table-responsive text-start">
-                                    <table className="table table-striped table-bordered">
-                                        <thead id={styleDh.Thead}>
-                                        <tr>
-                                            <th>Id</th>
-                                            <th><br/>Image</th>
-                                            <th>CNI patient</th>
-                                            <th>Sexe</th>
-                                            <th>Date</th>
-                                            <th>Urgent</th>
-                                            <th>Horaire</th>
-                                            <th>Urgence</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody id={styleDh.Tbody}>
-                                        {
-                                            consultations.map(consultation => {
-                                                const date = consultation.rdv[0] ? consultation.rdv[0].date : null;
-                                                if (new Date(date) >= new Date())
-                                                    return (
-                                                        <tr >
-                                                            <td>Cell 1</td>
-                                                            <td><img alt={'image'}
-                                                                     src={`data:image/jpeg;base64,${consultation.patient[0].photo}`}/>
-                                                            </td>
-                                                            <td>{consultation.patient[0].cni}</td>
-                                                            <td>{consultation.patient[0].gender}</td>
-                                                            <td>{consultation.rdv[0] ? consultation.rdv[0].date.substr(0, 10) : null}</td>
-                                                            <td>{consultation.rdv[0] ? consultation.rdv[0].urgent : null}</td>
-                                                            <td>Cell 1</td>
-                                                            <td>Cell 2</td>
-                                                        </tr>
-                                                    );
-                                            })
-                                        }
-
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
+                <h1 id={styleDh.myfirstitle}>Portail Consultation&nbsp;</h1>
+                <div className="container mt-5">
+                    <div className="row" id={styleDh.myfirstrow}>
+                        <div className="col-md-6 align-self-center">
+                            <p id={styleDh.mytext}>Consultation de la journée</p>
                         </div>
-                        <div className="row"id = {styleDh.myfirstrow} >
-                            <div className="col-md-6 align-self-center">
-                                <p id={styleDh.mytext}>Dernières Consultations</p>
-                            </div>
-                            <div className="col-md-6">
-                                <div className="table-responsive text-start"
-                                    >
-                                    <table className="table table-striped table-bordered">
-                                        <thead id={styleDh.Thead}>
-                                        <tr>
-                                            <th>Id</th>
-                                            <th><br/>Image</th>
-                                            <th>N°Patient</th>
-                                            <th>N°Dossier</th>
-                                            <th>Traitement</th>
-                                            <th>Date</th>
-                                            <th>Horaire</th>
-                                            <th>Urgence</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody id={styleDh.Tbody}>
-                                        {
-                                            consultations.map(consultation => {
-                                                console.log(consultation.rdv)
-                                                const date = consultation.rdv[0] ? consultation.rdv[0].date : null;
-                                                if (date < new Date())
-                                                    return (
-                                                        <tr styleDh={{color: 'rgb(255,255,255)'}}>
-                                                            <td>Cell 1</td>
-                                                            <td><img alt={'image'}
-                                                                     src={`data:image/jpeg;base64,${consultation.patient[0].photo}`}/>
-                                                            </td>
-                                                            <td>{consultation.patient[0].cni}</td>
-                                                            <td>{consultation.patient[0].gender}</td>
-                                                            <td>{consultation.rdv[0] ? consultation.rdv[0].date.substr(0, 10) : null}</td>
-                                                            <td>{consultation.rdv[0] ? consultation.rdv[0].urgent : null}</td>
-                                                            <td>Cell 1</td>
-                                                            <td>Cell 2</td>
-                                                        </tr>
-                                                    );
-                                            })
-                                        }
+                        <div className="col-md-6">
+                            <div className="table-responsive text-start">
+                                <table className="table table-striped table-bordered">
+                                    <thead id={styleDh.Thead}>
+                                    <tr>
+                                        <th>Id</th>
+                                        <th><br/>Image</th>
+                                        <th>CNI patient</th>
+                                        <th>Sexe</th>
+                                        <th>Date</th>
+                                        <th>Urgent</th>
+                                        <th>Horaire</th>
+                                        <th>Urgence</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id={styleDh.Tbody}>
+                                    {
+                                        consultations.map(consultation => {
+                                            const date = consultation.rdv[0] ? consultation.rdv[0].date : null;
+                                            if (new Date(date) >= new Date())
+                                                return (
+                                                    <tr>
+                                                        <td>Cell 1</td>
+                                                        <td><img alt={'image'}
+                                                                 src={`data:image/jpeg;base64,${consultation.patient[0].photo}`}/>
+                                                        </td>
+                                                        <td>{consultation.patient[0].cni}</td>
+                                                        <td>{consultation.patient[0].gender}</td>
+                                                        <td>{consultation.rdv[0] ? consultation.rdv[0].date.substr(0, 10) : null}</td>
+                                                        <td>{consultation.rdv[0] ? consultation.rdv[0].urgent : null}</td>
+                                                        <td>Cell 1</td>
+                                                        <td>Cell 2</td>
+                                                    </tr>
+                                                );
+                                        })
+                                    }
 
-                                        </tbody>
-                                    </table>
-                                </div>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
-                </section>
-                
-               
-               
-            
+                    <div className="row" id={styleDh.myfirstrow}>
+                        <div className="col-md-6 align-self-center">
+                            <p id={styleDh.mytext}>Dernières Consultations</p>
+                        </div>
+                        <div className="col-md-6">
+                            <div className="table-responsive text-start"
+                            >
+                                <table className="table table-striped table-bordered">
+                                    <thead id={styleDh.Thead}>
+                                    <tr>
+                                        <th>Id</th>
+                                        <th><br/>Image</th>
+                                        <th>N°Patient</th>
+                                        <th>N°Dossier</th>
+                                        <th>Traitement</th>
+                                        <th>Date</th>
+                                        <th>Horaire</th>
+                                        <th>Urgence</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id={styleDh.Tbody}>
+                                    {
+                                        consultations.map(consultation => {
+                                            console.log(consultation.rdv)
+                                            const date = consultation.rdv[0] ? consultation.rdv[0].date : null;
+                                            if (date < new Date())
+                                                return (
+                                                    <tr styleDh={{color: 'rgb(255,255,255)'}}>
+                                                        <td>Cell 1</td>
+                                                        <td><img alt={'image'}
+                                                                 src={`data:image/jpeg;base64,${consultation.patient[0].photo}`}/>
+                                                        </td>
+                                                        <td>{consultation.patient[0].cni}</td>
+                                                        <td>{consultation.patient[0].gender}</td>
+                                                        <td>{consultation.rdv[0] ? consultation.rdv[0].date.substr(0, 10) : null}</td>
+                                                        <td>{consultation.rdv[0] ? consultation.rdv[0].urgent : null}</td>
+                                                        <td>Cell 1</td>
+                                                        <td>Cell 2</td>
+                                                    </tr>
+                                                );
+                                        })
+                                    }
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
             <section className={styleDh.mysecondsection}>
                 <div className="container">
                     <div className="row" id={styleDh.myfirstrow}>
-                        <div className="col-md-4" ><img src={image} id={styleDh.myimg} /></div>
+                        <div className="col-md-4"><img src={image} id={styleDh.myimg}/></div>
                         <div className="col-md-8">
-                            <section className={styleDh.contactclean} >
-                                <form onSubmit={formik.handleSubmit} >
-                                    <h2 className="text-center" >Programme de votre Semaine</h2>
+                            <section className={styleDh.contactclean}>
+                                <form onSubmit={formik.handleSubmit}>
+                                    <h2 className="text-center">Programme de votre Semaine</h2>
 
                                     <div className="mb-3">
                                         <p>Semaine :&nbsp;</p>

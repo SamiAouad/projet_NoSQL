@@ -52,7 +52,7 @@ const SearchingDoctor = () => {
         item.append('urgent', formik.values.urgent)
         item.append('description', formik.values.description)
         try {
-            await api.post('/rdv/create', item).then(res => {
+            await api.post('/api/rdv/create', item).then(res => {
                 if (res.status === 500) {
                     navigate('/error/500')
                 } else
@@ -85,7 +85,7 @@ const SearchingDoctor = () => {
             navigate('/patient/register')
         const getDoctors = async () => {
             try {
-                const result = await api.post('doctor/find/specialty/city', item)
+                const result = await api.post('/api/doctor/find/specialty/city', item)
                 console.log(result.data)
                 if (result.status === 200) {
                     setDoctors(result.data)
