@@ -23,7 +23,7 @@ const DoctorRegister = () => {
         code: yup.string('valeur invalid').required('ce champs est obligatoire'),
         firstName: yup.string('valeur invalid').required('ce champs est obligatoire'),
         lastName: yup.string('valeur invalid').required('ce champs est obligatoire'),
-        phone: yup.string('valeur invalid').required('ce champs est obligatoire'),
+        phone: yup.string('valeur invalid').required('ce champs est obligatoire').min(10, "Numero invalid").max(10, "Numero invalide"),
         university: yup.string('valeur invalid').required('ce champs est obligatoire'),
         promotion: yup.string('valeur invalid').required('ce champs est obligatoire'),
         email: yup.string('valeur invalid').email("email invalid").required('ce champs est obligatoire'),
@@ -56,8 +56,9 @@ const DoctorRegister = () => {
             await api.post('/doctor/create', item).then(res => {
                 if (res.status === 500) {
                     navigate('/error/500')
-                } else
-                    console.log('looking good')
+                } else {
+                    navigate('/')
+                }
             })
         } catch (message) {
             navigate('/error/500')
@@ -70,11 +71,11 @@ const DoctorRegister = () => {
             firstName: '',
             lastName: '',
             phone: '',
-            university: '',
-            promotion: '',
+            university: 'FMP Tanger',
+            promotion: '2022',
             email: '',
-            specialty: '',
-            city: '',
+            specialty: 'L’anesthésiologie',
+            city: 'Casablanca',
             street: '',
             password: '',
             passwordConf: ''

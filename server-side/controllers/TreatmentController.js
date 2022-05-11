@@ -24,7 +24,7 @@ router.post('/treatment/create', TreatmentService.createTreatment)
     .get('/treatment/patient/:patientId', TreatmentService.getByPatientId)
     .post('/treatment/add/med', TreatmentService.addMed)
     .get('/treatment/meds/:treatmentId', TreatmentService.getMeds)
-    .delete('/treatment/appointment/:treatmentId/:index')
+    .delete('/treatment/appointment/:treatmentId/:index', TreatmentService.deleteAppointment)
     .get('/treatment/appointments/patient/:patientId', TreatmentService.getAppointmentsByPatientId)
     .post('/treatment/add/progress', TreatmentService.addProgress)
 

@@ -7,6 +7,7 @@ import axios from "axios";
 import React, {useEffect} from "react";
 import AddPrescription from "./GestionPatient/AddPrescription";
 import CreateAppoinment from "./GestionPatient/CreateAppoinment";
+import NavbarDoctor from "./NavbarDoctor";
 
 const DetailPatient = () => {
     const [consultations, setConsultations] = useState([])
@@ -16,6 +17,8 @@ const DetailPatient = () => {
     const [treatment, setTreatment] = useState()
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState('')
+    const [birthday, setBirthday] = useState([]);
+
     const api = axios.create({
         baseURL: 'http://localhost:5000'
     })
@@ -45,6 +48,8 @@ const DetailPatient = () => {
                     setLoading(false)
                     setTreatment(result.data[0])
                     await getConsultations(result.data[0].patientId)
+                    const temp = result.data[0].patient[0].birthday.substr(0, 10).split('-')
+                    setBirthday(temp)
                 } else
                     navigate(`/doctor/register`)
             } catch (ex) {
@@ -57,7 +62,6 @@ const DetailPatient = () => {
                 const result = await api.get(`treatment/patient/${patientId}`)
                 if (result.status === 200) {
                     setLoading(false)
-                    console.log(result.data)
                     setConsultations(result.data)
                 } else
                     navigate(`/doctor/register`)
@@ -70,13 +74,12 @@ const DetailPatient = () => {
         getPatient()
     }, [])
 
-    if (loading)
-        return <p>Loading</p>
 
     if (loading)
         return <div>Loading</div>
     return (
         <div>
+            <NavbarDoctor/>
             <section className={style.mysection}>
                 <h3 className={style.title}> Detail Patient </h3>
                 <div className='row' id={style.myrow}>
@@ -102,33 +105,40 @@ const DetailPatient = () => {
                                 </div>
                                 <div className='col'>
                                     <Form.Group className="mb-3">
-                                        <Form.Label>N° Dossier</Form.Label>
-                                        <Form.Control placeholder="Disabled input" disabled/>
+                                        <Form.Label>Numero de telephone</Form.Label>
+                                        <Form.Control placeholder={treatment.patient[0].phone} disabled/>
                                     </Form.Group>
                                 </div>
                             </div>
                             <div className='row'>
                                 <div className='col'>
                                     <Form.Group className="mb-3">
-                                        <Form.Label>Created At : </Form.Label>
-                                        <Form.Control classNAme='myfield' placeholder="Disabled input" disabled/>
+                                        <Form.Label>Date de naissance : </Form.Label>
+                                        <Form.Control classNAme='myfield'
+                                                      placeholder={`${birthday[2]}/${birthday[1]}/${birthday[0]}`}
+                                                      disabled/>
                                     </Form.Group>
                                 </div>
                                 <div className='col'>
                                     <Form.Group className="mb-3">
-                                        <Form.Label>Updated At </Form.Label>
-                                        <Form.Control placeholder="Disabled input" disabled/>
+                                        <Form.Label>Adresse </Form.Label>
+                                        <Form.Control
+                                            placeholder={`${treatment.patient[0].address.city} ${treatment.patient[0].address.street}`}
+                                            disabled/>
                                     </Form.Group>
                                 </div>
                             </div>
                             <div className='row'>
                                 <div className={style.myprogress}>
                                     <label> Retablissement : </label>
-                                    <ProgressBar variant="success" now={70}/>
+                                    <ProgressBar variant="success"
+                                                 now={consultations[0] ? consultations[0].progress.recovery * 10 : 0}/>
                                     <label> Traitement : </label>
-                                    <ProgressBar variant="info" now={30}/>
+                                    <ProgressBar variant="info"
+                                                 now={consultations[0] ? consultations[0].progress.treatmentState * 10 : 0}/>
                                     <label> Symptomes : </label>
-                                    <ProgressBar variant="danger" now={20}/>
+                                    <ProgressBar variant="danger"
+                                                 now={consultations[0] ? consultations[0].progress.state * 10 : 0}/>
 
                                 </div>
                             </div>
@@ -155,6 +165,7 @@ const DetailPatient = () => {
                             <tbody className={style.tbody}>
                             {
                                 consultations.map((consultation, key) => {
+                                    console.log("test consultation : ", consultations)
                                     return (
                                         <tr key={key}>
                                             <td>{key + 1}</td>

@@ -17,12 +17,16 @@ const NavbarDoctor = () => {
                     <ul className="navbar-nav mx-auto">
                         <li className="nav-item"><a className="nav-link active" href="/patient/home" style={{
                             fontWeight: 'bold',
-                            color: 'rgb(255,255,255)'
+                            color: 'rgb(0,0,0)'
                         }}>Acceuil</a></li>
                         <li className="nav-item"><a className="nav-link active" href="/patient/rdv" style={{
                             fontWeight: 'bold',
-                            color: 'rgb(255,255,255)'
+                            color: 'rgb(0,0,0)'
                         }}>Mes rendez-vous</a></li>
+                        <li className="nav-item"><a className="nav-link active" href="/patient/suivie" style={{
+                            fontWeight: 'bold',
+                            color: 'rgb(0,0,0)'
+                        }}>Mon etat</a></li>
                     </ul>
                     <ul className="navbar-nav">
                         <li className="nav-item"><a className="nav-link" onClick={logout}

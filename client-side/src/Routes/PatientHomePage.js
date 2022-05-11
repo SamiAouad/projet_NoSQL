@@ -107,6 +107,7 @@ const PatientHomePage = () => {
                                                             id={style.inputGroupSelect01}>
                                                         <option value={"rabat"} selected>Rabat</option>
                                                         <option value="fes">Fes</option>
+                                                        <option value="casablanca">Casablanca</option>
                                                         <option value="marrakech">Marrakech</option>
                                                         <option value="tanger">Tanger</option>
                                                         <option value="agadir">Agadir</option>

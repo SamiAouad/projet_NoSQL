@@ -14,6 +14,7 @@ const SearchingDoctor = () => {
         baseURL: 'http://localhost:5000'
     })
     const params = useParams()
+    const [loading, setLoading] = useState(true)
     const [doctors, setDoctors] = useState([])
     const user = JSON.parse(localStorage.getItem('user'))
     const navigate = useNavigate()
@@ -86,9 +87,10 @@ const SearchingDoctor = () => {
             try {
                 const result = await api.post('doctor/find/specialty/city', item)
                 console.log(result.data)
-                if (result.status === 200)
+                if (result.status === 200) {
                     setDoctors(result.data)
-                else
+                    setLoading(false)
+                } else
                     navigate(`/error/500`)
             } catch (ex) {
                 navigate(`/error/500`)
@@ -97,6 +99,8 @@ const SearchingDoctor = () => {
         }
         getDoctors()
     }, [])
+    if (loading)
+        return <p>Loading</p>
     return (
         <div>
             <PatientNavbar/>
@@ -161,13 +165,14 @@ const SearchingDoctor = () => {
                                     <div key={key}>
                                         {
                                             list.map((doctor, key2) => {
+                                                console.log("doctor: ", doctor)
                                                 return (
                                                     <div key={key2} className='col-4'>
                                                         <div className={style.coursecard}>
                                                             <div className={style.coursebanner}>
                                                                 <img
-                                                                    src={image}
-                                                                    alt="course banner"/>
+                                                                    src={`data:image/png;base64,${doctor.photo.data}`}
+                                                                />
                                                                 <button type='submit'
                                                                         onClick={() => setDoctorId(doctor._id)}
                                                                         className='btn-bg-danger mt-3 '> Demander Un

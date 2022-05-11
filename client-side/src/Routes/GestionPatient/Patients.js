@@ -55,9 +55,6 @@ const Patients = () => {
                     <div className='col-10'>
                         <h2 className={style.sectiontitle}>Voici La Liste de Vos Patients </h2>
                     </div>
-                    <div className='col-2'>
-                        <button type="submit" className="btn-text" id="mybtn"> Nouveau Patient</button>
-                    </div>
                 </div>
                 <div className={style.coursegrid}>
 
@@ -69,7 +66,7 @@ const Patients = () => {
                                         {
                                             list.map((consultation, key) => {
                                                 return (
-                                                    <div className='col-4'>
+                                                    <div key={key} className='col-4'>
                                                         <div className={style.coursecard}>
                                                             <div className={style.coursebanner}>
                                                                 <img alt={'image'}

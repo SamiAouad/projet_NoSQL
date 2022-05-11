@@ -155,7 +155,9 @@ const getMeds = async (req, res) => {
 
 const deleteAppointment = async (req, res) => {
     try {
-        await Treatment.updateOne({_id: req.params.treatmentId}, {$pullAll: {appointments: [req.params.index]}})
+        // await Treatment.updateOne({_id: req.params.treatmentId}, {$pullAll: {appointments: [req.params.index]}})
+        await Treatment.updateOne({_id: req.params.treatmentId}, {$unset: {[`appointments.${req.params.index}`]: 1}})
+        await Treatment.updateOne({}, {$pull: {"appointments": null}})
         res.send(true)
     } catch (ex) {
         res.status(500).send(false)
