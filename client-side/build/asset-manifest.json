@@ -1,0 +1,38 @@
+{
+  "files": {
+    "main.css": "/static/css/main.83b4ec05.css",
+    "main.js": "/static/js/main.fadf2490.js",
+    "static/js/787.b827dc5b.chunk.js": "/static/js/787.b827dc5b.chunk.js",
+    "static/media/Doctor.jpg": "/static/media/Doctor.b034d4db048084122f45.jpg",
+    "static/media/fieldimg.jpg": "/static/media/fieldimg.4eee38433bef5c9c5612.jpg",
+    "static/media/SectionPrescription.jpg": "/static/media/SectionPrescription.ca222acc5946a4357c4d.jpg",
+    "static/media/doc1.jpg": "/static/media/doc1.70d6cf2a79fd56a192e5.jpg",
+    "static/media/BackgroundPatient.jpg": "/static/media/BackgroundPatient.015870f54f6d68bcc3c0.jpg",
+    "static/media/Background2.jpg": "/static/media/Background2.2031ca657222746071b7.jpg",
+    "static/media/Image.jpg": "/static/media/Image.22b449ae7e68e05721e0.jpg",
+    "static/media/Doctorpic.jpg": "/static/media/Doctorpic.f90e00275f8d1dfc086a.jpg",
+    "static/media/pexels-thirdman-5327921.jpg": "/static/media/pexels-thirdman-5327921.7f592b60517cb1254a89.jpg",
+    "static/media/Picture.jpg": "/static/media/Picture.ad201ff027e2c5ab492c.jpg",
+    "static/media/ImageSection.jpg": "/static/media/ImageSection.dabd48abba633d99b384.jpg",
+    "static/media/Background.jpg": "/static/media/Background.398086c63ee1dc98fbc9.jpg",
+    "static/media/BackPat.jpg": "/static/media/BackPat.24ca32cb5a4c52a93923.jpg",
+    "static/media/HomeBg.jpg": "/static/media/HomeBg.d89d252ad1c53534ff34.jpg",
+    "static/media/MesRendezVous.jpg": "/static/media/MesRendezVous.423364551989c6fcccd9.jpg",
+    "static/media/PatientPatient.png": "/static/media/PatientPatient.14a4497e9e64761335a9.png",
+    "static/media/doctor.jpg": "/static/media/doctor.3aba45bfea5966c1fe13.jpg",
+    "static/media/Doctor.png": "/static/media/Doctor.d1061b30d9d039bde46f.png",
+    "static/media/Agnaou.png": "/static/media/Agnaou.42c3fc4d22d0347c4289.png",
+    "static/media/Image.png": "/static/media/Image.96f246850c50612121fd.png",
+    "static/media/logo.png": "/static/media/logo.8bd7d3141dff3711bb20.png",
+    "static/media/BackgroundDetails.jpg": "/static/media/BackgroundDetails.7f7b4705a6abdf118da9.jpg",
+    "static/media/Clock.png": "/static/media/Clock.d6159c710c78d55a2f8b.png",
+    "index.html": "/index.html",
+    "main.83b4ec05.css.map": "/static/css/main.83b4ec05.css.map",
+    "main.fadf2490.js.map": "/static/js/main.fadf2490.js.map",
+    "787.b827dc5b.chunk.js.map": "/static/js/787.b827dc5b.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.83b4ec05.css",
+    "static/js/main.fadf2490.js"
+  ]
+}

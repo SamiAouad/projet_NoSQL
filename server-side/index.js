@@ -8,7 +8,7 @@ const mongoose = require('mongoose')
 const morgan = require('morgan')
 const config = require('config')
 
-mongoose.connect('mongodb://localhost:27017/GestionMedicale')
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/GestionMedicale')
 
 
 let corsOptions = {
@@ -45,8 +45,15 @@ app.use(rdvController)
 app.use(userController)
 app.use(calendarController)
 
-server.listen(5000, () => {
+const port = process.env.PORT || 5000
+
+if (process.env.NODE_ENV === 'production') {
+    app.use(express.static("../client-side/build"));
+}
+
+server.listen(port, () => {
     console.log("SERVER RUNNING");
 });
+
 
 module.exports = server
