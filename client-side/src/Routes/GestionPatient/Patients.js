@@ -24,6 +24,7 @@ const Patients = () => {
     const [success, setSuccess] = useState('')
     const navigate = useNavigate()
     const user = JSON.parse(localStorage.getItem('user'))
+    const [loading, setLoading] = useState(true)
     const api = axios.create({
         baseURL: 'https://app-gestion-medicale.herokuapp.com/'
     })
@@ -35,18 +36,25 @@ const Patients = () => {
             navigate('/doctor/register')
         const getConsultations = async () => {
             try {
-                const result = await api.post('doctor/consultation/', {doctorId: user._id})
-                if (result.status === 200)
+                const result = await api.post('/api/doctor/consultation/', {doctorId: user._id})
+                if (result.status === 200) {
                     setConsultations(result.data)
-                else
+                    setLoading(false)
+                } else
                     navigate(`/doctor/register`)
             } catch (ex) {
                 navigate(`/error/500`)
-                console.log("error")
+                console.log("error: ", ex)
             }
         }
         getConsultations()
     }, [])
+    if (loading) {
+        return (
+            <p>Loading</p>
+        )
+    }
+
     return (
         <div>
             <section className={`${style.course} ${style.pagebg}`} id={style.course}>

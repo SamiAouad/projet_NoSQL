@@ -25,7 +25,7 @@ const CreateAppoinement = ({treatmentId}) => {
         item.append('description', formik.values.description)
         item.append('period', formik.values.period)
         try {
-            await api.post('/treatment/appointment', item).then(res => {
+            await api.post('/api/treatment/appointment', item).then(res => {
                 if (res.status === 500) {
                     setError('insertion failed')
                 } else if (res.data === false)

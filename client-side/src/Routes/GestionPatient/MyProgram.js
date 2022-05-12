@@ -42,7 +42,7 @@ const Program = () => {
             navigate('/doctor/register')
         const getAppointments = async () => {
             try {
-                const result = await api.post('doctor/appointments/', {doctorId: user._id})
+                const result = await api.post('/api/doctor/appointments/', {doctorId: user._id})
                 if (result.status === 200) {
                     setRdv(result.data.rdv)
                     //setAppointments(old => [...old, ...result.data.appointments])

@@ -24,7 +24,7 @@ function AddPrescription({treatmentId}) {
         item.append("file", file)
         item.append("treatmentId", treatmentId)
         try {
-            await api.post('/treatment/add/prescription', item)
+            await api.post('/api/treatment/add/prescription', item)
         } catch (ex) {
             console.log(ex)
             setError("une erreur s'est survenue")
