@@ -12,7 +12,7 @@ function PatientPage(props) {
     const patientId = params.id
     const [treatment, setTreatment] = useState()
     const api = axios.create({
-        baseURL: 'https://applicationgestionmedicale.herokuapp.com/'
+        baseURL: 'https://app-gestion-medicale.herokuapp.com/'
     })
     const [file, setFile] = useState()
 

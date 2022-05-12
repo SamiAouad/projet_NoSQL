@@ -49,7 +49,7 @@ const AcceptPatient = () => {
 
     const navigate = useNavigate()
     const api = axios.create({
-        baseURL: 'https://applicationgestionmedicale.herokuapp.com/'
+        baseURL: 'https://app-gestion-medicale.herokuapp.com/'
     })
 
 

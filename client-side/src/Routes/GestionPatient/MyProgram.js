@@ -14,7 +14,7 @@ const Program = () => {
     const [refresh, setRefresh] = useState(false)
     const user = JSON.parse(localStorage.getItem('user'))
     const api = axios.create({
-        baseURL: 'http://localhost:5000'
+        baseURL: 'https://app-gestion-medicale.herokuapp.com/'
     })
 
     const cancelAppointment = async (treatmentId, index) => {

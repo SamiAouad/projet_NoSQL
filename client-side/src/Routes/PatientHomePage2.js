@@ -8,7 +8,7 @@ function PatientHomePage2() {
     const [loading, setLoading] = useState(true)
     const [doctors, setDoctors] = useState([])
     const api = axios.create({
-        baseURL: 'https://applicationgestionmedicale.herokuapp.com/'
+        baseURL: 'https://app-gestion-medicale.herokuapp.com/'
     })
     useEffect(() => {
         console.log(user)

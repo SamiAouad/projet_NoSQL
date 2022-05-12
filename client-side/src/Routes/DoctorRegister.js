@@ -7,7 +7,7 @@ import axios from 'axios';
 
 
 const api = axios.create({
-    baseURL: `https://applicationgestionmedicale.herokuapp.com/`
+    baseURL: `https://app-gestion-medicale.herokuapp.com/`
 })
 
 const DoctorRegister = () => {

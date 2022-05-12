@@ -14,7 +14,7 @@ const DoctorHome = () => {
     const navigate = useNavigate()
     const user = JSON.parse(localStorage.getItem('user'))
     const api = axios.create({
-        baseURL: 'https://applicationgestionmedicale.herokuapp.com/'
+        baseURL: 'https://app-gestion-medicale.herokuapp.com/'
     })
 
     useEffect(() => {

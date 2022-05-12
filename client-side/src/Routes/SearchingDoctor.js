@@ -11,7 +11,7 @@ import PatientNavbar from "./PatientNavbar";
 
 const SearchingDoctor = () => {
     const api = axios.create({
-        baseURL: 'https://applicationgestionmedicale.herokuapp.com/'
+        baseURL: 'https://app-gestion-medicale.herokuapp.com/'
     })
     const params = useParams()
     const [loading, setLoading] = useState(true)

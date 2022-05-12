@@ -8,7 +8,7 @@ import {useFormik} from "formik";
 import {useState} from "react";
 
 const api = axios.create({
-    baseURL: `https://applicationgestionmedicale.herokuapp.com/`
+    baseURL: `https://app-gestion-medicale.herokuapp.com/`
 })
 
 const SignIn = () => {

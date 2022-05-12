@@ -15,7 +15,7 @@ const Amelioration = () => {
     const [loading, setLoading] = useState(true)
     const user = JSON.parse(localStorage.getItem('user'))
     const api = axios.create({
-        baseURL: 'https://applicationgestionmedicale.herokuapp.com/'
+        baseURL: 'https://app-gestion-medicale.herokuapp.com/'
     })
     const validationSchema = yup.object({
         treatmentId: yup.string('invalid input').required('this field is required'),

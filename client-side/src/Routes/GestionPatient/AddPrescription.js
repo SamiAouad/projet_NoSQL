@@ -8,7 +8,7 @@ import {useNavigate} from "react-router";
 import {Table} from "react-bootstrap";
 
 const api = axios.create({
-    baseURL: `http://localhost:5000/`
+    baseURL: `https://app-gestion-medicale.herokuapp.com/`
 })
 
 function AddPrescription({treatmentId}) {

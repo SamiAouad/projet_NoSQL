@@ -10,7 +10,7 @@ import PatientNavbar from "./PatientNavbar";
 
 const PatientRdv = () => {
     const api = axios.create({
-        baseURL: 'https://applicationgestionmedicale.herokuapp.com/'
+        baseURL: 'https://app-gestion-medicale.herokuapp.com/'
     })
     const [rdv, setRdv] = useState([])
     const [loading, setLoading] = useState(true)

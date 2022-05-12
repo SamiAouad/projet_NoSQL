@@ -20,7 +20,7 @@ const DetailPatient = () => {
     const [birthday, setBirthday] = useState([]);
 
     const api = axios.create({
-        baseURL: 'https://applicationgestionmedicale.herokuapp.com/'
+        baseURL: 'https://app-gestion-medicale.herokuapp.com/'
     })
     const [file, setFile] = useState()
 
