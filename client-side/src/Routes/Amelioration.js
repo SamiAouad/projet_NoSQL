@@ -6,6 +6,7 @@ import {useNavigate} from "react-router";
 import axios from "axios";
 import * as yup from "yup";
 import {useFormik} from "formik";
+import PatientNavbar from "./PatientNavbar";
 
 const Amelioration = () => {
     const [error, setError] = useState("")
@@ -73,6 +74,7 @@ const Amelioration = () => {
 
     return (
         <div>
+            <PatientNavbar/>
             <section className={style.mysection}>
                 <div className='row'>
                     <div className='col' id={style.myfield}>
