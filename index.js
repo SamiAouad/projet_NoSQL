@@ -12,6 +12,8 @@ const path = require('path')
 // 'mongodb://localhost:27017/GestionMedicale
 mongoose.connect(process.env.MONGODB_URI || 'mongodb+srv://sami:1453@gestionmedicale.9um7u.mongodb.net/gestionMedicale').then(() => {
     console.log("CONNECTION TO MONGO OKAY!!!")
+}).catch(ex => {
+    console.log("Error while connecting to MONGODB: ", ex)
 })
 
 
