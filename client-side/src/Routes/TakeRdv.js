@@ -6,7 +6,7 @@ import {useNavigate} from "react-router";
 import style from '../css/TakeRdv.module.css'
 
 const api = axios.create({
-    baseURL: `http://localhost:5000/`
+    baseURL: `https://applicationgestionmedicale.herokuapp.com/`
 })
 
 function TakeRdv() {

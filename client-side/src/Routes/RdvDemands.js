@@ -9,7 +9,7 @@ function RdvDemands() {
     const [loading, setLoading] = useState(true)
     const [appointments, setAppointments] = useState([])
     const api = axios.create({
-        baseURL: 'http://localhost:5000'
+        baseURL: 'https://applicationgestionmedicale.herokuapp.com/'
     })
 
     useEffect(() => {

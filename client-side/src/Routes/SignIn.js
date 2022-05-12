@@ -8,7 +8,7 @@ import {useFormik} from "formik";
 import {useState} from "react";
 
 const api = axios.create({
-    baseURL: `http://localhost:5000/`
+    baseURL: `https://applicationgestionmedicale.herokuapp.com/`
 })
 
 const SignIn = () => {
@@ -27,7 +27,7 @@ const SignIn = () => {
         try {
             await api.post('/api/login', item).then(res => {
                 if (res.status === 500) {
-                    navigate('/')
+                    navigate('/error/500')
                 } else if (res.data === false)
                     setError('Email ou mot de passe incorrect')
                 else {
@@ -36,7 +36,7 @@ const SignIn = () => {
                 }
             })
         } catch (message) {
-            navigate('/')
+            navigate('/error/500')
         }
 
     }

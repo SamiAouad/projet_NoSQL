@@ -9,7 +9,8 @@ const morgan = require('morgan')
 const config = require('config')
 const path = require('path')
 
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/GestionMedicale').then(() => {
+// 'mongodb://localhost:27017/GestionMedicale
+mongoose.connect(process.env.MONGODB_URI || 'mongodb+srv://sami:1453@gestionmedicale.9um7u.mongodb.net/gestionMedicale').then(() => {
     console.log("CONNECTION TO MONGO OKAY!!!")
 })
 

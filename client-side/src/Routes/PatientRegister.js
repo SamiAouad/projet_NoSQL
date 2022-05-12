@@ -7,7 +7,7 @@ import axios from 'axios';
 
 
 const api = axios.create({
-    baseURL: `http://localhost:5000/`
+    baseURL: `https://applicationgestionmedicale.herokuapp.com/`
 })
 
 const DoctorRegister = () => {
@@ -20,12 +20,15 @@ const DoctorRegister = () => {
         cni: yup.string('valeur invalid').required('ce champs est obligatoire'),
         firstName: yup.string('valeur invalid').required('ce champs est obligatoire'),
         lastName: yup.string('valeur invalid').required('ce champs est obligatoire'),
-        phone: yup.string('valeur invalid').required('ce champs est obligatoire'),
+        phone: yup.string('valeur invalid').required('ce champs est obligatoire').min(10, "Numero invalid").max(10, "Numero invalide"),
         email: yup.string('valeur invalid').email("email invalid").required('ce champs est obligatoire'),
         city: yup.string('valeur invalid').required('ce champs est obligatoire'),
         street: yup.string('valeur invalid').required('ce champs est obligatoire'),
-        password: yup.string('valeur invalid').required('ce champs est obligatoire'),
-        passwordConf: yup.string('valeur invalid').required('ce champs est obligatoire'),
+        password: yup.string('valeur invalid').required('ce champs est obligatoire')
+            .min(8, 'Password is too short - should be 8 chars minimum.').matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d\w\W]{8,}$/
+                , 'Mot de passe doit contenir au moins un chiffre une majuscule et une minuscule'),
+        passwordConf: yup.string('valeur invalid').required('ce champs est obligatoire')
+            .oneOf([yup.ref('password'), null], 'doit être le même que le mot de passe'),
     })
 
     const onSubmit = async () => {
@@ -41,13 +44,14 @@ const DoctorRegister = () => {
         item.append('street', formik.values.street)
         item.append('password', formik.values.password)
         item.append('birthday', formik.values.birthday)
+        item.append("gender", formik.values.gender)
         item.append('photo', file)
         try {
             await api.post('/api/patient/create', item).then(res => {
                 if (res.status === 500) {
                     navigate('/error/500')
                 } else
-                    console.log('looking good')
+                    navigate('/')
             })
         } catch (message) {
             navigate('/error/500')
@@ -61,11 +65,12 @@ const DoctorRegister = () => {
             lastName: '',
             phone: '',
             email: '',
-            city: '',
+            city: 'casablanca',
             street: '',
             password: '',
             passwordConf: '',
-            birthday: ''
+            birthday: '',
+            gender: 'm'
         },
         onSubmit,
         validationSchema
@@ -112,7 +117,7 @@ const DoctorRegister = () => {
                                 </div>
 
                                 <div className={style.inputField}>
-                                    <label>Nom</label>
+                                    <label>Date de naissance</label>
                                     <input type="date" name={"birthday"} value={formik.values.birthday}
                                            onChange={formik.handleChange}
                                            placeholder='Entrez votre nom' required/>
@@ -167,9 +172,9 @@ const DoctorRegister = () => {
                                 </div>
                                 <div className={style.inputField}>
                                     <label>Sexe</label>
-                                    <select name="gender" onChange={formik.handleChange} value={formik.values.city}>
-                                        <option value="casablanca">M</option>
-                                        <option value="Meknes">F</option>
+                                    <select name="gender" onChange={formik.handleChange} value={formik.values.gender}>
+                                        <option value="m">M</option>
+                                        <option value="f">F</option>
                                     </select>
                                     {formik.errors.city ?
                                         <div className="text-danger">{formik.errors.city}</div> : null}

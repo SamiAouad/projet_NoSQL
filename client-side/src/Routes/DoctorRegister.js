@@ -7,7 +7,7 @@ import axios from 'axios';
 
 
 const api = axios.create({
-    baseURL: `http://localhost:5000/`
+    baseURL: `https://applicationgestionmedicale.herokuapp.com/`
 })
 
 const DoctorRegister = () => {
@@ -75,7 +75,7 @@ const DoctorRegister = () => {
             promotion: '2022',
             email: '',
             specialty: 'L’anesthésiologie',
-            city: 'Casablanca',
+            city: 'casablanca',
             street: '',
             password: '',
             passwordConf: ''
@@ -186,8 +186,8 @@ const DoctorRegister = () => {
                                     <label>Specialité</label>
                                     <select name="specialty" onChange={formik.handleChange}
                                             value={formik.values.specialty}>
-                                        <option value="L’anesthésiologie">L’anesthésiologie</option>
-                                        <option value="L’andrologie">L’andrologie</option>
+                                        <option value="l’anesthésiologie">L’anesthésiologie</option>
+                                        <option value="l’andrologie">L’andrologie</option>
                                         <option value="cardiologie">cardiologie</option>
                                         <option value="chirurgie cardiaque">chirurgie cardiaque</option>
                                         <option value="chirurgie générale"> chirurgie générale</option>
@@ -206,14 +206,14 @@ const DoctorRegister = () => {
                                     <select name="city" onChange={formik.handleChange} value={formik.values.city}>
                                         <option value="casablanca">Casablanca</option>
                                         <option value="rabat">rabat</option>
-                                        <option value="Tanger">Tanger</option>
-                                        <option value="Chaouen">Chaouen</option>
-                                        <option value="Agadir">Agadir</option>
-                                        <option value="Marrakech">Marrakech</option>
-                                        <option value="Dakhla">Dakhla</option>
-                                        <option value="Taza">Taza</option>
-                                        <option value="Fes">Fes</option>
-                                        <option value="Meknes">Meknes</option>
+                                        <option value="tanger">Tanger</option>
+                                        <option value="chaouen">Chaouen</option>
+                                        <option value="agadir">Agadir</option>
+                                        <option value="marrakech">Marrakech</option>
+                                        <option value="dakhla">Dakhla</option>
+                                        <option value="taza">Taza</option>
+                                        <option value="fes">Fes</option>
+                                        <option value="meknes">Meknes</option>
                                     </select>
                                     {formik.errors.city ?
                                         <div className="text-danger">{formik.errors.city}</div> : null}

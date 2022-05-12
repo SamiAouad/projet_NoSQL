@@ -79,8 +79,8 @@ const PatientHomePage = () => {
                                                             onChange={formik.handleChange}
                                                             id={style.inputGroupSelect01}>
                                                         <option value=""/>
-                                                        <option value="L’anesthésiologie">L’anesthésiologie</option>
-                                                        <option value="L’andrologie">L’andrologie</option>
+                                                        <option value="l’anesthésiologie">L’anesthésiologie</option>
+                                                        <option value="l’andrologie">L’andrologie</option>
                                                         <option value="cardiologie">cardiologie</option>
                                                         <option value="chirurgie cardiaque">chirurgie cardiaque</option>
                                                         <option value="chirurgie générale"> chirurgie générale</option>
