@@ -1,6 +1,7 @@
 import style from '../asset/css/style.module.css'
 import stylesec from '../css/SearchingDoctor.module.css'
 import image from '../images/SearchingDoctor/doc1.jpg'
+import avatar from '../images/doctor_avatar.jpg'
 import {useEffect, useState} from "react";
 import {useNavigate, useParams} from "react-router";
 import axios from "axios";
@@ -171,7 +172,7 @@ const SearchingDoctor = () => {
                                                         <div className={style.coursecard}>
                                                             <div className={style.coursebanner}>
                                                                 <img
-                                                                    src={`data:image/png;base64,${doctor.photo.data}`}
+                                                                    src={avatar}
                                                                 />
                                                                 <button type='submit'
                                                                         onClick={() => setDoctorId(doctor._id)}
