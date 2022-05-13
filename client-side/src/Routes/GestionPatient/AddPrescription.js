@@ -33,16 +33,16 @@ function AddPrescription({treatmentId}) {
     }
 
     useEffect(() => {
-        console.log(user)
         if (!user)
             navigate('/SignIn')
         else if (user.cni)
             navigate('/doctor/register')
         const getMeds = async () => {
             try {
-                const result = await api.get(`treatment/meds/${treatmentId}`, {doctorId: user._id})
+                const result = await api.get(`/api/treatment/meds/${treatmentId}`, {doctorId: user._id})
                 console.log("meds: ", result.data)
                 if (result.status === 200) {
+                    console.log(result.data)
                     setMeds(result.data)
                     setLoading(false)
                 } else
@@ -65,7 +65,6 @@ function AddPrescription({treatmentId}) {
     })
 
     const onSubmit = async () => {
-        console.log(formik.values)
         let item = new URLSearchParams();
         item.append('treatmentId', treatmentId)
         item.append('name', formik.values.name)
@@ -75,11 +74,10 @@ function AddPrescription({treatmentId}) {
         item.append('duration', formik.values.duration)
         item.append('description', formik.values.description)
         try {
-            await api.post('/treatment/add/med', item).then(res => {
+            await api.post('/api/treatment/add/med', item).then(res => {
                 if (res.status === 500) {
                     navigate('/error/500')
                 } else {
-                    console.log('looking good')
                     setRefresh(!refresh)
                 }
             })
