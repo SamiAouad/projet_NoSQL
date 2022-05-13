@@ -12,6 +12,8 @@ const api = axios.create({
 })
 
 const SignIn = () => {
+    const [loading, setLoading] = useState(false)
+    const [refresh, setRefresh] = useState(false)
     const navigate = useNavigate();
     const [error, setError] = useState('')
     const validationSchema = yup.object({
@@ -21,6 +23,7 @@ const SignIn = () => {
 
     const onSubmit = async () => {
         console.log('Onsubmit')
+        // setLoading(true)
         let item = new URLSearchParams();
         item.append('email', formik.values.email)
         item.append('password', formik.values.password)
@@ -28,9 +31,11 @@ const SignIn = () => {
             await api.post('/api/login', item).then(res => {
                 if (res.status === 500) {
                     navigate('/error/500')
-                } else if (res.data === false)
+                } else if (res.data === false) {
                     setError('Email ou mot de passe incorrect')
-                else {
+                    //setLoading(false)
+                    //setRefresh(!refresh)
+                } else {
                     localStorage.setItem('user', JSON.stringify(res.data));
                     navigate('/')
                 }
@@ -48,8 +53,11 @@ const SignIn = () => {
         onSubmit,
         validationSchema
     })
+    if (loading)
+        return (
+            <div>Loading</div>
+        )
     return (
-
         <div>
             <section className={styleSign.mysection}>
                 <div className={'row ' + styleSign.content}>

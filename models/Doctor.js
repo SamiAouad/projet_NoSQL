@@ -4,7 +4,7 @@ const mongoose = require("mongoose")
 const doctorSchema = new mongoose.Schema({
     code: String,
     firstName: String,
-    lastName : String,
+    lastName: String,
     email: String,
     specialty: String,
     education: {

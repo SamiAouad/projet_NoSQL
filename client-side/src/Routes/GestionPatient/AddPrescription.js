@@ -13,6 +13,7 @@ const api = axios.create({
 
 function AddPrescription({treatmentId}) {
     const [meds, setMeds] = useState([])
+    const [loading, setLoading] = useState(true)
     const [error, setError] = useState('')
     const [refresh, setRefresh] = useState(false)
     const navigate = useNavigate()
@@ -43,6 +44,7 @@ function AddPrescription({treatmentId}) {
                 console.log("meds: ", result.data)
                 if (result.status === 200) {
                     setMeds(result.data)
+                    setLoading(false)
                 } else
                     navigate(`/doctor/register`)
             } catch (ex) {
@@ -98,7 +100,8 @@ function AddPrescription({treatmentId}) {
         onSubmit,
         validationSchema
     })
-
+    if (loading)
+        return <div>Loading</div>
 
     return (
         <div>
