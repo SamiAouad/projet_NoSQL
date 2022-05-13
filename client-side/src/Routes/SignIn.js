@@ -23,18 +23,19 @@ const SignIn = () => {
 
     const onSubmit = async () => {
         console.log('Onsubmit')
-        // setLoading(true)
+        setLoading(true)
         let item = new URLSearchParams();
         item.append('email', formik.values.email)
         item.append('password', formik.values.password)
         try {
             await api.post('/api/login', item).then(res => {
+               
                 if (res.status === 500) {
                     navigate('/error/500')
                 } else if (res.data === false) {
                     setError('Email ou mot de passe incorrect')
-                    //setLoading(false)
-                    //setRefresh(!refresh)
+                    setLoading(false)
+                    setRefresh(!refresh)
                 } else {
                     localStorage.setItem('user', JSON.stringify(res.data));
                     navigate('/')
