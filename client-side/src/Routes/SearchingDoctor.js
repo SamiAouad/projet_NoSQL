@@ -138,6 +138,7 @@ const SearchingDoctor = () => {
                         </div>
                         <div className='row'>
                             <div className='col-5'>
+                                <br/>
                                 <p id={stylesec.mysectext}>Date : </p>
                                 <input type={"date"} id={stylesec.myinputSelect} name={"date"}
                                        value={formik.values.date} onChange={formik.handleChange}/>
@@ -145,6 +146,7 @@ const SearchingDoctor = () => {
                         </div>
                         <div className='row'>
                             <div className='col-5'>
+                                <br/>
                                 <p id={stylesec.mysectext}>Urgence de votre Rendez-vous : </p>
                                 <select className="custom-select" id={stylesec.myinputSelect} name={"period"}
                                         value={formik.values.period} onChange={formik.handleChange}>
