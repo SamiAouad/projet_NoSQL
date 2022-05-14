@@ -9,6 +9,7 @@ const AcceptPatient = () => {
     const user = JSON.parse(localStorage.getItem('user'))
     const [loading, setLoading] = useState(true)
     const [refresh, setRefresh] = useState(false)
+    const [error, setError] = useState()
 
     const acceptRdv = async (rdv) => {
         console.log(rdv)
@@ -62,6 +63,8 @@ const AcceptPatient = () => {
             try {
                 const result = await api.get(`/api/doctor/rdv/demands/${user._id}`)
                 if (result.status === 200) {
+                    if (rdv.length === 0)
+                        setError("Aucune demande de rendez-vous")
                     setRdv(result.data)
                     setLoading(false)
                 } else
@@ -82,6 +85,7 @@ const AcceptPatient = () => {
             <section className={`${style.course} ${style.pagebg}`} id={style.course}>
                 <p className={style.sectionsubtitle}>Liste des Demandes</p>
                 <div className={style.coursegrid}>
+                    {error ? <div className={"text-danger"}>{error}</div> : null}
                     {
                         listToMatrix(rdv, 3).map(line => {
                             return (
@@ -109,11 +113,13 @@ const AcceptPatient = () => {
                                                             <h3 className={style.cardtitle}>
                                                                 <p>{col.patient[0].firstName} {col.patient[0].lastName}</p>
                                                             </h3>
-                                                            <div className={`${style.wrapper} ${style.borderbottom}`}>
+                                                            <div
+                                                                className={`${style.wrapper} ${style.borderbottom}`}>
                                                                 <div>
                                                                     <div
                                                                         className={`row ${style.authorname} ${style.textdecorationnone}`}>
-                                                                        <div className={"col-6"}>Date de Naissance</div>
+                                                                        <div className={"col-6"}>Date de Naissance
+                                                                        </div>
                                                                         <div
                                                                             className={"col-6"}>{col.patient[0].dateNaissance}
                                                                         </div>
