@@ -15,6 +15,7 @@ function AddPrescription({treatmentId}) {
     const [meds, setMeds] = useState([])
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState('')
+    const [success, setSuccess] = useState("")
     const [refresh, setRefresh] = useState(false)
     const navigate = useNavigate()
     const user = JSON.parse(localStorage.getItem('user'))
@@ -26,6 +27,7 @@ function AddPrescription({treatmentId}) {
         item.append("treatmentId", treatmentId)
         try {
             await api.post('/api/treatment/add/prescription', item)
+            setSuccess("Préscription Ajoutée")
         } catch (ex) {
             console.log(ex)
             setError("une erreur s'est survenue")
@@ -177,6 +179,7 @@ function AddPrescription({treatmentId}) {
                                 </button>
                             </div>
                         </div>
+                        {success ? <div className={"text-success"}>{success}</div> : null}
                     </div>
                     <div className='col-8'>
                         <div>

@@ -132,13 +132,13 @@ const DetailPatient = () => {
                                 <div className={style.myprogress}>
                                     <label> Retablissement : </label>
                                     <ProgressBar variant="success"
-                                                 now={consultations[0] ? consultations[0].progress.recovery * 10 : 0}/>
+                                                 now={consultations[0] && consultations[0].progress ? consultations[0].progress.recovery * 10 : 0}/>
                                     <label> Traitement : </label>
                                     <ProgressBar variant="info"
-                                                 now={consultations[0] ? consultations[0].progress.treatmentState * 10 : 0}/>
+                                                 now={consultations[0] && consultations[0].progress ? consultations[0].progress.treatmentState * 10 : 0}/>
                                     <label> Symptomes : </label>
                                     <ProgressBar variant="danger"
-                                                 now={consultations[0] ? consultations[0].progress.state * 10 : 0}/>
+                                                 now={consultations[0] && consultations[0].progress ? consultations[0].progress.state * 10 : 0}/>
 
                                 </div>
                             </div>

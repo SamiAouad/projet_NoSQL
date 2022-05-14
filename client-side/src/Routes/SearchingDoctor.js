@@ -57,7 +57,7 @@ const SearchingDoctor = () => {
                 if (res.status === 500) {
                     navigate('/error/500')
                 } else
-                    navigate('/home')
+                    navigate('/patient/home')
             })
         } catch (message) {
             navigate('/error/500')
@@ -89,6 +89,8 @@ const SearchingDoctor = () => {
                 const result = await api.post('/api/doctor/find/specialty/city', item)
                 console.log(result.data)
                 if (result.status === 200) {
+                    if (result.data.length === 0)
+                        return navigate(`/patient/home/error`)
                     setDoctors(result.data)
                     setLoading(false)
                 } else
@@ -196,7 +198,8 @@ const SearchingDoctor = () => {
                                                                         </div>
                                                                         <div
                                                                             className={`row ${style.authorname} ${style.textdecorationnone}`}>
-                                                                            <div className={"col-6"}>Specialité:</div>
+                                                                            <div className={"col-6"}>Specialité:
+                                                                            </div>
                                                                             <div
                                                                                 className={"col-6"}>{doctor.specialty}
                                                                             </div>

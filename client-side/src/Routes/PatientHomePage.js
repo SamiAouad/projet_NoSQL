@@ -5,12 +5,20 @@ import secondicon from '../images/PatientHomePage/secondicon.png'
 import thirsticon from '../images/PatientHomePage/third.png'
 import * as yup from "yup";
 import {useFormik} from "formik";
-import {useNavigate} from "react-router";
-import {useEffect} from "react";
+import {useNavigate, useParams} from "react-router";
+import {useEffect, useState} from "react";
 import PatientNavbar from "./PatientNavbar";
+import axios from "axios";
 
 const PatientHomePage = () => {
+    const api = axios.create({
+        baseURL: 'https://app-gestion-medicale.herokuapp.com/'
+    })
+    const params = useParams()
+    const [loading, setLoading] = useState(false)
+    const error = params.error
     const navigate = useNavigate()
+    const [refresh, setRefresh] = useState(true)
     const user = JSON.parse(localStorage.getItem('user'))
     const validationSchema = yup.object({
         city: yup.string('valeur invalid').required('ce champs est obligatoire'),
@@ -18,6 +26,26 @@ const PatientHomePage = () => {
     })
 
     const onSubmit = async () => {
+        /*const item = new URLSearchParams()
+        item.append('city', formik.values.city)
+        item.append('specialty', formik.values.specialty)
+        try {
+            setLoading(true)
+            const result = await api.post('/api/doctor/find/specialty/city', item)
+            if (result.status === 200) {
+                if (result.data.length !== 0)
+                    navigate(`/patient/search/doctor/${formik.values.specialty}/${formik.values.city}`)
+                else {
+                    setError("Aucun docteur ne correspond à votre recherche")
+                    setLoading(false)
+                    setRefresh(refresh)
+                }
+            } else
+                navigate(`/error/500`)
+        } catch (ex) {
+            navigate(`/error/500`)
+            console.log("error")
+        }*/
         navigate(`/patient/search/doctor/${formik.values.specialty}/${formik.values.city}`)
     }
     const formik = useFormik({
@@ -33,7 +61,10 @@ const PatientHomePage = () => {
             return navigate('/signin')
         if (user.code)
             return navigate('/signin')
-    }, [])
+
+    }, [refresh])
+    if (loading)
+        return <p>Loading</p>
     return (
         <div>
             <PatientNavbar/>
@@ -58,14 +89,16 @@ const PatientHomePage = () => {
                                                 <div className='col-6'>
                                                     <select className="custom-select" id={style.inputGroupSelect01}>
                                                         <option selected>courbatures</option>
-                                                        <option value="1">Akinésie</option>
+                                                        <option value="0">essouflement</option>
+                                                        <option value="1">fatigue</option>
                                                         <option value="2">Blocage du genou</option>
                                                         <option value="3">Aniscorie</option>
                                                         <option value="4">Croûtes dans le nez</option>
                                                         <option value="5">Le saignement du nez</option>
-                                                        <option value="6">Grincement des dents</option>
+                                                        <option value="6">Grincement</option>
                                                         <option value="7">La déformation des doigts</option>
                                                         <option value="8">La difficulté à avaler</option>
+                                                        <option value="9">Autre</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -127,7 +160,10 @@ const PatientHomePage = () => {
                                                 Recherche
                                             </button>
                                         </div>
-
+                                        <div className={"col-4"}/>
+                                        {error ?
+                                            <div className={"col-6 text-danger"}>Aucun docteur ne correspond à votre
+                                                recherche</div> : null}
                                     </div>
                                 </form>
 

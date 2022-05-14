@@ -30,7 +30,8 @@ function App() {
                 <Route path={'doctor/gestionpatient'} element={<GestionPatient/>} exact/>
                 <Route path={'doctor/acceptpatient'} element={<AcceptPatient/>} exact/>
                 <Route path={'/doctor/treatment/:id'} element={<DetailPatient/>} exact/>
-                <Route path={'patient/home'} element={<PatientHomePage/>} exact/>
+                <Route path={'patient/home/:error'} element={<PatientHomePage/>} exact/>
+                <Route path={'patient/home/'} element={<PatientHomePage/>} exact/>
                 <Route path={'patient/search/doctor/:specialty/:city'} element={<SearchingDoctor/>} exact/>
                 <Route path={'patient/rdv/'} element={<PatientRDV/>} exact/>
                 <Route path={'patient/register/'} element={<PatientRegister/>} exact/>
