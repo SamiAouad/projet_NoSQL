@@ -93,7 +93,6 @@ const DoctorHome = () => {
                                     <thead id={styleDh.Thead}>
                                     <tr>
                                         <th>Id</th>
-                                        <th><br/>Image</th>
                                         <th>CNI patient</th>
                                         <th>Sexe</th>
                                         <th>Date</th>
@@ -110,9 +109,6 @@ const DoctorHome = () => {
                                                 return (
                                                     <tr>
                                                         <td>Cell 1</td>
-                                                        <td><img alt={'image'}
-                                                                 src={`data:image/jpeg;base64,${consultation.patient[0].photo}`}/>
-                                                        </td>
                                                         <td>{consultation.patient[0].cni}</td>
                                                         <td>{consultation.patient[0].gender}</td>
                                                         <td>{consultation.rdv[0] ? consultation.rdv[0].date.substr(0, 10) : null}</td>
@@ -140,7 +136,6 @@ const DoctorHome = () => {
                                     <thead id={styleDh.Thead}>
                                     <tr>
                                         <th>Id</th>
-                                        <th><br/>Image</th>
                                         <th>N°Patient</th>
                                         <th>N°Dossier</th>
                                         <th>Traitement</th>
@@ -158,9 +153,6 @@ const DoctorHome = () => {
                                                 return (
                                                     <tr styleDh={{color: 'rgb(255,255,255)'}}>
                                                         <td>Cell 1</td>
-                                                        <td><img alt={'image'}
-                                                                 src={`data:image/jpeg;base64,${consultation.patient[0].photo}`}/>
-                                                        </td>
                                                         <td>{consultation.patient[0].cni}</td>
                                                         <td>{consultation.patient[0].gender}</td>
                                                         <td>{consultation.rdv[0] ? consultation.rdv[0].date.substr(0, 10) : null}</td>
