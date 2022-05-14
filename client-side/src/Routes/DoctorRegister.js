@@ -74,7 +74,7 @@ const DoctorRegister = () => {
             university: 'FMP Tanger',
             promotion: '2022',
             email: '',
-            specialty: 'L’anesthésiologie',
+            specialty: 'l’anesthésiologie',
             city: 'casablanca',
             street: '',
             password: '',
@@ -194,7 +194,7 @@ const DoctorRegister = () => {
                                         <option value="chirurgie pédiatrique">chirurgie pédiatrique</option>
                                         <option value="neurochirurgie">neurochirurgie</option>
                                         <option value="dermatologie">dermatologie</option>
-                                        <option value="L’endocrinologie">L’endocrinologie</option>
+                                        <option value="l’endocrinologie">L’endocrinologie</option>
                                         <option value="neurologie">neurologie</option>
                                     </select>
                                     {formik.errors.specialty ?

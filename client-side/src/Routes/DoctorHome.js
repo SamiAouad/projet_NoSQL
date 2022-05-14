@@ -25,9 +25,10 @@ const DoctorHome = () => {
         const getConsultations = async () => {
             try {
                 const result = await api.post('/api/doctor/consultation/', {doctorId: user._id})
-                if (result.status === 200)
+                if (result.status === 200) {
                     setConsultations(result.data)
-                else
+                    console.log("consultations: ", result.data)
+                } else
                     navigate(`/doctor/register`)
             } catch (ex) {
                 navigate(`/error/500`)
@@ -85,7 +86,7 @@ const DoctorHome = () => {
                 <div className="container mt-5">
                     <div className="row" id={styleDh.myfirstrow}>
                         <div className="col-md-6 align-self-center">
-                            <p id={styleDh.mytext}>Prochaines Consultations</p>
+                            <p id={styleDh.mytext}>Consultations Précédentes</p>
                         </div>
                         <div className="col-md-6">
                             <div className="table-responsive text-start">
@@ -93,7 +94,7 @@ const DoctorHome = () => {
                                     <thead id={styleDh.Thead}>
                                     <tr>
                                         <th>Id</th>
-                                        <th>CNI patient</th>
+                                        <th>Nom patient</th>
                                         <th>Sexe</th>
                                         <th>Date</th>
                                         <th>Urgent</th>
@@ -103,18 +104,19 @@ const DoctorHome = () => {
                                     </thead>
                                     <tbody id={styleDh.Tbody}>
                                     {
-                                        consultations.map(consultation => {
-                                            const date = consultation.rdv[0] ? consultation.rdv[0].date : null;
-                                            if (new Date(date) >= new Date())
+                                        consultations.map((consultation, key) => {
+                                            console.log("consultation ", key, " : ", consultation)
+                                            const date = consultation.rdv[0] ? consultation.rdv[0].date : null
+                                            if (date && Date.parse(date) < new Date())
                                                 return (
                                                     <tr>
-                                                        <td>Cell 1</td>
-                                                        <td>{consultation.patient[0].cni}</td>
-                                                        <td>{consultation.patient[0].gender}</td>
-                                                        <td>{consultation.rdv[0] ? consultation.rdv[0].date.substr(0, 10) : null}</td>
-                                                        <td>{consultation.rdv[0] ? consultation.rdv[0].urgent : null}</td>
-                                                        <td>{consultation.rdv[0] ? consultation.rdv[0].period : null}</td>
-                                                        <td>{consultation.rdv[0] ? consultation.rdv[0].description : null}</td>
+                                                        <td style={{color: "white"}}>{key + 1}</td>
+                                                        <td style={{color: "white"}}>{consultation.patient[0].cni}</td>
+                                                        <td style={{color: "white"}}>{consultation.patient[0].firstName} {consultation.patient[0].lastName}</td>
+                                                        <td style={{color: "white"}}>{consultation.rdv[0] ? consultation.rdv[0].date.substr(0, 10) : null}</td>
+                                                        <td style={{color: "white"}}>{consultation.rdv[0] ? consultation.rdv[0].urgent : null}</td>
+                                                        <td style={{color: "white"}}>{consultation.rdv[0] ? consultation.rdv[0].period : null}</td>
+                                                        <td style={{color: "white"}}>{consultation.rdv[0] ? consultation.rdv[0].description : null}</td>
                                                     </tr>
                                                 );
                                         })
@@ -125,50 +127,52 @@ const DoctorHome = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="row" id={styleDh.myfirstrow}>
-                        <div className="col-md-6 align-self-center">
-                            <p id={styleDh.mytext}>Dernières Consultations</p>
-                        </div>
-                        <div className="col-md-6">
-                            <div className="table-responsive text-start"
-                            >
-                                <table className="table table-striped table-bordered">
-                                    <thead id={styleDh.Thead}>
-                                    <tr>
-                                        <th>Id</th>
-                                        <th>N°Patient</th>
-                                        <th>N°Dossier</th>
-                                        <th>Traitement</th>
-                                        <th>Date</th>
-                                        <th>Horaire</th>
-                                        <th>Description</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody id={styleDh.Tbody}>
-                                    {
-                                        consultations.map(consultation => {
-                                            console.log(consultation.rdv)
-                                            const date = consultation.rdv[0] ? consultation.rdv[0].date : null;
-                                            if (date < new Date())
-                                                return (
-                                                    <tr styleDh={{color: 'rgb(255,255,255)'}}>
-                                                        <td>Cell 1</td>
-                                                        <td>{consultation.patient[0].cni}</td>
-                                                        <td>{consultation.patient[0].gender}</td>
-                                                        <td>{consultation.rdv[0] ? consultation.rdv[0].date.substr(0, 10) : null}</td>
-                                                        <td>{consultation.rdv[0] ? consultation.rdv[0].urgent : null}</td>
-                                                        <td>{consultation.rdv[0] ? consultation.rdv[0].period : null}</td>
-                                                        <td>{consultation.rdv[0] ? consultation.rdv[0].description : null}</td>
-                                                    </tr>
-                                                );
-                                        })
-                                    }
+                    {
+                        <div className="row" id={styleDh.myfirstrow}>
+                            <div className="col-md-6 align-self-center">
+                                <p id={styleDh.mytext}>Prochaines Consultations</p>
+                            </div>
+                            <div className="col-md-6">
+                                <div className="table-responsive text-start"
+                                >
+                                    <table className="table table-striped table-bordered">
+                                        <thead id={styleDh.Thead}>
+                                        <tr>
+                                            <th>Id</th>
+                                            <th>Nom patient</th>
+                                            <th>Sexe</th>
+                                            <th>Date</th>
+                                            <th>Urgent</th>
+                                            <th>Horaire</th>
+                                            <th>Description</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody id={styleDh.Tbody}>
+                                        {
+                                            consultations.map((consultation, key) => {
+                                                console.log(consultation.rdv)
+                                                const date = consultation.rdv[0] ? consultation.rdv[0].date : null;
+                                                if (date === null || Date.parse(date) >= new Date())
+                                                    return (
+                                                        <tr>
+                                                            <td style={{color: "white"}}>{key + 1}</td>
+                                                            <td style={{color: "white"}}>{consultation.patient[0].cni}</td>
+                                                            <td style={{color: "white"}}>{consultation.patient[0].firstName} {consultation.patient[0].lastName}</td>
+                                                            <td style={{color: "white"}}>{consultation.rdv[0] ? consultation.rdv[0].date.substr(0, 10) : null}</td>
+                                                            <td style={{color: "white"}}>{consultation.rdv[0] ? consultation.rdv[0].urgent : null}</td>
+                                                            <td style={{color: "white"}}>{consultation.rdv[0] ? consultation.rdv[0].period : null}</td>
+                                                            <td style={{color: "white"}}>{consultation.rdv[0] ? consultation.rdv[0].description : null}</td>
+                                                        </tr>
+                                                    );
+                                            })
+                                        }
 
-                                    </tbody>
-                                </table>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    }
                 </div>
             </section>
 

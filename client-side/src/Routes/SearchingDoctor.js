@@ -196,10 +196,9 @@ const SearchingDoctor = () => {
                                                                         </div>
                                                                         <div
                                                                             className={`row ${style.authorname} ${style.textdecorationnone}`}>
+                                                                            <div className={"col-6"}>Specialité:</div>
                                                                             <div
-                                                                                className={"col-3"}>Sexe:{doctor.gender}</div>
-                                                                            <div
-                                                                                className={"col-4"}>specialite
+                                                                                className={"col-6"}>{doctor.specialty}
                                                                             </div>
                                                                         </div>
                                                                         <div
@@ -224,8 +223,7 @@ const SearchingDoctor = () => {
                                                                         <p className={style.authorname}>Education </p>
                                                                         <p className={style.authorname}>
                                                                             Ce praticien est un laureat
-                                                                            de {doctor.education.university}
-                                                                            promotion {doctor.education.promotion}
+                                                                            de {doctor.education.university} promotion {doctor.education.promotion}
                                                                         </p>
                                                                     </div>
                                                                     <div>

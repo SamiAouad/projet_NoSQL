@@ -22,7 +22,7 @@ const PatientHomePage = () => {
     }
     const formik = useFormik({
         initialValues: {
-            specialty: '',
+            specialty: 'orthophonie',
             city: 'rabat',
         },
         onSubmit,
@@ -46,9 +46,10 @@ const PatientHomePage = () => {
                         <div className='row'>
                             <h1 className={style.title}> Bienvenue à votre plateforme Médicale </h1>
                             <div className={style.mycontainer}>
-                                <div className='row'>
-                                    <div className='col-8'>
-                                        <form onSubmit={formik.handleSubmit} className={style.myform}>
+
+                                <form onSubmit={formik.handleSubmit} className={style.myform}>
+                                    <div className='row'>
+                                        <div className='col-8'>
                                             <div className='row'>
 
                                                 <div className='col-4'>
@@ -78,7 +79,7 @@ const PatientHomePage = () => {
                                                             value={formik.values.specialty}
                                                             onChange={formik.handleChange}
                                                             id={style.inputGroupSelect01}>
-                                                        <option value=""/>
+                                                        <option value="orthophonie">Orthophonie</option>
                                                         <option value="l’anesthésiologie">L’anesthésiologie</option>
                                                         <option value="l’andrologie">L’andrologie</option>
                                                         <option value="cardiologie">cardiologie</option>
@@ -117,17 +118,19 @@ const PatientHomePage = () => {
                                                         <option value="tetouan">Tetouan</option>
                                                     </select>
                                                 </div>
-                                                <div className='col-2'>
-                                                    <button className={style.mybutton} type="submit">Faite votre
-                                                        Recherche
-                                                    </button>
-                                                </div>
+
                                             </div>
-                                        </form>
+
+                                        </div>
+                                        <div className='col-4'>
+                                            <button className={style.mybutton} type="submit">Faite votre
+                                                Recherche
+                                            </button>
+                                        </div>
+
                                     </div>
+                                </form>
 
-
-                                </div>
 
                             </div>
 
