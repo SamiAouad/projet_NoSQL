@@ -142,7 +142,7 @@ const Amelioration = () => {
             <form onSubmit={formik.handleSubmit} className={style.mysecsection}>
                 <div className='row'>
                     <div className='col-6'>
-                        <h4 className={style.mysectitle}>Veuillez Sairee vos Symptomes aupres de votre
+                        <h4 className={style.mysectitle}>Veuillez Saisir vos Symptomes aupres de votre
                             specialiste <br/> Afin qu'il puisse suivre vos ameliorations </h4>
                         <p className={style.myfourthtitle}>Nom de Votre Medecin
                             : </p> {/* la liste des Medecins dialo */}

@@ -63,7 +63,7 @@ const AcceptPatient = () => {
             try {
                 const result = await api.get(`/api/doctor/rdv/demands/${user._id}`)
                 if (result.status === 200) {
-                    if (rdv.length === 0)
+                    if (result.data.length === 0)
                         setError("Aucune demande de rendez-vous")
                     setRdv(result.data)
                     setLoading(false)
