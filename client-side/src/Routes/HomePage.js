@@ -58,7 +58,7 @@ function HomePage() {
                             </div>
                         </div>
                     </nav>
-                    <h1 id={styleHP.title}>Votre Platforme E-Health</h1>
+                    <h1 id={styleHP.title}>Votre Platforme Healtho</h1>
                     <h2 className="text-center" id={styleHP.subtitle}><br/><strong>RDV &amp; Suivi avec vos
                         professionnels
                         de santé</strong></h2>

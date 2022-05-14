@@ -117,10 +117,11 @@ const PatientHomePage = () => {
                                                         <option value="tetouan">Tetouan</option>
                                                     </select>
                                                 </div>
-                                            </div>
-                                            <div className='col-4'>
-                                                <button className={style.mybutton} type="submit">Faite votre Recherche
-                                                </button>
+                                                <div className='col-2'>
+                                                    <button className={style.mybutton} type="submit">Faite votre
+                                                        Recherche
+                                                    </button>
+                                                </div>
                                             </div>
                                         </form>
                                     </div>

@@ -85,7 +85,7 @@ const DoctorHome = () => {
                 <div className="container mt-5">
                     <div className="row" id={styleDh.myfirstrow}>
                         <div className="col-md-6 align-self-center">
-                            <p id={styleDh.mytext}>Consultation de la journée</p>
+                            <p id={styleDh.mytext}>Prochaines Consultations</p>
                         </div>
                         <div className="col-md-6">
                             <div className="table-responsive text-start">
@@ -98,7 +98,7 @@ const DoctorHome = () => {
                                         <th>Date</th>
                                         <th>Urgent</th>
                                         <th>Horaire</th>
-                                        <th>Urgence</th>
+                                        <th>Description</th>
                                     </tr>
                                     </thead>
                                     <tbody id={styleDh.Tbody}>
@@ -113,8 +113,8 @@ const DoctorHome = () => {
                                                         <td>{consultation.patient[0].gender}</td>
                                                         <td>{consultation.rdv[0] ? consultation.rdv[0].date.substr(0, 10) : null}</td>
                                                         <td>{consultation.rdv[0] ? consultation.rdv[0].urgent : null}</td>
-                                                        <td>Cell 1</td>
-                                                        <td>Cell 2</td>
+                                                        <td>{consultation.rdv[0] ? consultation.rdv[0].period : null}</td>
+                                                        <td>{consultation.rdv[0] ? consultation.rdv[0].description : null}</td>
                                                     </tr>
                                                 );
                                         })
@@ -141,7 +141,7 @@ const DoctorHome = () => {
                                         <th>Traitement</th>
                                         <th>Date</th>
                                         <th>Horaire</th>
-                                        <th>Urgence</th>
+                                        <th>Description</th>
                                     </tr>
                                     </thead>
                                     <tbody id={styleDh.Tbody}>
@@ -157,8 +157,8 @@ const DoctorHome = () => {
                                                         <td>{consultation.patient[0].gender}</td>
                                                         <td>{consultation.rdv[0] ? consultation.rdv[0].date.substr(0, 10) : null}</td>
                                                         <td>{consultation.rdv[0] ? consultation.rdv[0].urgent : null}</td>
-                                                        <td>Cell 1</td>
-                                                        <td>Cell 2</td>
+                                                        <td>{consultation.rdv[0] ? consultation.rdv[0].period : null}</td>
+                                                        <td>{consultation.rdv[0] ? consultation.rdv[0].description : null}</td>
                                                     </tr>
                                                 );
                                         })
