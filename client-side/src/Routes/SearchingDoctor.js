@@ -163,7 +163,7 @@ const SearchingDoctor = () => {
                         {
                             listToMatrix(doctors, 3).map((list, key) => {
                                 return (
-                                    <div key={key}>
+                                    <div className={"row"} key={key}>
                                         {
                                             list.map((doctor, key2) => {
                                                 console.log("doctor: ", doctor)
