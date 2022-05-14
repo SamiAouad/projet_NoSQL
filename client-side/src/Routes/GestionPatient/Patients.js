@@ -91,23 +91,21 @@ const Patients = () => {
                                                                 </h3>
                                                                 <div
                                                                     className={`${style.wrapper} ${style.borderbottom}`}>
-                                                                    <div className={style.author}>
+                                                                    <div className={`row ${style.author}`}>
                                                                         <a href="#"
                                                                            className={`${style.authorname} ${style.textdecorationnone}`}>
-                                                                            {consultation.patient[0].firstName} {consultation.patient[0].lastName}
+                                                                            Nom: {consultation.patient[0].firstName} {consultation.patient[0].lastName}
+                                                                        </a>
+                                                                    </div>
+                                                                    <div className={`row ${style.author}`}>
+                                                                        <a href="#"
+                                                                           className={`${style.authorname} ${style.textdecorationnone}`}>
+                                                                            Date de
+                                                                            naissance: {consultation.patient[0].birthday.substr(0, 10)}
                                                                         </a>
                                                                     </div>
                                                                 </div>
-                                                                <div className={style.wrapper}>
-                                                                    <div className={style.courseprice}>
-                                                                        <p className={style.authorname}>Suivie </p>
-                                                                        <p className={style.authorname}>Traitement </p>
-                                                                        <p className={style.authorname}>Amélioration </p>
-                                                                    </div>
-                                                                    <div>
-                                                                        <p></p>
-                                                                    </div>
-                                                                </div>
+
                                                             </div>
                                                         </div>
                                                     </div>

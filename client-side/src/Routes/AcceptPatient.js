@@ -92,6 +92,7 @@ const AcceptPatient = () => {
                                 <div className='row'>
                                     {
                                         line.map(col => {
+                                            console.log("colonne: ", col)
                                             return (
                                                 <div className='col-4'>
                                                     <div className={style.coursecard}>
@@ -113,6 +114,9 @@ const AcceptPatient = () => {
                                                             <h3 className={style.cardtitle}>
                                                                 <p>{col.patient[0].firstName} {col.patient[0].lastName}</p>
                                                             </h3>
+                                                            <h3 className={style.cardtitle}>
+                                                                <p>Date Rdv: {col.date.substr(0, 10)} {col.period}</p>
+                                                            </h3>
                                                             <div
                                                                 className={`${style.wrapper} ${style.borderbottom}`}>
                                                                 <div>
@@ -121,7 +125,7 @@ const AcceptPatient = () => {
                                                                         <div className={"col-6"}>Date de Naissance
                                                                         </div>
                                                                         <div
-                                                                            className={"col-6"}>{col.patient[0].dateNaissance}
+                                                                            className={"col-6"}>{col.patient[0].birthday.substr(0, 10)}
                                                                         </div>
                                                                     </div>
                                                                     <div
