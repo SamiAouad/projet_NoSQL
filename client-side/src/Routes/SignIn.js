@@ -29,7 +29,6 @@ const SignIn = () => {
         item.append('password', formik.values.password)
         try {
             await api.post('/api/login', item).then(res => {
-               
                 if (res.status === 500) {
                     navigate('/error/500')
                 } else if (res.data === false) {
@@ -37,11 +36,13 @@ const SignIn = () => {
                     setLoading(false)
                     setRefresh(!refresh)
                 } else {
+                    delete res.data.photo
                     localStorage.setItem('user', JSON.stringify(res.data));
                     navigate('/')
                 }
             })
         } catch (message) {
+            console.log("message: ", message)
             navigate('/error/500')
         }
 

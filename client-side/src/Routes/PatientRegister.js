@@ -14,6 +14,7 @@ const DoctorRegister = () => {
 
     const navigate = useNavigate();
     const [file, setFile] = useState()
+    const [loading, setLoading] = useState()
     // const [error, setError] = useState('')
 
     const validationSchema = yup.object({
@@ -76,7 +77,9 @@ const DoctorRegister = () => {
         validationSchema
     })
 
-
+    if (loading) {
+        return <div>Loading</div>
+    }
     return (
         <div className={style.register}>
             <div className={style.container}>
